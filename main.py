@@ -22,10 +22,6 @@ class Jogo:
 		while self.rodando:
 			self.eventos()
 			
-			key = pygame.key.get_pressed()
-			if key[pygame.K_ESCAPE]:
-				break;
-
 			Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)]).desenha(BRANCO)
 			Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)]).desenha(BRANCO)
 			Face(self.superficie, [Vertice(300, 200), Vertice(350, 300)]).desenha(BRANCO)
@@ -48,7 +44,10 @@ class Jogo:
 			
 
 	def eventos(self):
+		key = pygame.key.get_pressed()
 		for evento in pygame.event.get():
+			if key[pygame.K_ESCAPE]:
+				self.rodando = False
 			if evento.type == pygame.QUIT:
 				self.rodando = False
 		
