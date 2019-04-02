@@ -21,6 +21,10 @@ class Jogo:
 	def loop(self):
 		while self.rodando:
 			self.eventos()
+			
+			key = pygame.key.get_pressed()
+			if key[pygame.K_ESCAPE]:
+				break;
 
 			Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)]).desenha(BRANCO)
 			Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)]).desenha(BRANCO)
