@@ -1,7 +1,9 @@
 import pygame
 import math
 
-WHITE = [255, 255, 255]
+BRANCO = [255, 255, 255]
+VERMELHO = [255, 0, 0]
+VERDE = [0, 255, 0]
 
 class Jogo:
 	def __init__(self):
@@ -18,15 +20,26 @@ class Jogo:
 			self.eventos()
 
 			# Desenha pixel
-			self.reta([200, 200], [250, 300], WHITE)
-			self.reta([250, 300], [300, 200], WHITE)
-			self.reta([300, 200], [350, 300], WHITE)
-			self.reta([350, 300], [400, 200], WHITE)
+			self.reta([200, 200], [250, 300], BRANCO)
+			self.reta([250, 300], [300, 200], BRANCO)
+			self.reta([300, 200], [350, 300], BRANCO)
+			self.reta([350, 300], [400, 200], BRANCO)
 
-			# self.circulo([100, 100], 100, [255, 255, 255])
+			quadrado = [[200, 200],
+						[400, 200],
+						[400, 400],
+						[200, 400]]
+
+			triangulo = [[400, 400],
+						 [200, 400],
+						 [300, 200]]
+
+			self.poligono(quadrado, VERMELHO)
+			self.poligono(triangulo, VERDE)
 
 			self.tela.blit(self.superficie, [0, 0])
 			pygame.display.flip()
+			
 
 	def eventos(self):
 		for evento in pygame.event.get():
@@ -37,14 +50,21 @@ class Jogo:
 		xi, yi = inicio
 		xf, yf = fim
 
-		for x in range(xi, xf + 1):
+		xstep = 1
+		if xf < xi:
+			xstep = -1
+
+		for x in range(xi, xf + 1, xstep):
 			if (xf - xi) != 0:
 				m = (yf - yi) / (xf - xi)
 				y = m * (x - xi) + yi
 
 				self.superficie.set_at([x, int(y)], cor)
 
-		for y in range(yi, yf + 1):
+		ystep = 1
+		if (yf < yi):
+			ystep = -1
+		for y in range(yi, yf + 1, ystep):
 			if (yf - yi) != 0:
 				m = (xf - xi) / (yf - yi)
 				x = m * (y - yi) + xi
@@ -69,6 +89,18 @@ class Jogo:
 
 			self.superficie.set_at([int(x1), y], cor)
 			self.superficie.set_at([int(x2), y], cor)
+			
+	
+	def poligono(self, vertices, cor):
+		if len(vertices) < 3:
+			print("Isso não é um polígono.")
+			exit()
 
+		for i in range(len(vertices)):
+			if i < len(vertices)-1:
+				self.reta(vertices[i], vertices[i+1], cor)
+			else:
+				self.reta(vertices[0], vertices[i], cor)
+		
 jogo = Jogo()
 jogo.loop()
