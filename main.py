@@ -7,7 +7,7 @@ from face import *
 BRANCO = [255, 255, 255]
 VERMELHO = [255, 0, 0]
 VERDE = [0, 255, 0]
-BLACK = [0, 0, 0]
+PRETO = [0, 0, 0]
 
 #Estados - nomes temporarios - mudem como quiser
 TELA_INICIAL = 0
