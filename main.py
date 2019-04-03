@@ -4,6 +4,7 @@ import math
 from vertice import *
 from face import *
 from tela import *
+from desenho import *
 
 BRANCO = [255, 255, 255]
 VERMELHO = [255, 0, 0]
@@ -31,18 +32,20 @@ class Jogo:
         self.corretas = 0
 
     def monta_telas(self):
-        # tela 1
-        perguntas = [Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)], BRANCO),
-                     Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)], BRANCO),
-                     Face(self.superficie, [Vertice(300, 200), Vertice(350, 300)], BRANCO),
-                     Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)], BRANCO)]
+        # Tela 1
+        perguntas = [Desenho([Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)], BRANCO),
+                             Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)], BRANCO)]),
+                     Desenho([Face(self.superficie, [Vertice(300, 200), Vertice(350, 300)], BRANCO),
+                             Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)], BRANCO)])]
 
-        respostas = [Face(self.superficie, [Vertice(200, 200), Vertice(400, 200), Vertice(400, 400), Vertice(200, 400)], VERDE),
-                     Face(self.superficie, [Vertice(400, 400), Vertice(200, 400), Vertice(300, 200)], VERDE)]
-        resposta = 0
+        respostas = [Desenho([Face(self.superficie, [Vertice(200, 200), Vertice(400, 200), Vertice(400, 400), Vertice(200, 400)], VERDE)]),
+                     Desenho([Face(self.superficie, [Vertice(400, 400), Vertice(200, 400), Vertice(300, 200)], VERDE)])]
+        resposta = 1
 
         tela = Tela(perguntas, respostas, resposta)
         self.telas.append(tela)
+
+        # TODO: criar telas seguintes
 
     def jogar(self):
         print("")
@@ -57,7 +60,7 @@ class Jogo:
             self.tela.blit(self.superficie, [0, 0])
             pygame.display.flip()
 
-        print("Você acertou " + str(self.corretas) + " perguntas, seu QI é de: " + str(self.corretas * 10))
+        print("Você acertou " + str(self.corretas) + " perguntas, seu QI é: " + str(self.corretas * 10))
 
     def entrada(self):
         key = pygame.key.get_pressed()

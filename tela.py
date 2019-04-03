@@ -4,8 +4,10 @@ class Tela:
         self.respostas = respostas
         self.correta = correta
 
+        # TODO: dispor os desenhos de modo que não fiquem um por cima do outro, aí bota isso no offset de cada um
+
     def desenha(self):
-        for poligono in self.perguntas:
-            poligono.desenha()
-        for poligono in self.respostas:
-            poligono.desenha()
+        for desenho in self.perguntas:
+            desenho.desenha()
+        for desenho in self.respostas:
+            desenho.desenha()
