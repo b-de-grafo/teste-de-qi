@@ -3,215 +3,96 @@ import math
 
 from vertice import *
 from face import *
+from tela import *
 
 BRANCO = [255, 255, 255]
 VERMELHO = [255, 0, 0]
 VERDE = [0, 255, 0]
 PRETO = [0, 0, 0]
 
-#Estados - nomes temporarios - mudem como quiser
-TELA_INICIAL = 0
-TELA1 = 1
-TELA2 = 2
-TELA3 = 3
-TELA4 = 4
-TELA5 = 5
-TELA6 = 6
-TELA7 = 7
-TELA8 = 8
-TELA9 = 9
-TELA10 = 10
-TELA_FINAL = 11
 
 class Jogo:
-	def __init__(self):
-		pygame.init()
+    def __init__(self):
+        pygame.init()
 
-		self.estado = 0
-		self.tamanho_tela = [600, 600]
-		self.tela = pygame.display.set_mode(self.tamanho_tela)
-		self.superficie = pygame.Surface(self.tamanho_tela)
+        self.tamanho_tela = [600, 600]
+        self.tela = pygame.display.set_mode(self.tamanho_tela)
+        self.superficie = pygame.Surface(self.tamanho_tela)
 
-		self.rodando = True
+        self.rodando = True
 
-	def loop(self):
-		while self.rodando:
-			self.eventos()
+        self.telas = []
+        self.monta_telas()
 
-			self.tela_atual()
+        self.tela_atual = 0
 
-			self.tela.blit(self.superficie, [0,0])
-			pygame.display.flip()
-			
+        self.resposta_do_jogador = -1
 
-	def eventos(self):
-		key = pygame.key.get_pressed()
-		for evento in pygame.event.get():
-			if key[pygame.K_ESCAPE]:
-				self.rodando = False
-			#tecla n e b sao para debug
-			if key[pygame.K_n] and self.estado < TELA_FINAL:
-				self.estado += 1
-			if key[pygame.K_b] and self.estado > TELA_INICIAL:
-				self.estado -= 1
-			if evento.type == pygame.QUIT:
-				self.rodando = False
+        self.corretas = 0
 
-	#Nome temporario
-	def tela_inicial(self):
-		self.superficie.fill(PRETO) #Preciso so para debug
+    def monta_telas(self):
+        # tela 1
+        perguntas = [Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)], BRANCO),
+                     Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)], BRANCO),
+                     Face(self.superficie, [Vertice(300, 200), Vertice(350, 300)], BRANCO),
+                     Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)], BRANCO)]
 
-		Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)]).desenha(BRANCO)
-		Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)]).desenha(BRANCO)
-		Face(self.superficie, [Vertice(300, 200), Vertice(350, 300)]).desenha(BRANCO)
-		Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)]).desenha(BRANCO)
+        respostas = [Face(self.superficie, [Vertice(200, 200), Vertice(400, 200), Vertice(400, 400), Vertice(200, 400)], VERDE),
+                     Face(self.superficie, [Vertice(400, 400), Vertice(200, 400), Vertice(300, 200)], VERDE)]
+        resposta = 0
 
-		quadrado = Face(self.superficie, [Vertice(200, 200),
-		                                  Vertice(400, 200),
-		                                  Vertice(400, 400),
-		                                  Vertice(200, 400)])
+        tela = Tela(perguntas, respostas, resposta)
+        self.telas.append(tela)
 
-		triangulo = Face(self.superficie, [Vertice(400, 400),
-		                                   Vertice(200, 400),
-		                                   Vertice(300, 200)])
+    def jogar(self):
+        print("")
 
-		quadrado.desenha(VERMELHO)
-		triangulo.desenha(VERDE)
+        while self.rodando:
+            self.entrada()
 
-	def tela1(self):
-		self.superficie.fill(PRETO)
+            self.fluxo_do_jogo()
 
-		Face(self.superficie, [Vertice(200, 200),
-		                       Vertice(400, 200),
-		                       Vertice(400, 400),
-		                       Vertice(200, 400)]).desenha(BRANCO)
+            self.telas[self.tela_atual].desenha()
 
-	def tela2(self):
-		self.superficie.fill(VERDE)
+            self.tela.blit(self.superficie, [0, 0])
+            pygame.display.flip()
 
-		Face(self.superficie, [Vertice(200, 200),
-		                       Vertice(400, 200),
-		                       Vertice(400, 400),
-		                       Vertice(200, 400)]).desenha(PRETO)
+        print("Você acertou " + str(self.corretas) + " perguntas, seu QI é de: " + str(self.corretas * 10))
 
-	def tela3(self):
-		self.superficie.fill(VERMELHO)
+    def entrada(self):
+        key = pygame.key.get_pressed()
+        for evento in pygame.event.get():
+            if key[pygame.K_ESCAPE]:  # Tecla ESC
+                self.rodando = False
 
-		Face(self.superficie, [Vertice(200, 200),
-		                       Vertice(400, 200),
-		                       Vertice(400, 400),
-		                       Vertice(200, 400)]).desenha(VERDE)
+            if key[pygame.K_1]:  # Tecla 1
+                self.resposta_do_jogador = 1
+            if key[pygame.K_2]:  # Tecla 2
+                self.resposta_do_jogador = 2
+            if key[pygame.K_3]:  # Tecla 3
+                self.resposta_do_jogador = 3
+            if key[pygame.K_4]:  # Tecla 4
+                self.resposta_do_jogador = 4
+            if key[pygame.K_5]:  # Tecla 5
+                self.resposta_do_jogador = 5
 
-	def tela4(self):
-		self.superficie.fill(PRETO)
+            if evento.type == pygame.QUIT:  # Fechar janela
+                self.rodando = False
 
-		Face(self.superficie, [Vertice(400, 400),
-		                       Vertice(200, 400),
-		                       Vertice(300, 200)]).desenha(BRANCO)
+    def fluxo_do_jogo(self):
+        if self.resposta_do_jogador != -1:
+            if self.resposta_do_jogador == self.telas[self.tela_atual].correta:
+                print("Acertou\n")
+                self.corretas += 1
+            else:
+                print("Errou\n")
 
-	def tela5(self):
-		self.superficie.fill(VERMELHO)
+            if self.tela_atual == len(self.telas) - 1:
+                print("Fim de jogo")
+                self.rodando = False
+            else:
+                self.tela_atual += 1
 
-		Face(self.superficie, [Vertice(400, 400),
-		                       Vertice(200, 400),
-		                       Vertice(300, 200)]).desenha(VERDE)
-
-	def tela6(self):
-		self.superficie.fill(VERDE)
-
-		Face(self.superficie, [Vertice(400, 400),
-		                       Vertice(200, 400),
-		                       Vertice(300, 200)]).desenha(VERMELHO)
-
-	def tela7(self):
-		self.superficie.fill(PRETO)
-
-		Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)]).desenha(BRANCO)
-		Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)]).desenha(BRANCO)
-		Face(self.superficie, [Vertice(300, 200), Vertice(350, 300)]).desenha(BRANCO)
-		Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)]).desenha(BRANCO)
-
-	def tela8(self):
-		self.superficie.fill(VERDE)
-
-		Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)]).desenha(VERMELHO)
-		Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)]).desenha(VERMELHO)
-		Face(self.superficie, [Vertice(300, 200), Vertice(350, 300)]).desenha(VERMELHO)
-		Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)]).desenha(VERMELHO)
-
-	def tela9(self):
-		self.superficie.fill(VERMELHO)
-
-		Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)]).desenha(VERDE)
-		Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)]).desenha(VERDE)
-		Face(self.superficie, [Vertice(300, 200), Vertice(350, 300)]).desenha(VERDE)
-		Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)]).desenha(VERDE)
-
-	def tela10(self):
-		self.superficie.fill(PRETO)
-
-		Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)]).desenha(BRANCO)
-		Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)]).desenha(BRANCO)
-		Face(self.superficie, [Vertice(300, 200), Vertice(350, 300)]).desenha(BRANCO)
-		Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)]).desenha(BRANCO)
-
-		quadrado = Face(self.superficie, [Vertice(200, 200),
-		                                  Vertice(400, 200),
-		                                  Vertice(400, 400),
-		                                  Vertice(200, 400)])
-
-		triangulo = Face(self.superficie, [Vertice(400, 400),
-		                                   Vertice(200, 400),
-		                                   Vertice(300, 200)])
-
-		quadrado.desenha(VERMELHO)
-		triangulo.desenha(VERDE)
-
-	def tela_final(self):
-		self.superficie.fill(BRANCO)
-
-		Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)]).desenha(PRETO)
-		Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)]).desenha(PRETO)
-		Face(self.superficie, [Vertice(300, 200), Vertice(350, 300)]).desenha(PRETO)
-		Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)]).desenha(PRETO)
-
-		quadrado = Face(self.superficie, [Vertice(200, 200),
-		                                  Vertice(400, 200),
-		                                  Vertice(400, 400),
-		                                  Vertice(200, 400)])
-
-		triangulo = Face(self.superficie, [Vertice(400, 400),
-		                                   Vertice(200, 400),
-		                                   Vertice(300, 200)])
-
-		quadrado.desenha(VERDE)
-		triangulo.desenha(VERMELHO)
-
-	def tela_atual(self):
-		if self.estado == TELA_INICIAL:
-			self.tela_inicial()
-		elif self.estado == TELA1:
-			self.tela1()
-		elif self.estado == TELA2:
-			self.tela2()
-		elif self.estado == TELA3:
-			self.tela3()
-		elif self.estado == TELA4:
-			self.tela4()
-		elif self.estado == TELA5:
-			self.tela5()
-		elif self.estado == TELA6:
-			self.tela6()
-		elif self.estado == TELA7:
-			self.tela7()
-		elif self.estado == TELA8:
-			self.tela8()
-		elif self.estado == TELA9:
-			self.tela9()
-		elif self.estado == TELA10:
-			self.tela10()
-		else:
-			self.tela_final()
 
 jogo = Jogo()
-jogo.loop()
+jogo.jogar()
