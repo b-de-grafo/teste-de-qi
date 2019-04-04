@@ -1,7 +1,5 @@
 import pygame
-import math
 
-from vertice import *
 from face import *
 from tela import *
 from desenho import *
@@ -39,7 +37,7 @@ class Jogo:
                              Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)], BRANCO)])]
 
         respostas = [Desenho([Face(self.superficie, [Vertice(200, 200), Vertice(400, 200), Vertice(400, 400), Vertice(200, 400)], VERDE)]),
-                     Desenho([Face(self.superficie, [Vertice(400, 400), Vertice(200, 400), Vertice(300, 200)], VERDE)])]
+                     Desenho([Face(self.superficie, [Vertice(400, 400), Vertice(200, 400), Vertice(300, 200)], VERDE).preenche()])]
         resposta = 1
 
         tela = Tela(perguntas, respostas, resposta)
