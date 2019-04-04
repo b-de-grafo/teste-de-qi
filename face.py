@@ -20,7 +20,18 @@ class Face:
                 reta(self.superficie, self.vertices[i], self.vertices[i + 1], self.cor)
             else:
                 reta(self.superficie, self.vertices[0], self.vertices[i], self.cor)
-    
+
+    def pinta(self):
+        i = 0
+        j = len(self.vertices) - 1
+        while(i < j):
+
+            if j - 1 != i:
+                reta_especial(self.superficie, self.vertices[i],
+                              self.vertices[j - 1], self.vertices[j])
+
+            i += 1
+            j -= 1
 
     def translacao(self, Tx=0, Ty=0, Tz=0):
         novos_vertices = []
@@ -35,7 +46,7 @@ class Face:
         
         return Face(self.superficie, novos_vertices, self.cor)
 
- 
+
 f1 = Face(None, [Vertice(100, 100), Vertice(200, 200)], [255, 255, 255])
 f1 = Face.translacao(f1, Ty=20)
 print(f1)
