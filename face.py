@@ -13,3 +13,15 @@ class Face:
                 reta(self.superficie, self.vertices[i], self.vertices[i + 1], self.cor)
             else:
                 reta(self.superficie, self.vertices[0], self.vertices[i], self.cor)
+
+    def pinta(self):
+        i = 0
+        j = len(self.vertices) - 1
+        while(i < j):
+
+            if j - 1 != i:
+                reta_especial(self.superficie, self.vertices[i],
+                              self.vertices[j - 1], self.vertices[j])
+
+            i += 1
+            j -= 1
