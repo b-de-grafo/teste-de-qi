@@ -1,5 +1,6 @@
 from util import *
 from vertice import *
+from math import cos,sin
 
 
 class Face:
@@ -43,3 +44,8 @@ class Face:
             vertice.z = int(vertice.z * tz)
         return self
 
+    def rotaciona(self, teta):
+        for vertice in self.vertices:
+            vertice.x = int(vertice.x * cos(teta) - vertice.y * sin(teta))
+            vertice.y = int(vertice.y * cos(teta) + vertice.x * sin(teta))
+        return self

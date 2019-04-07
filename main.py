@@ -1,5 +1,5 @@
 import pygame
-
+from math import pi,radians
 from face import *
 from tela import *
 from desenho import *
@@ -37,7 +37,7 @@ class Jogo:
                              Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)], BRANCO)])]
 
         respostas = [Desenho([Face(self.superficie, [Vertice(200, 200), Vertice(400, 200), Vertice(400, 400), Vertice(200, 400)], VERDE)]),
-                     Desenho([Face(self.superficie, [Vertice(400, 400), Vertice(200, 400), Vertice(300, 200)], VERDE).escala(0.5,0.5)])]
+                     Desenho([Face(self.superficie, [Vertice(400, 400), Vertice(200, 400), Vertice(300, 200)], VERDE).rotaciona(radians(10))])]
         resposta = 1
 
         tela = Tela(perguntas, respostas, resposta)
