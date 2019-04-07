@@ -34,3 +34,4 @@ class Face:
             vertice.x = vertice.x + tx
             vertice.y = vertice.y + ty
             vertice.z = vertice.z + tz
+        return self
