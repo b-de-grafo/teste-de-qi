@@ -35,3 +35,11 @@ class Face:
             vertice.y = vertice.y + ty
             vertice.z = vertice.z + tz
         return self
+
+    def escala(self, tx=1, ty=1, tz=1):
+        for vertice in self.vertices:
+            vertice.x = int(vertice.x * tx)
+            vertice.y = int(vertice.y * ty)
+            vertice.z = int(vertice.z * tz)
+        return self
+
