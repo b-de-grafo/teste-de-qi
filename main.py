@@ -30,6 +30,11 @@ class Jogo:
         self.corretas = 0
 
     def monta_telas(self):
+        # Alguns polígonos pra começar
+        triangulo = Face(self.superficie, [Vertice(0, 247), Vertice(268, 247), Vertice(134, 17)]).desenha()
+        quadrado = Face(self.superficie, [Vertice(0, 0), Vertice(268, 0), Vertice(268, 268), Vertice(0, 268)]).desenha()
+        dodecagono = Face(self.superficie, [Vertice(0, 134), Vertice(18, 67), Vertice(67, 18), Vertice(134, 0), Vertice(201, 18), Vertice(250, 67), Vertice(268, 134), Vertice(250, 201), Vertice(201, 250), Vertice(134, 268), Vertice(67, 250), Vertice(18, 201)]).desenha()
+
         # Tela 1
         perguntas = [Desenho([Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)], BRANCO),
                              Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)], BRANCO)]),

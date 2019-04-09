@@ -2,9 +2,11 @@ from util import *
 from vertice import *
 from math import cos,sin
 
+BRANCO = [255, 255, 255]
+
 
 class Face:
-    def __init__(self, superficie, vertices, cor):
+    def __init__(self, superficie, vertices, cor=BRANCO):
         self.superficie = superficie
         self.vertices = vertices
         self.cor = cor
@@ -16,12 +18,15 @@ class Face:
         r += "]"
         return r
 
-    def desenha(self):
+    def desenha(self, cor=None):
+        if cor is None:
+            cor = self.cor
+
         for i in range(len(self.vertices)):
             if i < len(self.vertices) - 1:
-                reta(self.superficie, self.vertices[i], self.vertices[i + 1], self.cor)
+                reta(self.superficie, self.vertices[i], self.vertices[i + 1], cor)
             else:
-                reta(self.superficie, self.vertices[0], self.vertices[i], self.cor)
+                reta(self.superficie, self.vertices[0], self.vertices[i], cor)
 
     def preenche(self):
         for j in range(len(self.vertices) - 1, 0, -1):
