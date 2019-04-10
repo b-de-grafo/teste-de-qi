@@ -35,6 +35,11 @@ class Jogo:
         quadrado = Face(self.superficie, [Vertice(0, 0), Vertice(268, 0), Vertice(268, 268), Vertice(0, 268)]).desenha()
         dodecagono = Face(self.superficie, [Vertice(0, 134), Vertice(18, 67), Vertice(67, 18), Vertice(134, 0), Vertice(201, 18), Vertice(250, 67), Vertice(268, 134), Vertice(250, 201), Vertice(201, 250), Vertice(134, 268), Vertice(67, 250), Vertice(18, 201)]).desenha()
 
+        #Area das Respostas:
+        areaPadrao =  [Desenho([Face(self.superficie, [Vertice(0, 450), Vertice(600,450)]),
+                                Face(self.superficie, [Vertice(200, 450), Vertice(200, 600)]),
+                                Face(self.superficie, [Vertice(400, 450), Vertice(400, 600)])])]
+
         # Tela 1
         perguntas = [Desenho([Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)], BRANCO),
                              Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)], BRANCO)]),
@@ -45,7 +50,7 @@ class Jogo:
                      Desenho([Face(self.superficie, [Vertice(400, 400), Vertice(200, 400), Vertice(300, 200)], VERDE).rotaciona(radians(10))])]
         resposta = 1
 
-        tela = Tela(perguntas, respostas, resposta)
+        tela = Tela(perguntas, respostas, resposta, areaPadrao)
         self.telas.append(tela)
 
         # TODO: criar telas seguintes
