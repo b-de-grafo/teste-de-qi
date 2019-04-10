@@ -87,6 +87,15 @@ class Jogo:
             if key[pygame.K_5]:  # Tecla 5
                 self.resposta_do_jogador = 5
 
+            if evento.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                if(pos[0] >= 0 and pos[0] < 200) and (pos[1] >= 450 and pos[1] <= 600):
+                    self.resposta_do_jogador = 1
+                if (pos[0] >= 200 and pos[0] < 400) and (pos[1] >= 450 and pos[1] <= 600):
+                    self.resposta_do_jogador = 2
+                if (pos[0] >= 400 and pos[0] < 600) and (pos[1] >= 450 and pos[1] <= 600):
+                    self.resposta_do_jogador = 3
+
             if evento.type == pygame.QUIT:  # Fechar janela
                 self.rodando = False
 
