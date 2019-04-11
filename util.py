@@ -62,3 +62,28 @@ def translada(face, tx=0, ty=0, tz=0):
         novos_vertices.append(novo_vertice)
 
     return Face(face.superficie, novos_vertices, face.cor)
+
+def multiplicao_matriz(mat1,mat2): #deve ser testado!
+    linhas_1 = len(mat1)
+    colunas_1 = len(mat1[0])
+    linhas_2 = len(mat2)
+    colunas_2 = len(mat2[0])
+
+    if colunas_1 != linhas_2:
+        print("colunas_1 != linhas_2")
+        return
+
+    result = [[0 for row in range(colunas_2)] for col in range(linhas_1)]
+    print(result)
+
+    for i in range(linhas_1):
+        for j in range(colunas_2):
+            for k in range(colunas_1):
+                result[i][j] += mat1[i][k] * mat2[k][j]
+    return result
+
+def transpoe_matriz(mat):
+
+    # TODO: transpor matriz
+
+

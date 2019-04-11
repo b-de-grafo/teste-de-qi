@@ -36,10 +36,16 @@ class Face:
         return self
 
     def translada(self, tx=0, ty=0, tz=0):
+
+        matriz_translação = [[1, 0, tx],
+                             [0, 1, ty],
+                             [0, 0, 1]]
+
         for vertice in self.vertices:
-            vertice.x = vertice.x + tx
-            vertice.y = vertice.y + ty
-            vertice.z = vertice.z + tz
+            vertice_t = transpoe_matriz(vertice.get_vetor())
+            print(vertice)
+            vertice = multiplicao_matriz(matriz_translação, vertice_t)
+
         return self
 
     def escala(self, tx=1, ty=1, tz=1):
@@ -50,7 +56,10 @@ class Face:
         return self
 
     def rotaciona(self, teta):
+        print(self.vertices)
         for vertice in self.vertices:
+            print(vertice.get_vetor())
             vertice.x = int(vertice.x * cos(teta) - vertice.y * sin(teta))
             vertice.y = int(vertice.y * cos(teta) + vertice.x * sin(teta))
         return self
+

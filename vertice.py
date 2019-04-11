@@ -6,3 +6,6 @@ class Vertice:
 
 	def __repr__(self):
 		return f"({self.x}, {self.y}, {self.z})"
+
+	def get_vetor(self):
+		return [self.x, self.y, self.z]
