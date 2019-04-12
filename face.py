@@ -10,6 +10,7 @@ class Face:
 
         self.vertices = []
         for vertice in vertices:
+            # Converte para coordenadas homogêneas
             if len(vertice) == 2:
                 self.vertices.append(vertice + [1])
         self.cor = cor
