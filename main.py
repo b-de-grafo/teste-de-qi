@@ -31,26 +31,26 @@ class Jogo:
 
     def monta_telas(self):
         # Alguns polígonos pra começar
-        triangulo = Face(self.superficie, [Vertice(0, 247), Vertice(268, 247), Vertice(134, 17)]).desenha()
-        quadrado = Face(self.superficie, [Vertice(0, 0), Vertice(268, 0), Vertice(268, 268), Vertice(0, 268)]).desenha()
-        dodecagono = Face(self.superficie, [Vertice(0, 134), Vertice(18, 67), Vertice(67, 18), Vertice(134, 0), Vertice(201, 18), Vertice(250, 67), Vertice(268, 134), Vertice(250, 201), Vertice(201, 250), Vertice(134, 268), Vertice(67, 250), Vertice(18, 201)]).desenha()
+        triangulo = Face(self.superficie, [[0, 247], [268, 247], [134, 17]]).desenha()
+        quadrado = Face(self.superficie, [[0, 0], [268, 0], [268, 268], [0, 268]]).desenha()
+        dodecagono = Face(self.superficie, [[0, 134], [18, 67], [67, 18], [134, 0], [201, 18], [250, 67], [268, 134], [250, 201], [201, 250], [134, 268], [67, 250], [18, 201]]).desenha()
 
-        #Area das Respostas:
-        areaPadrao =  [Desenho([Face(self.superficie, [Vertice(0, 450), Vertice(600,450)]),
-                                Face(self.superficie, [Vertice(200, 450), Vertice(200, 600)]),
-                                Face(self.superficie, [Vertice(400, 450), Vertice(400, 600)])])]
+        # Area das Respostas:
+        area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),
+                                Face(self.superficie, [[200, 450], [200, 600]]),
+                                Face(self.superficie, [[400, 450], [400, 600]])])]
 
         # Tela 1
-        perguntas = [Desenho([Face(self.superficie, [Vertice(200, 200), Vertice(250, 300)], BRANCO),
-                             Face(self.superficie, [Vertice(250, 300), Vertice(300, 200)], BRANCO)]),
-                     Desenho([Face(self.superficie, [Vertice(300, 200), Vertice(350, 300)], BRANCO),
-                             Face(self.superficie, [Vertice(350, 300), Vertice(400, 200)], BRANCO)])]
+        perguntas = [Desenho([Face(self.superficie, [[200, 200], [250, 300]], BRANCO),
+                             Face(self.superficie, [[250, 300], [300, 200]], BRANCO)]),
+                     Desenho([Face(self.superficie, [[300, 200], [350, 300]], BRANCO),
+                             Face(self.superficie, [[350, 300], [400, 200]], BRANCO)])]
 
-        respostas = [Desenho([Face(self.superficie, [Vertice(200, 200), Vertice(400, 200), Vertice(400, 400), Vertice(200, 400)], VERDE)]),
-                     Desenho([Face(self.superficie, [Vertice(400, 400), Vertice(200, 400), Vertice(300, 200)], VERDE).rotaciona(360)])]
+        respostas = [Desenho([Face(self.superficie, [[200, 200], [400, 200], [400, 400], [200, 400]], VERDE)]),
+                     Desenho([Face(self.superficie, [[400, 400], [200, 400], [300, 200]], VERDE).rotaciona(360)])]
         resposta = 1
 
-        tela = Tela(perguntas, respostas, resposta, areaPadrao)
+        tela = Tela(perguntas, respostas, resposta, area_padrao)
         self.telas.append(tela)
 
         # TODO: criar telas seguintes
@@ -89,11 +89,11 @@ class Jogo:
 
             if evento.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
-                if(pos[0] >= 0 and pos[0] < 200) and (pos[1] >= 450 and pos[1] <= 600):
+                if(0 <= pos[0] < 200) and (450 <= pos[1] <= 600):
                     self.resposta_do_jogador = 1
-                if (pos[0] >= 200 and pos[0] < 400) and (pos[1] >= 450 and pos[1] <= 600):
+                if (200 <= pos[0] < 400) and (450 <= pos[1] <= 600):
                     self.resposta_do_jogador = 2
-                if (pos[0] >= 400 and pos[0] < 600) and (pos[1] >= 450 and pos[1] <= 600):
+                if (400 <= pos[0] < 600) and (450 <= pos[1] <= 600):
                     self.resposta_do_jogador = 3
 
             if evento.type == pygame.QUIT:  # Fechar janela
