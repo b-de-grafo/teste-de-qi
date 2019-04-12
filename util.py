@@ -74,16 +74,36 @@ def multiplicao_matriz(mat1,mat2): #deve ser testado!
         return
 
     result = [[0 for row in range(colunas_2)] for col in range(linhas_1)]
-    print(result)
 
     for i in range(linhas_1):
         for j in range(colunas_2):
             for k in range(colunas_1):
                 result[i][j] += mat1[i][k] * mat2[k][j]
+    print(result)
     return result
 
 def transpoe_matriz(mat):
+    # NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo
+    # NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo
+    # NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo
+    # NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo#NAO CONSIgo
+    try:
+        result = [[0 for x in range(len(mat))] for y in range(len(mat[0]))]
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                result[i][j] = mat[j][i]
+    except TypeError:
+        result = [[0 for x in range(len(mat))]]
+        for i in range(len(mat)):
+            print(result[i][0])
+            result[i][0] = mat[0][i]
+    print(result)
+    # NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA
+    # NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA
+    # NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA# NAO FUNCIONA
 
-    # TODO: transpor matriz
-
-
+def transpoe_vetor(vetor):
+    resultado = []
+    for item in vetor:
+        resultado.append([item])
+    return resultado
