@@ -31,9 +31,16 @@ class Jogo:
 
     def monta_telas(self):
         # Alguns polígonos pra começar
-        triangulo = Face(self.superficie, [[0, 247], [268, 247], [134, 17]]).desenha()
-        quadrado = Face(self.superficie, [[0, 0], [268, 0], [268, 268], [0, 268]]).desenha()
-        dodecagono = Face(self.superficie, [[0, 134], [18, 67], [67, 18], [134, 0], [201, 18], [250, 67], [268, 134], [250, 201], [201, 250], [134, 268], [67, 250], [18, 201]]).desenha()
+        triangulo = Face(self.superficie, [[100, 0], [150, 100], [50, 100]]).desenha()
+        quadrado = Face(self.superficie, [[200, 0], [300, 0], [300, 100], [200, 100]]).desenha()
+        pentagono = Face(self.superficie, [[400, 0], [450, 25], [450, 100], [350, 100], [350, 25]]).desenha()
+        hexagono = Face(self.superficie, [[550, 0], [600, 25], [600, 75], [550, 100], [500, 75], [500, 25]]).desenha()
+        cruz = Face(self.superficie, [[100, 150], [150, 150], [150, 200], [200, 200], [200, 250], [150, 250], [150, 300], [100, 300], [100, 250], [50, 250], [50, 200], [100, 200]]).desenha()
+        seta = Face(self.superficie, [[325, 150], [400, 225], [325, 300], [325, 250], [225, 250], [225, 200], [325, 200]]).desenha()
+        bandeiraEsquisitaDeFestaJunina = Face(self.superficie, [[500, 175], [600, 175], [550, 225], [600, 275], [500, 275], [425, 225]]).desenha()
+        dodecagono = Face(self.superficie, [[0, 466], [18, 399], [67, 350], [134, 332], [201, 350], [250, 399], [268, 466], [250, 533], [201, 582], [134, 600], [67, 582], [18, 533]]).desenha()
+        estrela = Face(self.superficie,[[350, 325], [365, 350], [400, 350], [375, 365], [385, 400], [350, 380], [315, 400], [325, 365], [300, 350], [335, 350]]).desenha()
+        estrelaDaviVsGolias = Face(self.superficie, [[450, 425], [465, 450], [500, 450], [475, 475], [500, 500], [465, 500], [450, 525], [435, 500], [400, 500], [425, 475], [400, 450], [435, 450]]).desenha()
 
         # Area das Respostas:
         area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),
@@ -50,7 +57,8 @@ class Jogo:
                      Desenho([Face(self.superficie, [[400, 400], [200, 400], [300, 200]], VERDE).rotaciona(360)])]
         resposta = 1
 
-        tela = Tela(perguntas, respostas, resposta, area_padrao)
+        #tela = Tela(perguntas, respostas, resposta, area_padrao)
+        tela = Tela([], [], resposta, [])
         self.telas.append(tela)
 
         # TODO: criar telas seguintes
