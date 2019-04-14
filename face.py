@@ -49,7 +49,7 @@ class Face:
                              [0, 1, ty],
                              [0, 0, 1]]
 
-        print(self.vertices)
+       #print(self.vertices)
 
         for vertice in self.vertices:
             vertice_t = transpoe_vetor(vertice)
@@ -63,7 +63,7 @@ class Face:
             novos_vertices.append(vertice)
 
 
-        print(novos_vertices)
+        #print(novos_vertices)
 
         return Face(self.superficie, novos_vertices, self.cor)
 
@@ -108,3 +108,24 @@ class Face:
         nova_face = Face(self.superficie, novos_vertices, self.cor)
         return nova_face
 
+    def rotaciona_ponto(self, teta, ind_ponto):
+        i = 0
+        for vertice in self.vertices:
+            if i == ind_ponto:
+                delta_x = -(vertice[0])
+                delta_y = -(vertice[1])
+            i += 1
+
+
+        print(delta_x,delta_y)
+        print("translada para origem")
+        face_orig = self.translada(delta_x, delta_y)
+        print(face_orig)
+
+        print("rotaciona na origem")
+        face_rotacao = face_orig.rotaciona(teta)
+        print(face_rotacao)
+        print("volta pra posicao inical")
+        nova_face = face_rotacao.translada(-delta_x, -delta_y)
+        print(nova_face)
+        return nova_face
