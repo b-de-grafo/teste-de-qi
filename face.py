@@ -108,12 +108,36 @@ class Face:
         nova_face = Face(self.superficie, novos_vertices, self.cor)
         return nova_face
 
-    def rotaciona_ponto(self, teta, ind_ponto):
+    def escala_ponto(self, lx, ly, ind_ponto=0):
         i = 0
         for vertice in self.vertices:
             if i == ind_ponto:
                 delta_x = -(vertice[0])
                 delta_y = -(vertice[1])
+                break
+            i += 1
+
+
+        print(delta_x,delta_y)
+        print("translada para origem")
+        face_orig = self.translada(delta_x, delta_y)
+        print(face_orig)
+
+        print("rotaciona na origem")
+        face_rotacao = face_orig.escala(lx,ly)
+        print(face_rotacao)
+        print("volta pra posicao inical")
+        nova_face = face_rotacao.translada(-delta_x, -delta_y)
+        print(nova_face)
+        return nova_face
+
+    def rotaciona_ponto(self, teta, ind_ponto=0):
+        i = 0
+        for vertice in self.vertices:
+            if i == ind_ponto:
+                delta_x = -(vertice[0])
+                delta_y = -(vertice[1])
+                break
             i += 1
 
 

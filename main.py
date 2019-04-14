@@ -42,8 +42,8 @@ class Jogo:
         estrela = Face(self.superficie, [[350, 325], [365, 350], [400, 350], [375, 365], [385, 400], [350, 380], [315, 400], [325, 365], [300, 350], [335, 350]]).desenha()
         estrelaDaviVsGolias = Face(self.superficie, [[450, 425], [465, 450], [500, 450], [475, 475], [500, 500], [465, 500], [450, 525], [435, 500], [400, 500], [425, 475], [400, 450], [435, 450]])
         estrelaDaviVsGolias.desenha()
-        estrelaDaviVsGolias.rotaciona_ponto(radians(90), 1).desenha()
-
+        estrelaDaviVsGolias.escala_ponto(2, 2, 0).desenha()
+        #estrelaDaviVsGolias.rotaciona_ponto(radians(90), 2).desenha()
         #estrelaDaviVsGolias.escala(1, 0.5).desenha()
         #estrelaDaviVsGolias.rotaciona(radians(15)).desenha()
         #estrelaDaviVsGolias.translada(50).desenha()
