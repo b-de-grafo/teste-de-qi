@@ -108,6 +108,27 @@ class Face:
         nova_face = Face(self.superficie, novos_vertices, self.cor)
         return nova_face
 
+    def cisalhamento(self, kx, ky):
+        novos_vertices = []
+        matriz_rotacao = [[1, kx, 0],
+                          [ky, 1, 0],
+                          [0, 0, 1]]
+
+
+        for vertice in self.vertices:
+            vertice_t = transpoe_vetor(vertice)
+            vertice = d_transpoe_vetor(multiplicacao_matriz(matriz_rotacao, vertice_t))
+
+            i = 0
+            for n in vertice:
+                vertice[i] = int(n)
+                i += 1
+            novos_vertices.append(vertice)
+
+        nova_face = Face(self.superficie, novos_vertices, self.cor)
+        print(nova_face)
+        return nova_face
+
     def escala_ponto(self, lx, ly, ind_ponto=0):
         i = 0
         for vertice in self.vertices:
@@ -123,7 +144,7 @@ class Face:
         face_orig = self.translada(delta_x, delta_y)
         print(face_orig)
 
-        print("rotaciona na origem")
+        print("escala na origem")
         face_rotacao = face_orig.escala(lx,ly)
         print(face_rotacao)
         print("volta pra posicao inical")
@@ -149,6 +170,30 @@ class Face:
         print("rotaciona na origem")
         face_rotacao = face_orig.rotaciona(teta)
         print(face_rotacao)
+        print("volta pra posicao inical")
+        nova_face = face_rotacao.translada(-delta_x, -delta_y)
+        print(nova_face)
+        return nova_face
+
+    def cisalhamento_ponto(self, kx, ky, ind_ponto=0):
+        i = 0
+        for vertice in self.vertices:
+            if i == ind_ponto:
+                delta_x = -(vertice[0])
+                delta_y = -(vertice[1])
+                break
+            i += 1
+
+
+        print(delta_x,delta_y)
+        print("translada para origem")
+        face_orig = self.translada(delta_x, delta_y)
+        print(face_orig)
+
+        print("cisalha na origem")
+        face_rotacao = face_orig.cisalhamento(kx,ky)
+        print(face_rotacao)
+
         print("volta pra posicao inical")
         nova_face = face_rotacao.translada(-delta_x, -delta_y)
         print(nova_face)
