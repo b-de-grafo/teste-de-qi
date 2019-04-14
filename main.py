@@ -39,8 +39,15 @@ class Jogo:
         seta = Face(self.superficie, [[325, 150], [400, 225], [325, 300], [325, 250], [225, 250], [225, 200], [325, 200]]).desenha()
         bandeiraEsquisitaDeFestaJunina = Face(self.superficie, [[500, 175], [600, 175], [550, 225], [600, 275], [500, 275], [425, 225]]).desenha()
         dodecagono = Face(self.superficie, [[0, 466], [18, 399], [67, 350], [134, 332], [201, 350], [250, 399], [268, 466], [250, 533], [201, 582], [134, 600], [67, 582], [18, 533]]).desenha()
-        estrela = Face(self.superficie,[[350, 325], [365, 350], [400, 350], [375, 365], [385, 400], [350, 380], [315, 400], [325, 365], [300, 350], [335, 350]]).desenha()
-        estrelaDaviVsGolias = Face(self.superficie, [[450, 425], [465, 450], [500, 450], [475, 475], [500, 500], [465, 500], [450, 525], [435, 500], [400, 500], [425, 475], [400, 450], [435, 450]]).desenha()
+        estrela = Face(self.superficie, [[350, 325], [365, 350], [400, 350], [375, 365], [385, 400], [350, 380], [315, 400], [325, 365], [300, 350], [335, 350]]).desenha()
+        estrelaDaviVsGolias = Face(self.superficie, [[450, 425], [465, 450], [500, 450], [475, 475], [500, 500], [465, 500], [450, 525], [435, 500], [400, 500], [425, 475], [400, 450], [435, 450]])
+        estrelaDaviVsGolias.desenha()
+#        estrelaDaviVsGolias.escala(1, 0.5).desenha()
+        #estrelaDaviVsGolias.rotaciona(radians(15)).desenha()
+        #estrelaDaviVsGolias.translada(50).desenha()
+        #estrelaDaviVsGolias.translada(0, 50).desenha()
+        #estrelaDaviVsGolias.translada(50, 50).desenha()
+
 
         # Area das Respostas:
         area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),
@@ -54,7 +61,7 @@ class Jogo:
                              Face(self.superficie, [[350, 300], [400, 200]], BRANCO)])]
 
         respostas = [Desenho([Face(self.superficie, [[200, 200], [400, 200], [400, 400], [200, 400]], VERDE)]),
-                     Desenho([Face(self.superficie, [[400, 400], [200, 400], [300, 200]], VERDE).rotaciona(360)])]
+                     Desenho([Face(self.superficie, [[400, 400], [200, 400], [300, 200]], VERDE)])]
         resposta = 1
 
         #tela = Tela(perguntas, respostas, resposta, area_padrao)

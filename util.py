@@ -78,3 +78,10 @@ def transpoe_vetor(vetor):
     for item in vetor:
         resultado.append([item])
     return resultado
+
+def d_transpoe_vetor(vetor):
+    resultado = []
+    for item in vetor:
+        for valor in item:
+            resultado.append(valor)
+    return resultado

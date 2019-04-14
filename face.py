@@ -13,6 +13,8 @@ class Face:
             # Converte para coordenadas homogêneas
             if len(vertice) == 2:
                 self.vertices.append(vertice + [1])
+            else:
+                self.vertices.append(vertice)
         self.cor = cor
         self.preenchido = False
     
@@ -47,10 +49,21 @@ class Face:
                              [0, 1, ty],
                              [0, 0, 1]]
 
+        print(self.vertices)
+
         for vertice in self.vertices:
             vertice_t = transpoe_vetor(vertice)
-            vertice = multiplicacao_matriz(matriz_translacao, vertice_t)
+            vertice = d_transpoe_vetor(multiplicacao_matriz(matriz_translacao, vertice_t))
+
+            i = 0
+            for n in vertice:
+                vertice[i] = int(n)
+                i += 1
+
             novos_vertices.append(vertice)
+
+
+        print(novos_vertices)
 
         return Face(self.superficie, novos_vertices, self.cor)
 
@@ -62,8 +75,17 @@ class Face:
 
         for vertice in self.vertices:
             vertice_t = transpoe_vetor(vertice)
-            vertice = multiplicacao_matriz(matriz_escala, vertice_t)
+            vertice = d_transpoe_vetor(multiplicacao_matriz(matriz_escala, vertice_t))
+
+            i = 0
+            for n in vertice:
+                vertice[i] = int(n)
+                i += 1
+
             novos_vertices.append(vertice)
+
+        print(novos_vertices)
+
         return Face(self.superficie, novos_vertices, self.cor)
 
     def rotaciona(self, teta):
@@ -72,9 +94,17 @@ class Face:
                           [sin(teta), cos(teta), 0],
                           [0        , 0        , 1]]
 
+
         for vertice in self.vertices:
             vertice_t = transpoe_vetor(vertice)
-            vertice = multiplicacao_matriz(matriz_rotacao, vertice_t)
+            vertice = d_transpoe_vetor(multiplicacao_matriz(matriz_rotacao, vertice_t))
+
+            i = 0
+            for n in vertice:
+                vertice[i] = int(n)
+                i += 1
             novos_vertices.append(vertice)
-        return Face(self.superficie, novos_vertices, self.cor)
+
+        nova_face = Face(self.superficie, novos_vertices, self.cor)
+        return nova_face
 
