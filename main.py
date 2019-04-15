@@ -31,16 +31,16 @@ class Jogo:
 
     def monta_telas(self):
         # Alguns polígonos pra começar
-        triforceDeViking = Face(self.superficie, [[45, 0], [60, 24], [75, 0], [120, 96], [90, 96], [105, 120], [15, 120], [30, 96], [0, 96]]).desenha()
-        raio = Face(self.superficie, [[225, 0], [245, 0], [240, 30], [275, 35], [225, 125], [235, 50], [200, 50]]).desenha()
-        diamante = Face(self.superficie, [[375, 0], [425, 0], [450, 25], [400, 100], [350, 25]]).desenha()
-        cataVento = Face(self.superficie, [[550, 0], [575, 25], [575, 50], [600, 50], [575, 75], [550, 75], [550, 100], [525, 75], [525, 50], [500, 50], [525, 25], [550, 25]]).desenha()
-        cruz = Face(self.superficie, [[100, 150], [150, 150], [150, 200], [200, 200], [200, 250], [150, 250], [150, 300], [100, 300], [100, 250], [50, 250], [50, 200], [100, 200]]).desenha()
-        seta = Face(self.superficie, [[325, 150], [400, 225], [325, 300], [325, 250], [225, 250], [225, 200], [325, 200]]).desenha()
-        bandeiraEsquisitaDeFestaJunina = Face(self.superficie, [[500, 175], [600, 175], [550, 225], [600, 275], [500, 275], [425, 225]]).desenha()
-        dodecagono = Face(self.superficie, [[0, 466], [18, 399], [67, 350], [134, 332], [201, 350], [250, 399], [268, 466], [250, 533], [201, 582], [134, 600], [67, 582], [18, 533]]).desenha()
-        estrela = Face(self.superficie, [[350, 325], [365, 350], [400, 350], [375, 365], [385, 400], [350, 380], [315, 400], [325, 365], [300, 350], [335, 350]]).desenha()
-        estrelaDaviVsGolias = Face(self.superficie, [[450, 425], [465, 450], [500, 450], [475, 475], [500, 500], [465, 500], [450, 525], [435, 500], [400, 500], [425, 475], [400, 450], [435, 450]]).desenha()
+        #triforceDeViking = Face(self.superficie, [[45, 0], [60, 24], [75, 0], [120, 96], [90, 96], [105, 120], [15, 120], [30, 96], [0, 96]]).desenha()
+        #raio = Face(self.superficie, [[225, 0], [245, 0], [240, 30], [275, 35], [225, 125], [235, 50], [200, 50]]).desenha()
+        #diamante = Face(self.superficie, [[375, 0], [425, 0], [450, 25], [400, 100], [350, 25]]).desenha()
+        #cataVento = Face(self.superficie, [[550, 0], [575, 25], [575, 50], [600, 50], [575, 75], [550, 75], [550, 100], [525, 75], [525, 50], [500, 50], [525, 25], [550, 25]]).desenha()
+        #cruz = Face(self.superficie, [[100, 150], [150, 150], [150, 200], [200, 200], [200, 250], [150, 250], [150, 300], [100, 300], [100, 250], [50, 250], [50, 200], [100, 200]]).desenha()
+        seta = Face(self.superficie, [[325, 150], [400, 225], [325, 300], [325, 250], [225, 250], [225, 200], [325, 200]], BRANCO)
+        bandeiraEsquisitaDeFestaJunina = Face(self.superficie, [[500, 175], [600, 175], [550, 225], [600, 275], [500, 275], [425, 225]], BRANCO)
+        #dodecagono = Face(self.superficie, [[0, 466], [18, 399], [67, 350], [134, 332], [201, 350], [250, 399], [268, 466], [250, 533], [201, 582], [134, 600], [67, 582], [18, 533]]).desenha()
+        #estrela = Face(self.superficie, [[350, 325], [365, 350], [400, 350], [375, 365], [385, 400], [350, 380], [315, 400], [325, 365], [300, 350], [335, 350]]).desenha()
+        #estrelaDaviVsGolias = Face(self.superficie, [[450, 425], [465, 450], [500, 450], [475, 475], [500, 500], [465, 500], [450, 525], [435, 500], [400, 500], [425, 475], [400, 450], [435, 450]]).desenha()
         #estrelaDaviVsGolias.cisalhamento_ponto(1, 0, 0).desenha()
         #estrelaDaviVsGolias.rotaciona_ponto(radians(90), 2).desenha()
         #estrelaDaviVsGolias.escala(1, 0.5).desenha()
@@ -55,18 +55,27 @@ class Jogo:
                                 Face(self.superficie, [[200, 450], [200, 600]]),
                                 Face(self.superficie, [[400, 450], [400, 600]])])]
 
-        # Tela 1
-        perguntas = [Desenho([Face(self.superficie, [[200, 200], [250, 300]], BRANCO),
-                             Face(self.superficie, [[250, 300], [300, 200]], BRANCO)]),
-                     Desenho([Face(self.superficie, [[300, 200], [350, 300]], BRANCO),
-                             Face(self.superficie, [[350, 300], [400, 200]], BRANCO)])]
+
+        # Tela 1 #Ideia: poligonos rotacionados de acordo com sua posicao na matriz vezes 15 graus
+        perguntas = [Desenho([seta.escala_ponto(0.8, 0.8).translada(-200, -100),
+                              seta.escala_ponto(0.8, 0.8).translada(0, -100).rotaciona_ponto(radians((0 + 1) * 15), 3),
+                              seta.escala_ponto(0.8, 0.8).translada(200, -100).rotaciona_ponto(radians((0 + 2) * 15), 3),
+                              ]),
+                     Desenho([bandeiraEsquisitaDeFestaJunina.rotaciona_ponto(radians(180)).translada(-375, 150).rotaciona_ponto(radians((1 + 0) * 15), 5),#.escala_ponto(0.7, 0.7).translada(-200, -100),
+                              bandeiraEsquisitaDeFestaJunina.rotaciona_ponto(radians(180)).translada(-175, 175).rotaciona_ponto(radians((1 + 1) * 15), 5),
+                              bandeiraEsquisitaDeFestaJunina.rotaciona_ponto(radians(180)).translada(15, 200).rotaciona_ponto(radians((1 + 2) * 15), 5),
+                              ]),
+                     Desenho([seta.escala_ponto(0.8, 0.8).translada(-200, 200).rotaciona_ponto(radians((2 + 0) * 15), 3),
+                              seta.escala_ponto(0.8, 0.8).translada(0, 200).rotaciona_ponto(radians((2 + 1) * 15), 3),
+                              seta.escala_ponto(0.8, 0.8).translada(200, 200).rotaciona_ponto(radians((2 + 2) * 15), 3),
+                              ])]
 
         respostas = [Desenho([Face(self.superficie, [[200, 200], [400, 200], [400, 400], [200, 400]], VERDE)]),
                      Desenho([Face(self.superficie, [[400, 400], [200, 400], [300, 200]], VERDE)])]
         resposta = 1
 
         #tela = Tela(perguntas, respostas, resposta, area_padrao)
-        tela = Tela([], [], resposta, [])
+        tela = Tela(perguntas, [], resposta, [])
         self.telas.append(tela)
 
         # TODO: criar telas seguintes
