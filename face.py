@@ -49,8 +49,6 @@ class Face:
                              [0, 1, ty],
                              [0, 0, 1]]
 
-       #print(self.vertices)
-
         for vertice in self.vertices:
             vertice_t = transpoe_vetor(vertice)
             vertice = d_transpoe_vetor(multiplicacao_matriz(matriz_translacao, vertice_t))
@@ -61,9 +59,6 @@ class Face:
                 i += 1
 
             novos_vertices.append(vertice)
-
-
-        #print(novos_vertices)
 
         return Face(self.superficie, novos_vertices, self.cor)
 
@@ -94,7 +89,6 @@ class Face:
                           [sin(teta), cos(teta), 0],
                           [0        , 0        , 1]]
 
-
         for vertice in self.vertices:
             vertice_t = transpoe_vetor(vertice)
             vertice = d_transpoe_vetor(multiplicacao_matriz(matriz_rotacao, vertice_t))
@@ -113,7 +107,6 @@ class Face:
         matriz_rotacao = [[1, kx, 0],
                           [ky, 1, 0],
                           [0, 0, 1]]
-
 
         for vertice in self.vertices:
             vertice_t = transpoe_vetor(vertice)
@@ -138,7 +131,6 @@ class Face:
                 break
             i += 1
 
-
         print(delta_x,delta_y)
         print("translada para origem")
         face_orig = self.translada(delta_x, delta_y)
@@ -161,7 +153,6 @@ class Face:
                 break
             i += 1
 
-
         print(delta_x,delta_y)
         print("translada para origem")
         face_orig = self.translada(delta_x, delta_y)
@@ -183,7 +174,6 @@ class Face:
                 delta_y = -(vertice[1])
                 break
             i += 1
-
 
         print(delta_x,delta_y)
         print("translada para origem")
