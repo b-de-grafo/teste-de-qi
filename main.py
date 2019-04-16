@@ -193,21 +193,24 @@ class Jogo:
         self.superficie.fill(PRETO)
 
         if self.estado_do_jogo == TELA_INICIAL:
-            mensagem = "Pressione qualquer tecla para iniciar o teste"
+            mensagem = "Pressione qualquer tecla para iniciar o teste!"
             surface_msg = self.fonte.render(mensagem, False, BRANCO)
 
-            self.superficie.blit(surface_msg, (110, 250))
+            self.superficie.blit(surface_msg, (70, 250))
         elif self.estado_do_jogo == JOGANDO:
             self.telas[self.tela_atual].desenha()
         elif self.estado_do_jogo == FIM_DE_JOGO:
-            mensagem = "Você acertou %d pergunta%s em %.1f segundos, seu QI é:" % (self.corretas,
-                                                                                   "" if self.corretas == 1 else "s",
-                                                                                   self.tempo_de_resposta)
+            mensagem = "Você acertou %d pergunta%s em %.1f segundos!" % (self.corretas,
+                                                                                "" if self.corretas == 1 else "s",
+                                                                                self.tempo_de_resposta)
+            mensagem2 = "Seu QI é:"
             qi = "%.0f" % ((self.corretas * 10) * (10 / self.tempo_de_resposta))
             surface_msg = self.fonte.render(mensagem, False, BRANCO)
+            surface_msg2 = self.fonte.render(mensagem2, False, BRANCO)
             surface_qi = self.fonte.render(qi, False, BRANCO)
 
             self.superficie.blit(surface_msg, (65, 150))
+            self.superficie.blit(surface_msg2, (175, 200))
             self.superficie.blit(surface_qi, (290, 200))
 
 
