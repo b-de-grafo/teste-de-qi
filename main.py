@@ -41,8 +41,8 @@ class Jogo:
     def monta_telas(self):
         # Alguns polígonos pra começar
         # triforceDeViking = Face(self.superficie, [[45, 0], [60, 24], [75, 0], [120, 96], [90, 96], [105, 120], [15, 120], [30, 96], [0, 96]]).desenha()
-        # raio = Face(self.superficie, [[225, 0], [245, 0], [240, 30], [275, 35], [225, 125], [235, 50], [200, 50]]).desenha()
-        # diamante = Face(self.superficie, [[375, 0], [425, 0], [450, 25], [400, 100], [350, 25]]).desenha()
+        raio = Face(self.superficie, [[225, 0], [245, 0], [240, 30], [275, 35], [225, 125], [235, 50], [200, 50]])
+        diamante = Face(self.superficie, [[375, 0], [425, 0], [450, 25], [400, 100], [350, 25]])
         # cataVento = Face(self.superficie, [[550, 0], [575, 25], [575, 50], [600, 50], [575, 75], [550, 75], [550, 100], [525, 75], [525, 50], [500, 50], [525, 25], [550, 25]]).desenha()
         # cruz = Face(self.superficie, [[100, 150], [150, 150], [150, 200], [200, 200], [200, 250], [150, 250], [150, 300], [100, 300], [100, 250], [50, 250], [50, 200], [100, 200]]).desenha()
         seta = Face(self.superficie,
@@ -50,9 +50,9 @@ class Jogo:
         bandeiraEsquisitaDeFestaJunina = Face(self.superficie,
                                               [[500, 175], [600, 175], [550, 225], [600, 275], [500, 275], [425, 225]],
                                               BRANCO)
-        # dodecagono = Face(self.superficie, [[0, 466], [18, 399], [67, 350], [134, 332], [201, 350], [250, 399], [268, 466], [250, 533], [201, 582], [134, 600], [67, 582], [18, 533]]).desenha()
-        # estrela = Face(self.superficie, [[350, 325], [365, 350], [400, 350], [375, 365], [385, 400], [350, 380], [315, 400], [325, 365], [300, 350], [335, 350]]).desenha()
-        # estrelaDaviVsGolias = Face(self.superficie, [[450, 425], [465, 450], [500, 450], [475, 475], [500, 500], [465, 500], [450, 525], [435, 500], [400, 500], [425, 475], [400, 450], [435, 450]]).desenha()
+        dodecagono = Face(self.superficie, [[0, 466], [18, 399], [67, 350], [134, 332], [201, 350], [250, 399], [268, 466], [250, 533], [201, 582], [134, 600], [67, 582], [18, 533]])
+        estrela = Face(self.superficie, [[350, 325], [365, 350], [400, 350], [375, 365], [385, 400], [350, 380], [315, 400], [325, 365], [300, 350], [335, 350]])
+        estrelaDaviVsGolias = Face(self.superficie, [[450, 425], [465, 450], [500, 450], [475, 475], [500, 500], [465, 500], [450, 525], [435, 500], [400, 500], [425, 475], [400, 450], [435, 450]])
 
         # estrelaDaviVsGolias.cisalhamento_ponto(1, 0, 0).desenha()
         # estrelaDaviVsGolias.rotaciona_ponto(radians(90), 2).desenha()
@@ -95,6 +95,34 @@ class Jogo:
 
         # tela = Tela(perguntas, respostas, resposta, area_padrao)
         tela = Tela(perguntas, [], resposta, [])
+        self.telas.append(tela)
+
+        # Tela 2
+        #Estrelas -> x [300 a 400] y [ 325 a 400]
+        #Estrelas de Davi -> x [400 a 500] y [ 425 a 525 ]
+        perguntas = [Desenho([estrelaDaviVsGolias.translada(-350, -400).escala_ponto(1.5,1.5, 0),
+                              estrela.escala_ponto(0.7, 0.7, 0).translada(-250, -260)]),
+                     Desenho([estrelaDaviVsGolias.translada(-150, -400).escala_ponto(1.5, 1.5, 0),
+                              raio.escala_ponto(0.5, 0.5, 0).translada(70, 75)]),
+                     Desenho([estrelaDaviVsGolias.translada(50, -400).escala_ponto(1.5, 1.5, 0),
+                              diamante.escala_ponto(0.5, 0.5, 0).translada(112,75)]),
+                     Desenho([dodecagono.translada(35, -195).escala_ponto(0.5, 0.5, 0),
+                              diamante.escala_ponto(0.5, 0.5, 0).translada(-287,245)]),
+                     Desenho([dodecagono.translada(235, -195).escala_ponto(0.5, 0.5, 0),
+                              raio.escala_ponto(0.5, 0.5, 0).translada(70, 245)])
+                     ]
+
+        respostas = [Desenho([dodecagono.translada(35, 60).escala_ponto(0.5, 0.5, 0),
+                              diamante.escala_ponto(0.5, 0.5, 0).translada(-287,500)]),
+                     Desenho([estrelaDaviVsGolias.translada(-150, 25).escala_ponto(1.5, 1.5, 0),
+                              raio.escala_ponto(0.5, 0.5, 0).translada(70, 500)]),
+                     Desenho([dodecagono.translada(435, 60).escala_ponto(0.5, 0.5, 0),
+                              estrela.escala_ponto(0.7, 0.7, 0).translada(150, 170)]),
+                     ]
+
+        resposta = 3
+
+        tela = Tela(perguntas, respostas, resposta, area_padrao)
         self.telas.append(tela)
 
         # TODO: criar telas seguintes

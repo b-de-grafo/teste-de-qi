@@ -42,6 +42,7 @@ class Face:
 
     def preenche(self):
         self.preenchido = True
+        return self
 
     def translada(self, tx=0, ty=0):
         novos_vertices = []
