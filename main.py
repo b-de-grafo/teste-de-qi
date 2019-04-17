@@ -67,34 +67,36 @@ class Jogo:
                                 Face(self.superficie, [[200, 450], [200, 600]]),
                                 Face(self.superficie, [[400, 450], [400, 600]])])]
 
-        # Tela 1 #Ideia: poligonos rotacionados de acordo com sua posicao na matriz vezes 15 graus
-        perguntas = [Desenho([seta.escala_ponto(0.8, 0.8).translada(-200, -100),
-                              seta.escala_ponto(0.8, 0.8).translada(0, -100).rotaciona_ponto(radians((0 + 1) * 15), 3),
-                              seta.escala_ponto(0.8, 0.8).translada(200, -100).rotaciona_ponto(radians((0 + 2) * 15),
-                                                                                               3),
+        # Tela 1 #Ideia: poligonos rotacionados de acordo com sua posicao na matriz vezes 90 graus se seta, 180 graus se bandeirola
+        perguntas = [Desenho([seta.escala_ponto(0.7, 0.7).translada(-225, -100),
+                              seta.escala_ponto(0.7, 0.7).translada(-40, -100).rotaciona_ponto(radians((0 + 1) * 90), 3),
+                              seta.escala_ponto(0.7, 0.7).translada(150, -125).rotaciona_ponto(radians((0 + 2) * 90), 3),
                               ]),
-                     Desenho([bandeiraEsquisitaDeFestaJunina.rotaciona_ponto(radians(180)).translada(-375,
-                                                                                                     150).rotaciona_ponto(
-                         radians((1 + 0) * 15), 5),  # .escala_ponto(0.7, 0.7).translada(-200, -100),
-                              bandeiraEsquisitaDeFestaJunina.rotaciona_ponto(radians(180)).translada(-175,
-                                                                                                     175).rotaciona_ponto(
-                                  radians((1 + 1) * 15), 5),
-                              bandeiraEsquisitaDeFestaJunina.rotaciona_ponto(radians(180)).translada(15,
-                                                                                                     200).rotaciona_ponto(
-                                  radians((1 + 2) * 15), 5),
+                     Desenho([bandeiraEsquisitaDeFestaJunina.escala_ponto(0.7, 0.7).rotaciona_ponto(radians(180))
+                                                                                   .translada(-525, 100)
+                                                                                   .rotaciona_ponto(radians((1 + 0) * 180), 5),
+                              bandeiraEsquisitaDeFestaJunina.escala_ponto(0.7, 0.7).rotaciona_ponto(radians(180))
+                                                                                   .translada(-190, 98)
+                                                                                   .rotaciona_ponto(radians((1 + 1) * 180), 5),
+                              bandeiraEsquisitaDeFestaJunina.escala_ponto(0.7, 0.7).rotaciona_ponto(radians(180))
+                                                                                   .translada(-130, 100)
+                                                                                   .rotaciona_ponto(radians((1 + 2) * 180), 5),
                               ]),
                      Desenho(
-                         [seta.escala_ponto(0.8, 0.8).translada(-200, 200).rotaciona_ponto(radians((2 + 0) * 15), 3),
-                          seta.escala_ponto(0.8, 0.8).translada(0, 200).rotaciona_ponto(radians((2 + 1) * 15), 3),
-                          seta.escala_ponto(0.8, 0.8).translada(200, 200).rotaciona_ponto(radians((2 + 2) * 15), 3),
+                         [seta.escala_ponto(0.7, 0.7).translada(-250, 125).rotaciona_ponto(radians((2 + 0) * 90), 3),
+                          seta.escala_ponto(0.7, 0.7).translada(-5, 135).rotaciona_ponto(radians((2 + 1) * 90), 3),
+                          #seta.escala_ponto(0.7, 0.7).translada(0, 200).rotaciona_ponto(radians((2 + 2) * 90), 3)
                           ])]
 
-        respostas = [Desenho([Face(self.superficie, [[200, 200], [400, 200], [400, 400], [200, 400]], VERDE)]),
-                     Desenho([Face(self.superficie, [[400, 400], [200, 400], [300, 200]], VERDE)])]
+        respostas = [Desenho([seta.escala_ponto(0.7, 0.7).translada(-220, 320).rotaciona_ponto(radians((2 + 2) * 90), 3)]),
+                     Desenho([seta.escala_ponto(0.7, 0.7).translada(-40, 320).rotaciona_ponto(radians((2 + 3) * 90), 3)]),
+                     Desenho([seta.escala_ponto(0.7, 0.7).translada(150, 290).rotaciona_ponto(radians((2 + 4) * 90), 3)]),
+                     ]
+
         resposta = 1
 
         # tela = Tela(perguntas, respostas, resposta, area_padrao)
-        tela = Tela(perguntas, [], resposta, [])
+        tela = Tela(perguntas, respostas, resposta, area_padrao)
         self.telas.append(tela)
 
         # Tela 2
@@ -105,9 +107,9 @@ class Jogo:
                      Desenho([estrelaDaviVsGolias.translada(-150, -400).escala_ponto(1.5, 1.5, 0),
                               raio.escala_ponto(0.5, 0.5, 0).translada(70, 75)]),
                      Desenho([estrelaDaviVsGolias.translada(50, -400).escala_ponto(1.5, 1.5, 0),
-                              diamante.escala_ponto(0.5, 0.5, 0).translada(112,75)]),
+                              diamante.escala_ponto(0.5, 0.5, 0).translada(112, 75)]),
                      Desenho([dodecagono.translada(35, -195).escala_ponto(0.5, 0.5, 0),
-                              diamante.escala_ponto(0.5, 0.5, 0).translada(-287,245)]),
+                              diamante.escala_ponto(0.5, 0.5, 0).translada(-287, 245)]),
                      Desenho([dodecagono.translada(235, -195).escala_ponto(0.5, 0.5, 0),
                               raio.escala_ponto(0.5, 0.5, 0).translada(70, 245)])
                      ]
