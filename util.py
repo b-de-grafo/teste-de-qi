@@ -53,35 +53,33 @@ def preenchimento(superficie, origem, inicio, fim, cor):
             reta(superficie, origem, [int(x), y], cor)
 
 
-def multiplicacao_matriz(mat1, mat2):
-    #  TODO: testar
-    linhas_1 = len(mat1)
-    colunas_1 = len(mat1[0])
-    linhas_2 = len(mat2)
-    colunas_2 = len(mat2[0])
+def multiplica_matrizes(matA, matB):
+    n_linhasA = len(matA)
+    n_colunasA = len(matA[0])
+    n_linhasB = len(matB)
+    n_colunasB = len(matB[0])
 
-    if colunas_1 != linhas_2:
-        print("Erro [multiplicacao_matriz] : colunas_1 != linhas_2")
+    if n_colunasA != n_linhasB:
         return
 
-    resultado = [[0 for row in range(colunas_2)] for col in range(linhas_1)]
+    resultado = [[0 for row in range(n_colunasB)] for col in range(n_linhasA)]
 
-    for i in range(linhas_1):
-        for j in range(colunas_2):
-            for k in range(colunas_1):
-                resultado[i][j] += mat1[i][k] * mat2[k][j]
+    for i in range(n_linhasA):
+        for j in range(n_colunasB):
+            for k in range(n_colunasA):
+                resultado[i][j] += matA[i][k] * matB[k][j]
+
     return resultado
 
 
 def transpoe_vetor(vetor):
     resultado = []
-    for item in vetor:
-        resultado.append([item])
-    return resultado
 
-def d_transpoe_vetor(vetor):
-    resultado = []
-    for item in vetor:
-        for valor in item:
-            resultado.append(valor)
+    if type(vetor[0]) == list:  # Vetor na vertical
+        for item in vetor:
+            resultado.append(item[0])
+    else:  # Vetor na horizontal (normal)
+        for item in vetor:
+            resultado.append([item])
+
     return resultado

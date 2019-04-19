@@ -5,7 +5,7 @@ BRANCO = [255, 255, 255]
 
 
 class Face:
-    def __init__(self, superficie, vertices, cor=BRANCO):
+    def __init__(self, superficie, vertices, cor=BRANCO, preenchido=False):
         self.superficie = superficie
 
         self.vertices = []
@@ -16,7 +16,7 @@ class Face:
             else:
                 self.vertices.append(vertice)
         self.cor = cor
-        self.preenchido = False
+        self.preenchido = preenchido
     
     def __repr__(self):
         r = "[ "
@@ -25,9 +25,11 @@ class Face:
         r += "]"
         return r
 
-    def desenha(self, cor=None):
+    def desenha(self, cor=None, preenchido=None):
         if cor is None:
             cor = self.cor
+        if preenchido is None:
+            preenchido = self.preenchido
 
         for i in range(len(self.vertices)):
             if i < len(self.vertices) - 1:
@@ -35,157 +37,96 @@ class Face:
             else:
                 reta(self.superficie, self.vertices[0], self.vertices[i], cor)
 
-        if self.preenchido:
-            for j in range(len(self.vertices) - 1, 0, -1):
-                if j - 1 != 0:
-                    preenchimento(self.superficie, self.vertices[0], self.vertices[j - 1], self.vertices[j], self.cor)
-
-    def preenche(self):
-        self.preenchido = True
-        return self
+        opacidade = 10
+        if preenchido:
+            for i in range(opacidade):
+                self.escala_no_ponto(i / opacidade, i / opacidade).desenha(preenchido=False)
 
     def translada(self, tx=0, ty=0):
-        novos_vertices = []
         matriz_translacao = [[1, 0, tx],
                              [0, 1, ty],
                              [0, 0, 1]]
 
+        novos_vertices = []
         for vertice in self.vertices:
-            vertice_t = transpoe_vetor(vertice)
-            vertice = d_transpoe_vetor(multiplicacao_matriz(matriz_translacao, vertice_t))
+            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_translacao, transpoe_vetor(vertice)))
 
-            i = 0
-            for n in vertice:
-                vertice[i] = int(n)
-                i += 1
+            # Arredonda possíveis floats do vetor
+            for i in range(len(novo_vertice)):
+                novo_vertice[i] = int(novo_vertice[i])
 
-            novos_vertices.append(vertice)
+            novos_vertices.append(novo_vertice)
 
-        return Face(self.superficie, novos_vertices, self.cor)
+        return Face(self.superficie, novos_vertices, self.cor, self.preenchido)
 
     def escala(self, lx=1, ly=1):
+        matriz_escala = [[lx, 0 , 0],
+                         [0 , ly, 0],
+                         [0 , 0 , 1]]
+
         novos_vertices = []
-        matriz_escala = [[lx, 0, 0],
-                         [0, ly, 0],
-                         [0, 0, 1]]
-
         for vertice in self.vertices:
-            vertice_t = transpoe_vetor(vertice)
-            vertice = d_transpoe_vetor(multiplicacao_matriz(matriz_escala, vertice_t))
+            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_escala, transpoe_vetor(vertice)))
 
-            i = 0
-            for n in vertice:
-                vertice[i] = int(n)
-                i += 1
+            # Arredonda possíveis floats do vetor
+            for i in range(len(novo_vertice)):
+                novo_vertice[i] = int(novo_vertice[i])
 
-            novos_vertices.append(vertice)
+            novos_vertices.append(novo_vertice)
 
-        print(novos_vertices)
-
-        return Face(self.superficie, novos_vertices, self.cor)
+        return Face(self.superficie, novos_vertices, self.cor, self.preenchido)
 
     def rotaciona(self, teta):
-        novos_vertices = []
         matriz_rotacao = [[cos(teta), -sin(teta), 0],
-                          [sin(teta), cos(teta), 0],
-                          [0        , 0        , 1]]
+                          [sin(teta),  cos(teta), 0],
+                          [0        ,  0        , 1]]
 
+        novos_vertices = []
         for vertice in self.vertices:
-            vertice_t = transpoe_vetor(vertice)
-            vertice = d_transpoe_vetor(multiplicacao_matriz(matriz_rotacao, vertice_t))
+            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_rotacao, transpoe_vetor(vertice)))
 
-            i = 0
-            for n in vertice:
-                vertice[i] = int(n)
-                i += 1
-            novos_vertices.append(vertice)
+            # Arredonda possíveis floats do vetor
+            for i in range(len(novo_vertice)):
+                novo_vertice[i] = int(novo_vertice[i])
 
-        nova_face = Face(self.superficie, novos_vertices, self.cor)
-        return nova_face
+            novos_vertices.append(novo_vertice)
+
+        return Face(self.superficie, novos_vertices, self.cor, self.preenchido)
 
     def cisalhamento(self, kx, ky):
         novos_vertices = []
-        matriz_rotacao = [[1, kx, 0],
-                          [ky, 1, 0],
-                          [0, 0, 1]]
+        matriz_rotacao = [[1 , kx, 0],
+                          [ky, 1 , 0],
+                          [0 , 0 , 1]]
 
         for vertice in self.vertices:
-            vertice_t = transpoe_vetor(vertice)
-            vertice = d_transpoe_vetor(multiplicacao_matriz(matriz_rotacao, vertice_t))
+            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_rotacao, transpoe_vetor(vertice)))
 
-            i = 0
-            for n in vertice:
-                vertice[i] = int(n)
-                i += 1
-            novos_vertices.append(vertice)
+            # Arredonda possíveis floats do vetor
+            for i in range(len(novo_vertice)):
+                novo_vertice[i] = int(novo_vertice[i])
 
-        nova_face = Face(self.superficie, novos_vertices, self.cor)
-        print(nova_face)
-        return nova_face
+            novos_vertices.append(novo_vertice)
 
-    def escala_ponto(self, lx, ly, ind_ponto=0):
-        i = 0
-        for vertice in self.vertices:
-            if i == ind_ponto:
-                delta_x = -(vertice[0])
-                delta_y = -(vertice[1])
-                break
-            i += 1
+        return Face(self.superficie, novos_vertices, self.cor, self.preenchido)
 
-        print(delta_x,delta_y)
-        print("translada para origem")
-        face_orig = self.translada(delta_x, delta_y)
-        print(face_orig)
+    def escala_no_ponto(self, lx, ly, ind_ponto=0):
+        delta_x = -self.vertices[ind_ponto][0]
+        delta_y = -self.vertices[ind_ponto][1]
 
-        print("escala na origem")
-        face_rotacao = face_orig.escala(lx,ly)
-        print(face_rotacao)
-        print("volta pra posicao inical")
-        nova_face = face_rotacao.translada(-delta_x, -delta_y)
-        print(nova_face)
-        return nova_face
+        # Translada para a origem, faz lá a escala e translada de volta
+        return self.translada(delta_x, delta_y).escala(lx, ly).translada(-delta_x, -delta_y)
 
-    def rotaciona_ponto(self, teta, ind_ponto=0):
-        i = 0
-        for vertice in self.vertices:
-            if i == ind_ponto:
-                delta_x = -(vertice[0])
-                delta_y = -(vertice[1])
-                break
-            i += 1
+    def rotaciona_no_ponto(self, teta, ind_ponto=0):
+        delta_x = -self.vertices[ind_ponto][0]
+        delta_y = -self.vertices[ind_ponto][1]
 
-        print(delta_x,delta_y)
-        print("translada para origem")
-        face_orig = self.translada(delta_x, delta_y)
-        print(face_orig)
+        # Translada para a origem, faz lá a rotação e translada de volta
+        return self.translada(delta_x, delta_y).rotaciona(teta).translada(-delta_x, -delta_y)
 
-        print("rotaciona na origem")
-        face_rotacao = face_orig.rotaciona(teta)
-        print(face_rotacao)
-        print("volta pra posicao inical")
-        nova_face = face_rotacao.translada(-delta_x, -delta_y)
-        print(nova_face)
-        return nova_face
+    def cisalhamento_no_ponto(self, kx, ky, ind_ponto=0):
+        delta_x = -self.vertices[ind_ponto][0]
+        delta_y = -self.vertices[ind_ponto][1]
 
-    def cisalhamento_ponto(self, kx, ky, ind_ponto=0):
-        i = 0
-        for vertice in self.vertices:
-            if i == ind_ponto:
-                delta_x = -(vertice[0])
-                delta_y = -(vertice[1])
-                break
-            i += 1
-
-        print(delta_x,delta_y)
-        print("translada para origem")
-        face_orig = self.translada(delta_x, delta_y)
-        print(face_orig)
-
-        print("cisalha na origem")
-        face_rotacao = face_orig.cisalhamento(kx,ky)
-        print(face_rotacao)
-
-        print("volta pra posicao inical")
-        nova_face = face_rotacao.translada(-delta_x, -delta_y)
-        print(nova_face)
-        return nova_face
+        # Translada para a origem, faz lá o cisalhamento e transalada de volta
+        return self.translada(delta_x, delta_y).cisalhamento(kx, ky).translada(-delta_x, -delta_y)

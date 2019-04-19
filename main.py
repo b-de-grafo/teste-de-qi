@@ -41,7 +41,7 @@ class Jogo:
     def monta_telas(self):
         # Alguns polígonos pra começar
         # triforceDeViking = Face(self.superficie, [[45, 0], [60, 24], [75, 0], [120, 96], [90, 96], [105, 120], [15, 120], [30, 96], [0, 96]]).desenha()
-        raio = Face(self.superficie, [[225, 0], [245, 0], [240, 30], [275, 35], [225, 125], [235, 50], [200, 50]])
+        raio = Face(self.superficie, [[225, 0], [245, 0], [240, 30], [275, 35], [225, 125], [235, 50], [200, 50]], preenchido=True)
         diamante = Face(self.superficie, [[375, 0], [425, 0], [450, 25], [400, 100], [350, 25]])
         # cataVento = Face(self.superficie, [[550, 0], [575, 25], [575, 50], [600, 50], [575, 75], [550, 75], [550, 100], [525, 75], [525, 50], [500, 50], [525, 25], [550, 25]]).desenha()
         # cruz = Face(self.superficie, [[100, 150], [150, 150], [150, 200], [200, 200], [200, 250], [150, 250], [150, 300], [100, 300], [100, 250], [50, 250], [50, 200], [100, 200]]).desenha()
@@ -68,29 +68,29 @@ class Jogo:
                                 Face(self.superficie, [[400, 450], [400, 600]])])]
 
         # Tela 1 #Ideia: poligonos rotacionados de acordo com sua posicao na matriz vezes 90 graus se seta, 180 graus se bandeirola
-        perguntas = [Desenho([seta.escala_ponto(0.7, 0.7).translada(-225, -100),
-                              seta.escala_ponto(0.7, 0.7).translada(-40, -100).rotaciona_ponto(radians((0 + 1) * 90), 3),
-                              seta.escala_ponto(0.7, 0.7).translada(150, -125).rotaciona_ponto(radians((0 + 2) * 90), 3),
+        perguntas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-225, -100),
+                              seta.escala_no_ponto(0.7, 0.7).translada(-40, -100).rotaciona_no_ponto(radians((0 + 1) * 90), 3),
+                              seta.escala_no_ponto(0.7, 0.7).translada(150, -125).rotaciona_no_ponto(radians((0 + 2) * 90), 3),
                               ]),
-                     Desenho([bandeiraEsquisitaDeFestaJunina.escala_ponto(0.7, 0.7).rotaciona_ponto(radians(180))
+                     Desenho([bandeiraEsquisitaDeFestaJunina.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180))
                                                                                    .translada(-525, 100)
-                                                                                   .rotaciona_ponto(radians((1 + 0) * 180), 5),
-                              bandeiraEsquisitaDeFestaJunina.escala_ponto(0.7, 0.7).rotaciona_ponto(radians(180))
+                                                                                   .rotaciona_no_ponto(radians((1 + 0) * 180), 5),
+                              bandeiraEsquisitaDeFestaJunina.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180))
                                                                                    .translada(-190, 98)
-                                                                                   .rotaciona_ponto(radians((1 + 1) * 180), 5),
-                              bandeiraEsquisitaDeFestaJunina.escala_ponto(0.7, 0.7).rotaciona_ponto(radians(180))
+                                                                                   .rotaciona_no_ponto(radians((1 + 1) * 180), 5),
+                              bandeiraEsquisitaDeFestaJunina.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180))
                                                                                    .translada(-130, 100)
-                                                                                   .rotaciona_ponto(radians((1 + 2) * 180), 5),
+                                                                                   .rotaciona_no_ponto(radians((1 + 2) * 180), 5),
                               ]),
                      Desenho(
-                         [seta.escala_ponto(0.7, 0.7).translada(-250, 125).rotaciona_ponto(radians((2 + 0) * 90), 3),
-                          seta.escala_ponto(0.7, 0.7).translada(-5, 135).rotaciona_ponto(radians((2 + 1) * 90), 3),
+                         [seta.escala_no_ponto(0.7, 0.7).translada(-250, 125).rotaciona_no_ponto(radians((2 + 0) * 90), 3),
+                          seta.escala_no_ponto(0.7, 0.7).translada(-5, 135).rotaciona_no_ponto(radians((2 + 1) * 90), 3),
                           #seta.escala_ponto(0.7, 0.7).translada(0, 200).rotaciona_ponto(radians((2 + 2) * 90), 3)
                           ])]
 
-        respostas = [Desenho([seta.escala_ponto(0.7, 0.7).translada(-220, 320).rotaciona_ponto(radians((2 + 2) * 90), 3)]),
-                     Desenho([seta.escala_ponto(0.7, 0.7).translada(-40, 320).rotaciona_ponto(radians((2 + 3) * 90), 3)]),
-                     Desenho([seta.escala_ponto(0.7, 0.7).translada(150, 290).rotaciona_ponto(radians((2 + 4) * 90), 3)]),
+        respostas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-220, 320).rotaciona_no_ponto(radians((2 + 2) * 90), 3)]),
+                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-40, 320).rotaciona_no_ponto(radians((2 + 3) * 90), 3)]),
+                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(150, 290).rotaciona_no_ponto(radians((2 + 4) * 90), 3)]),
                      ]
 
         resposta = 1
@@ -102,24 +102,24 @@ class Jogo:
         # Tela 2
         #Estrelas -> x [300 a 400] y [ 325 a 400]
         #Estrelas de Davi -> x [400 a 500] y [ 425 a 525 ]
-        perguntas = [Desenho([estrelaDaviVsGolias.translada(-350, -400).escala_ponto(1.5,1.5, 0),
-                              estrela.escala_ponto(0.7, 0.7, 0).translada(-250, -260)]),
-                     Desenho([estrelaDaviVsGolias.translada(-150, -400).escala_ponto(1.5, 1.5, 0),
-                              raio.escala_ponto(0.5, 0.5, 0).translada(70, 75)]),
-                     Desenho([estrelaDaviVsGolias.translada(50, -400).escala_ponto(1.5, 1.5, 0),
-                              diamante.escala_ponto(0.5, 0.5, 0).translada(112, 75)]),
-                     Desenho([dodecagono.translada(35, -195).escala_ponto(0.5, 0.5, 0),
-                              diamante.escala_ponto(0.5, 0.5, 0).translada(-287, 245)]),
-                     Desenho([dodecagono.translada(235, -195).escala_ponto(0.5, 0.5, 0),
-                              raio.escala_ponto(0.5, 0.5, 0).translada(70, 245)])
+        perguntas = [Desenho([estrelaDaviVsGolias.translada(-350, -400).escala_no_ponto(1.5, 1.5, 0),
+                              estrela.escala_no_ponto(0.7, 0.7, 0).translada(-250, -260)]),
+                     Desenho([estrelaDaviVsGolias.translada(-150, -400).escala_no_ponto(1.5, 1.5, 0),
+                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 75)]),
+                     Desenho([estrelaDaviVsGolias.translada(50, -400).escala_no_ponto(1.5, 1.5, 0),
+                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(112, 75)]),
+                     Desenho([dodecagono.translada(35, -195).escala_no_ponto(0.5, 0.5, 0),
+                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(-287, 245)]),
+                     Desenho([dodecagono.translada(235, -195).escala_no_ponto(0.5, 0.5, 0),
+                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 245)])
                      ]
 
-        respostas = [Desenho([dodecagono.translada(35, 60).escala_ponto(0.5, 0.5, 0),
-                              diamante.escala_ponto(0.5, 0.5, 0).translada(-287,500)]),
-                     Desenho([estrelaDaviVsGolias.translada(-150, 25).escala_ponto(1.5, 1.5, 0),
-                              raio.escala_ponto(0.5, 0.5, 0).translada(70, 500)]),
-                     Desenho([dodecagono.translada(435, 60).escala_ponto(0.5, 0.5, 0),
-                              estrela.escala_ponto(0.7, 0.7, 0).translada(150, 170)]),
+        respostas = [Desenho([dodecagono.translada(35, 60).escala_no_ponto(0.5, 0.5, 0),
+                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(-287, 500)]),
+                     Desenho([estrelaDaviVsGolias.translada(-150, 25).escala_no_ponto(1.5, 1.5, 0),
+                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 500)]),
+                     Desenho([dodecagono.translada(435, 60).escala_no_ponto(0.5, 0.5, 0),
+                              estrela.escala_no_ponto(0.7, 0.7, 0).translada(150, 170)]),
                      ]
 
         resposta = 3
@@ -180,10 +180,7 @@ class Jogo:
     def fluxo_do_jogo(self):
         if self.estado_do_jogo == JOGANDO and self.resposta_do_jogador is not None:
             if self.resposta_do_jogador == self.telas[self.tela_atual].correta:
-                print("Acertou\n")
                 self.corretas += 1
-            else:
-                print("Errou\n")
             self.resposta_do_jogador = None
             self.tela_atual += 1
 
