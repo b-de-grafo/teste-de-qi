@@ -28,6 +28,7 @@ class Face:
         if cor is None:
             cor = self.cor
 
+        # Desenha reta entre os vértices
         for i in range(len(self.vertices)):
             if i < len(self.vertices) - 1:
                 reta(self.superficie, self.vertices[i], self.vertices[i + 1], cor)

@@ -1,5 +1,5 @@
 import pygame
-from math import pi, radians
+from math import radians
 from face import *
 from tela import *
 from desenho import *
@@ -12,6 +12,7 @@ PRETO = [0, 0, 0]
 TELA_INICIAL = 0
 JOGANDO = 1
 FIM_DE_JOGO = 2
+
 
 class Jogo:
     def __init__(self):
@@ -200,8 +201,8 @@ class Jogo:
             self.telas[self.tela_atual].desenha()
         elif self.estado_do_jogo == FIM_DE_JOGO:
             mensagem = "Você acertou %d pergunta%s em %.1f segundos!" % (self.corretas,
-                                                                                "" if self.corretas == 1 else "s",
-                                                                                self.tempo_de_resposta)
+                                                                         "" if self.corretas == 1 else "s",
+                                                                         self.tempo_de_resposta)
             mensagem2 = "Seu QI é:"
             qi = "%.0f" % ((self.corretas * 10) * (10 / self.tempo_de_resposta))
             surface_msg = self.fonte.render(mensagem, False, BRANCO)

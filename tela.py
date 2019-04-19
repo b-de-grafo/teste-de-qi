@@ -1,16 +1,14 @@
 class Tela:
-    def __init__(self, perguntas, respostas, correta, areaDasRespostas):
+    def __init__(self, perguntas, respostas, correta, area_das_respostas):
         self.perguntas = perguntas
         self.respostas = respostas
         self.correta = correta
-        self.areaDasRespostas = areaDasRespostas
-
-        # TODO: dispor os desenhos de modo que não fiquem um por cima do outro, aí bota isso no offset de cada um
+        self.area_das_respostas = area_das_respostas
 
     def desenha(self):
         for desenho in self.perguntas:
             desenho.desenha()
         for desenho in self.respostas:
             desenho.desenha()
-        for desenho in self.areaDasRespostas:
+        for desenho in self.area_das_respostas:
             desenho.desenha()
