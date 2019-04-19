@@ -5,7 +5,7 @@ BRANCO = [255, 255, 255]
 
 
 class Face:
-    def __init__(self, superficie, vertices, cor=BRANCO, preenchido=False):
+    def __init__(self, superficie, vertices, cor=BRANCO):
         self.superficie = superficie
 
         self.vertices = []
@@ -16,7 +16,6 @@ class Face:
             else:
                 self.vertices.append(vertice)
         self.cor = cor
-        self.preenchido = preenchido
     
     def __repr__(self):
         r = "[ "
@@ -25,22 +24,15 @@ class Face:
         r += "]"
         return r
 
-    def desenha(self, cor=None, preenchido=None):
+    def desenha(self, cor=None):
         if cor is None:
             cor = self.cor
-        if preenchido is None:
-            preenchido = self.preenchido
 
         for i in range(len(self.vertices)):
             if i < len(self.vertices) - 1:
                 reta(self.superficie, self.vertices[i], self.vertices[i + 1], cor)
             else:
                 reta(self.superficie, self.vertices[0], self.vertices[i], cor)
-
-        opacidade = 10
-        if preenchido:
-            for i in range(opacidade):
-                self.escala_no_ponto(i / opacidade, i / opacidade).desenha(preenchido=False)
 
     def translada(self, tx=0, ty=0):
         matriz_translacao = [[1, 0, tx],
@@ -57,7 +49,7 @@ class Face:
 
             novos_vertices.append(novo_vertice)
 
-        return Face(self.superficie, novos_vertices, self.cor, self.preenchido)
+        return Face(self.superficie, novos_vertices, self.cor)
 
     def escala(self, lx=1, ly=1):
         matriz_escala = [[lx, 0 , 0],
@@ -74,7 +66,7 @@ class Face:
 
             novos_vertices.append(novo_vertice)
 
-        return Face(self.superficie, novos_vertices, self.cor, self.preenchido)
+        return Face(self.superficie, novos_vertices, self.cor)
 
     def rotaciona(self, teta):
         matriz_rotacao = [[cos(teta), -sin(teta), 0],
@@ -91,7 +83,7 @@ class Face:
 
             novos_vertices.append(novo_vertice)
 
-        return Face(self.superficie, novos_vertices, self.cor, self.preenchido)
+        return Face(self.superficie, novos_vertices, self.cor)
 
     def cisalhamento(self, kx, ky):
         novos_vertices = []
@@ -108,7 +100,7 @@ class Face:
 
             novos_vertices.append(novo_vertice)
 
-        return Face(self.superficie, novos_vertices, self.cor, self.preenchido)
+        return Face(self.superficie, novos_vertices, self.cor)
 
     def escala_no_ponto(self, lx, ly, ind_ponto=0):
         delta_x = -self.vertices[ind_ponto][0]
