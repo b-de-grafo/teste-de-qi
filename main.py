@@ -44,8 +44,8 @@ class Jogo:
         # triforceDeViking = Face(self.superficie, [[45, 0], [60, 24], [75, 0], [120, 96], [90, 96], [105, 120], [15, 120], [30, 96], [0, 96]]).desenha()
         raio = Face(self.superficie, [[225, 0], [245, 0], [240, 30], [275, 35], [225, 125], [235, 50], [200, 50]])
         diamante = Face(self.superficie, [[375, 0], [425, 0], [450, 25], [400, 100], [350, 25]])
-        # cataVento = Face(self.superficie, [[550, 0], [575, 25], [575, 50], [600, 50], [575, 75], [550, 75], [550, 100], [525, 75], [525, 50], [500, 50], [525, 25], [550, 25]]).desenha()
-        # cruz = Face(self.superficie, [[100, 150], [150, 150], [150, 200], [200, 200], [200, 250], [150, 250], [150, 300], [100, 300], [100, 250], [50, 250], [50, 200], [100, 200]]).desenha()
+        cataVento = Face(self.superficie, [[550, 0], [575, 25], [575, 50], [600, 50], [575, 75], [550, 75], [550, 100], [525, 75], [525, 50], [500, 50], [525, 25], [550, 25]])
+        cruz = Face(self.superficie, [[100, 150], [150, 150], [150, 200], [200, 200], [200, 250], [150, 250], [150, 300], [100, 300], [100, 250], [50, 250], [50, 200], [100, 200]])
         seta = Face(self.superficie,
                     [[325, 150], [400, 225], [325, 300], [325, 250], [225, 250], [225, 200], [325, 200]], BRANCO)
         bandeiraEsquisitaDeFestaJunina = Face(self.superficie,
@@ -124,6 +124,31 @@ class Jogo:
                      ]
 
         resposta = 3
+
+        tela = Tela(perguntas, respostas, resposta, area_padrao)
+        self.telas.append(tela)
+
+        # Tela 3
+
+        perguntas = [
+            Desenho([cataVento.rotaciona_no_ponto(radians(45)).escala_no_ponto(1.5, 1.5, 0).translada(-382, 35)]),
+            Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(232, -120)]),
+            Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, -120)]),
+            Desenho([cataVento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-100, 150)]),
+            Desenho([cataVento.escala_no_ponto(1.5, 1.5, 0).translada(-445, 185)]),
+            Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 55)])
+            ]
+
+        respostas = [
+            Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(25, 310)]),
+            Desenho([cataVento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-507, 580)]),
+            Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, 325)]),
+            Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(385, 310)]),
+            Desenho([cataVento.escala_no_ponto(1.5, 1.5, 0).translada(-245, 450)]),
+            Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 310)]),
+            ]
+
+        resposta = 2
 
         tela = Tela(perguntas, respostas, resposta, area_padrao)
         self.telas.append(tela)
