@@ -9,6 +9,7 @@ VERMELHO = [255, 0, 0]
 VERDE = [0, 255, 0]
 AZUL = [0, 0, 255]
 AMARELO = [255, 255, 0]
+AZUL_PISCINA = [0, 255, 255]
 PRETO = [0, 0, 0]
 
 TELA_INICIAL = 0
@@ -46,22 +47,20 @@ class Jogo:
         self.corretas = 0
 
     def monta_telas(self):
-        triforceDeViking = Face(self.superficie, [[45, 0], [60, 24], [75, 0], [120, 96], [90, 96], [105, 120], [15, 120], [30, 96], [0, 96]]).desenha()
+        triforce_de_viking = Face(self.superficie,
+                                  [[45, 0], [60, 24], [75, 0], [120, 96], [90, 96], [105, 120], [15, 120], [30, 96], [0, 96]])
         raio = Face(self.superficie,
-                    [[225, 0], [245, 0], [240, 30], [275, 35], [225, 125], [235, 50], [200, 50]],
-                    AMARELO)
+                    [[225, 0], [245, 0], [240, 30], [275, 35], [225, 125], [235, 50], [200, 50]])
         diamante = Face(self.superficie,
-                        [[375, 0], [425, 0], [450, 25], [400, 100], [350, 25]],
-                        AZUL)
+                        [[375, 0], [425, 0], [450, 25], [400, 100], [350, 25]])
         cata_vento = Face(self.superficie,
                           [[550, 0], [575, 25], [575, 50], [600, 50], [575, 75], [550, 75], [550, 100], [525, 75], [525, 50], [500, 50], [525, 25], [550, 25]])
         cruz = Face(self.superficie,
                     [[100, 150], [150, 150], [150, 200], [200, 200], [200, 250], [150, 250], [150, 300], [100, 300], [100, 250], [50, 250], [50, 200], [100, 200]])
         seta = Face(self.superficie,
-                    [[325, 150], [400, 225], [325, 300], [325, 250], [225, 250], [225, 200], [325, 200]], BRANCO)
+                    [[325, 150], [400, 225], [325, 300], [325, 250], [225, 250], [225, 200], [325, 200]])
         bandeira = Face(self.superficie,
-                        [[500, 175], [600, 175], [550, 225], [600, 275], [500, 275], [425, 225]],
-                        BRANCO)
+                        [[500, 175], [600, 175], [550, 225], [600, 275], [500, 275], [425, 225]])
         dodecagono = Face(self.superficie,
                           [[0, 466], [18, 399], [67, 350], [134, 332], [201, 350], [250, 399], [268, 466], [250, 533], [201, 582], [134, 600], [67, 582], [18, 533]])
         estrela = Face(self.superficie,
@@ -77,18 +76,18 @@ class Jogo:
         # Tela 1
         # Ideia: poligonos rotacionados de acordo com sua posicao na matriz
         # multiplicado por 90 graus se for seta e 180 graus se for bandeira
-        perguntas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-225, -100),
-                              seta.escala_no_ponto(0.7, 0.7).translada(-40, -100).rotaciona_no_ponto(radians((0 + 1) * 90), 3),
-                              seta.escala_no_ponto(0.7, 0.7).translada(150, -125).rotaciona_no_ponto(radians((0 + 2) * 90), 3)]),
-                     Desenho([bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-525, 100).rotaciona_no_ponto(radians((1 + 0) * 180), 5),
-                              bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-190, 98).rotaciona_no_ponto(radians((1 + 1) * 180), 5),
-                              bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-130, 100).rotaciona_no_ponto(radians((1 + 2) * 180), 5)]),
-                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-250, 125).rotaciona_no_ponto(radians((2 + 0) * 90), 3),
-                              seta.escala_no_ponto(0.7, 0.7).translada(-5, 135).rotaciona_no_ponto(radians((2 + 1) * 90), 3)])]
+        perguntas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-225, -100).muda_cor(VERMELHO),
+                              seta.escala_no_ponto(0.7, 0.7).translada(-40, -100).rotaciona_no_ponto(radians((0 + 1) * 90), 3).muda_cor(VERMELHO),
+                              seta.escala_no_ponto(0.7, 0.7).translada(150, -125).rotaciona_no_ponto(radians((0 + 2) * 90), 3).muda_cor(VERMELHO)]),
+                     Desenho([bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-525, 100).rotaciona_no_ponto(radians((1 + 0) * 180), 5).muda_cor(VERDE),
+                              bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-190, 98).rotaciona_no_ponto(radians((1 + 1) * 180), 5).muda_cor(VERDE),
+                              bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-130, 100).rotaciona_no_ponto(radians((1 + 2) * 180), 5).muda_cor(VERDE)]),
+                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-250, 125).rotaciona_no_ponto(radians((2 + 0) * 90), 3).muda_cor(AZUL),
+                              seta.escala_no_ponto(0.7, 0.7).translada(-5, 135).rotaciona_no_ponto(radians((2 + 1) * 90), 3).muda_cor(AZUL)])]
 
-        respostas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-220, 320).rotaciona_no_ponto(radians((2 + 2) * 90), 3)]),
-                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-40, 320).rotaciona_no_ponto(radians((2 + 3) * 90), 3)]),
-                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(150, 290).rotaciona_no_ponto(radians((2 + 4) * 90), 3)])]
+        respostas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-220, 320).rotaciona_no_ponto(radians((2 + 2) * 90), 3).muda_cor(AZUL)]),
+                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-40, 320).rotaciona_no_ponto(radians((2 + 3) * 90), 3).muda_cor(VERMELHO)]),
+                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(150, 290).rotaciona_no_ponto(radians((2 + 4) * 90), 3).muda_cor(AZUL)])]
 
         resposta = 1
 
@@ -96,23 +95,23 @@ class Jogo:
         self.telas.append(tela)
 
         # Tela 2
-        perguntas = [Desenho([estrela_de_davi.translada(-350, -400).escala_no_ponto(1.5, 1.5, 0),
-                              estrela.escala_no_ponto(0.7, 0.7, 0).translada(-250, -260)]),
-                     Desenho([estrela_de_davi.translada(-150, -400).escala_no_ponto(1.5, 1.5, 0),
-                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 75)]),
-                     Desenho([estrela_de_davi.translada(50, -400).escala_no_ponto(1.5, 1.5, 0),
-                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(112, 75)]),
-                     Desenho([dodecagono.translada(35, -195).escala_no_ponto(0.5, 0.5, 0),
-                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(-287, 245)]),
-                     Desenho([dodecagono.translada(235, -195).escala_no_ponto(0.5, 0.5, 0),
-                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 245)])]
+        perguntas = [Desenho([estrela_de_davi.translada(-350, -400).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
+                              estrela.escala_no_ponto(0.7, 0.7, 0).translada(-250, -260).muda_cor(AMARELO)]),
+                     Desenho([estrela_de_davi.translada(-150, -400).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
+                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 75).muda_cor(VERMELHO)]),
+                     Desenho([estrela_de_davi.translada(50, -400).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
+                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(112, 75).muda_cor(AZUL)]),
+                     Desenho([dodecagono.translada(35, -195).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
+                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(-287, 245).muda_cor(AZUL)]),
+                     Desenho([dodecagono.translada(235, -195).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
+                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 245).muda_cor(VERMELHO)])]
 
-        respostas = [Desenho([dodecagono.translada(35, 60).escala_no_ponto(0.5, 0.5, 0),
-                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(-287, 500)]),
-                     Desenho([estrela_de_davi.translada(-150, 25).escala_no_ponto(1.5, 1.5, 0),
-                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 500)]),
-                     Desenho([dodecagono.translada(435, 60).escala_no_ponto(0.5, 0.5, 0),
-                              estrela.escala_no_ponto(0.7, 0.7, 0).translada(150, 170)])]
+        respostas = [Desenho([dodecagono.translada(35, 60).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
+                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(-287, 500).muda_cor(AZUL)]),
+                     Desenho([estrela_de_davi.translada(-150, 25).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
+                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 500).muda_cor(VERMELHO)]),
+                     Desenho([dodecagono.translada(435, 60).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
+                              estrela.escala_no_ponto(0.7, 0.7, 0).translada(150, 170).muda_cor(AMARELO)])]
 
         resposta = 3
 

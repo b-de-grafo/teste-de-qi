@@ -35,6 +35,10 @@ class Face:
             else:
                 reta(self.superficie, self.vertices[0], self.vertices[i], cor)
 
+    def muda_cor(self, cor):
+        self.cor = cor
+        return self
+
     def translada(self, tx=0, ty=0):
         matriz_translacao = [[1, 0, tx],
                              [0, 1, ty],
@@ -86,7 +90,7 @@ class Face:
 
         return Face(self.superficie, novos_vertices, self.cor)
 
-    def cisalhamento(self, kx, ky):
+    def cisalha(self, kx, ky):
         novos_vertices = []
         matriz_rotacao = [[1 , kx, 0],
                           [ky, 1 , 0],
@@ -117,9 +121,9 @@ class Face:
         # Translada para a origem, faz lá a rotação e translada de volta
         return self.translada(delta_x, delta_y).rotaciona(teta).translada(-delta_x, -delta_y)
 
-    def cisalhamento_no_ponto(self, kx, ky, ind_ponto=0):
+    def cisalha_no_ponto(self, kx, ky, ind_ponto=0):
         delta_x = -self.vertices[ind_ponto][0]
         delta_y = -self.vertices[ind_ponto][1]
 
         # Translada para a origem, faz lá o cisalhamento e transalada de volta
-        return self.translada(delta_x, delta_y).cisalhamento(kx, ky).translada(-delta_x, -delta_y)
+        return self.translada(delta_x, delta_y).cisalha(kx, ky).translada(-delta_x, -delta_y)
