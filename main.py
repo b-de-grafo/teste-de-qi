@@ -119,19 +119,38 @@ class Jogo:
         self.telas.append(tela)
 
         # Tela 3
-        perguntas = [Desenho([cata_vento.rotaciona_no_ponto(radians(45)).escala_no_ponto(1.5, 1.5, 0).translada(-382, 35)]),
-                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(232, -120)]),
-                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, -120)]),
-                     Desenho([cata_vento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-100, 150)]),
-                     Desenho([cata_vento.escala_no_ponto(1.5, 1.5, 0).translada(-445, 185)]),
-                     Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 55)])]
+        perguntas = [Desenho([cata_vento.rotaciona_no_ponto(radians(45)).escala_no_ponto(1.5, 1.5, 0).translada(-382, 35).muda_cor(AMARELO)]),
+                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(232, -120).muda_cor(AMARELO)]),
+                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, -120).muda_cor(AMARELO),
+                              cata_vento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-100, 150).muda_cor(AMARELO)]),
+                     Desenho([cata_vento.escala_no_ponto(1.5, 1.5, 0).translada(-445, 185).muda_cor(VERDE)]),
+                     Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 55).muda_cor(VERDE)])]
 
-        respostas = [Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(25, 310)]),
-                     Desenho([cata_vento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-507, 580)]),
-                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, 325)]),
-                     Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(385, 310)]),
-                     Desenho([cata_vento.escala_no_ponto(1.5, 1.5, 0).translada(-245, 450)]),
-                     Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 310)])]
+        respostas = [Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(25, 310).muda_cor(VERDE),
+                              cata_vento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-507, 580).muda_cor(VERDE)]),
+                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, 325).muda_cor(VERDE),
+                              cruz.escala_no_ponto(0.8, 0.8, 0).translada(385, 310).muda_cor(VERDE)]),
+                     Desenho([cata_vento.escala_no_ponto(1.5, 1.5, 0).translada(-245, 450).muda_cor(VERDE),
+                              cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 310).muda_cor(VERDE)])]
+
+        resposta = 2
+
+        tela = Tela(perguntas, respostas, resposta, area_padrao)
+        self.telas.append(tela)
+
+        # Tela 4
+        perguntas = [Desenho([triforce_de_viking.translada(35, 10)]),
+                     Desenho([bandeira.translada(-210, -140).escala_no_ponto(0.8, 0.8).muda_cor(AZUL)]),
+                     Desenho([triforce_de_viking.translada(395, 10).cisalha_no_ponto(0.6, 0).muda_cor(AZUL_PISCINA)]),
+                     Desenho([triforce_de_viking.translada(35, 175)]),
+                     Desenho([bandeira.translada(-210, 20).escala_no_ponto(0.5, 0.8).muda_cor(AZUL)]),
+                     Desenho([triforce_de_viking.translada(420, 175).cisalha_no_ponto(0.35, 0).muda_cor(AZUL_PISCINA)]),
+                     Desenho([triforce_de_viking.translada(35, 320)]),
+                     Desenho([bandeira.translada(-215, 170).escala_no_ponto(1.1, 0.8).muda_cor(AZUL)])]
+
+        respostas = [Desenho([triforce_de_viking.translada(100, 465).cisalha_no_ponto(-0.8, 0).muda_cor(AZUL_PISCINA)]),
+                     Desenho([triforce_de_viking.translada(180, 465).cisalha_no_ponto(0.8, 0).muda_cor(AZUL_PISCINA)]),
+                     Desenho([triforce_de_viking.translada(420, 465).cisalha_no_ponto(0.2, 0).muda_cor(AZUL_PISCINA)])]
 
         resposta = 2
 
