@@ -228,7 +228,7 @@ class Jogo:
                                                                           "" if self.corretas == 1 else "s",
                                                                           self.tempo_de_resposta)
             mensagem2 = "Seu QI é: "
-            qi = "%.0f" % ((self.corretas * 10) * (10 / self.tempo_de_resposta))
+            qi = "%.0f" % ((self.corretas * 25) + (30 * (10 / self.tempo_de_resposta)))
             mensagem3 = "Pressione qualquer tecla para voltar à tela inicial"
 
             surface_msg1 = self.fonte.render(mensagem1, False, BRANCO)
