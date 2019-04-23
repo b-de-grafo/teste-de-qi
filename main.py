@@ -7,6 +7,8 @@ from desenho import *
 BRANCO = [255, 255, 255]
 VERMELHO = [255, 0, 0]
 VERDE = [0, 255, 0]
+AZUL = [0, 0, 255]
+AMARELO = [255, 255, 0]
 PRETO = [0, 0, 0]
 
 TELA_INICIAL = 0
@@ -31,97 +33,86 @@ class Jogo:
         self.monta_telas()
 
         self.estado_do_jogo = TELA_INICIAL
+
+    def inicializa_jogo(self):
+        self.estado_do_jogo = JOGANDO
+
         self.tela_atual = 0
 
-        self.resposta_do_jogador = None
         self.tempo_inicial = pygame.time.get_ticks()
+        self.resposta_do_jogador = None
         self.tempo_de_resposta = 0
 
         self.corretas = 0
 
     def monta_telas(self):
-        # Alguns polígonos pra começar
-        # triforceDeViking = Face(self.superficie, [[45, 0], [60, 24], [75, 0], [120, 96], [90, 96], [105, 120], [15, 120], [30, 96], [0, 96]]).desenha()
-        raio = Face(self.superficie, [[225, 0], [245, 0], [240, 30], [275, 35], [225, 125], [235, 50], [200, 50]])
-        diamante = Face(self.superficie, [[375, 0], [425, 0], [450, 25], [400, 100], [350, 25]])
-        cataVento = Face(self.superficie, [[550, 0], [575, 25], [575, 50], [600, 50], [575, 75], [550, 75], [550, 100], [525, 75], [525, 50], [500, 50], [525, 25], [550, 25]])
-        cruz = Face(self.superficie, [[100, 150], [150, 150], [150, 200], [200, 200], [200, 250], [150, 250], [150, 300], [100, 300], [100, 250], [50, 250], [50, 200], [100, 200]])
+        triforceDeViking = Face(self.superficie, [[45, 0], [60, 24], [75, 0], [120, 96], [90, 96], [105, 120], [15, 120], [30, 96], [0, 96]]).desenha()
+        raio = Face(self.superficie,
+                    [[225, 0], [245, 0], [240, 30], [275, 35], [225, 125], [235, 50], [200, 50]],
+                    AMARELO)
+        diamante = Face(self.superficie,
+                        [[375, 0], [425, 0], [450, 25], [400, 100], [350, 25]],
+                        AZUL)
+        cata_vento = Face(self.superficie,
+                          [[550, 0], [575, 25], [575, 50], [600, 50], [575, 75], [550, 75], [550, 100], [525, 75], [525, 50], [500, 50], [525, 25], [550, 25]])
+        cruz = Face(self.superficie,
+                    [[100, 150], [150, 150], [150, 200], [200, 200], [200, 250], [150, 250], [150, 300], [100, 300], [100, 250], [50, 250], [50, 200], [100, 200]])
         seta = Face(self.superficie,
                     [[325, 150], [400, 225], [325, 300], [325, 250], [225, 250], [225, 200], [325, 200]], BRANCO)
-        bandeiraEsquisitaDeFestaJunina = Face(self.superficie,
-                                              [[500, 175], [600, 175], [550, 225], [600, 275], [500, 275], [425, 225]],
-                                              BRANCO)
-        dodecagono = Face(self.superficie, [[0, 466], [18, 399], [67, 350], [134, 332], [201, 350], [250, 399], [268, 466], [250, 533], [201, 582], [134, 600], [67, 582], [18, 533]])
-        estrela = Face(self.superficie, [[350, 325], [365, 350], [400, 350], [375, 365], [385, 400], [350, 380], [315, 400], [325, 365], [300, 350], [335, 350]])
-        estrelaDaviVsGolias = Face(self.superficie, [[450, 425], [465, 450], [500, 450], [475, 475], [500, 500], [465, 500], [450, 525], [435, 500], [400, 500], [425, 475], [400, 450], [435, 450]])
-
-        # estrelaDaviVsGolias.cisalhamento_ponto(1, 0, 0).desenha()
-        # estrelaDaviVsGolias.rotaciona_ponto(radians(90), 2).desenha()
-        # estrelaDaviVsGolias.escala(1, 0.5).desenha()
-        # estrelaDaviVsGolias.rotaciona(radians(15)).desenha()
-        # estrelaDaviVsGolias.translada(50).desenha()
-        # estrelaDaviVsGolias.translada(0, 50).desenha()
-        # estrelaDaviVsGolias.translada(50, 50).desenha()
+        bandeira = Face(self.superficie,
+                        [[500, 175], [600, 175], [550, 225], [600, 275], [500, 275], [425, 225]],
+                        BRANCO)
+        dodecagono = Face(self.superficie,
+                          [[0, 466], [18, 399], [67, 350], [134, 332], [201, 350], [250, 399], [268, 466], [250, 533], [201, 582], [134, 600], [67, 582], [18, 533]])
+        estrela = Face(self.superficie,
+                       [[350, 325], [365, 350], [400, 350], [375, 365], [385, 400], [350, 380], [315, 400], [325, 365], [300, 350], [335, 350]])
+        estrela_de_davi = Face(self.superficie,
+                               [[450, 425], [465, 450], [500, 450], [475, 475], [500, 500], [465, 500], [450, 525], [435, 500], [400, 500], [425, 475], [400, 450], [435, 450]])
 
         # Area das Respostas:
         area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),
                                 Face(self.superficie, [[200, 450], [200, 600]]),
                                 Face(self.superficie, [[400, 450], [400, 600]])])]
 
-        # Tela 1 #Ideia: poligonos rotacionados de acordo com sua posicao na matriz vezes 90 graus se seta, 180 graus se bandeirola
+        # Tela 1
+        # Ideia: poligonos rotacionados de acordo com sua posicao na matriz
+        # multiplicado por 90 graus se for seta e 180 graus se for bandeira
         perguntas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-225, -100),
                               seta.escala_no_ponto(0.7, 0.7).translada(-40, -100).rotaciona_no_ponto(radians((0 + 1) * 90), 3),
-                              seta.escala_no_ponto(0.7, 0.7).translada(150, -125).rotaciona_no_ponto(radians((0 + 2) * 90), 3),
-                              ]),
-                     Desenho([bandeiraEsquisitaDeFestaJunina.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180))
-                                                                                   .translada(-525, 100)
-                                                                                   .rotaciona_no_ponto(radians((1 + 0) * 180), 5),
-                              bandeiraEsquisitaDeFestaJunina.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180))
-                                                                                   .translada(-190, 98)
-                                                                                   .rotaciona_no_ponto(radians((1 + 1) * 180), 5),
-                              bandeiraEsquisitaDeFestaJunina.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180))
-                                                                                   .translada(-130, 100)
-                                                                                   .rotaciona_no_ponto(radians((1 + 2) * 180), 5),
-                              ]),
-                     Desenho(
-                         [seta.escala_no_ponto(0.7, 0.7).translada(-250, 125).rotaciona_no_ponto(radians((2 + 0) * 90), 3),
-                          seta.escala_no_ponto(0.7, 0.7).translada(-5, 135).rotaciona_no_ponto(radians((2 + 1) * 90), 3),
-                          #seta.escala_ponto(0.7, 0.7).translada(0, 200).rotaciona_ponto(radians((2 + 2) * 90), 3)
-                          ])]
+                              seta.escala_no_ponto(0.7, 0.7).translada(150, -125).rotaciona_no_ponto(radians((0 + 2) * 90), 3)]),
+                     Desenho([bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-525, 100).rotaciona_no_ponto(radians((1 + 0) * 180), 5),
+                              bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-190, 98).rotaciona_no_ponto(radians((1 + 1) * 180), 5),
+                              bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-130, 100).rotaciona_no_ponto(radians((1 + 2) * 180), 5)]),
+                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-250, 125).rotaciona_no_ponto(radians((2 + 0) * 90), 3),
+                              seta.escala_no_ponto(0.7, 0.7).translada(-5, 135).rotaciona_no_ponto(radians((2 + 1) * 90), 3)])]
 
         respostas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-220, 320).rotaciona_no_ponto(radians((2 + 2) * 90), 3)]),
                      Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-40, 320).rotaciona_no_ponto(radians((2 + 3) * 90), 3)]),
-                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(150, 290).rotaciona_no_ponto(radians((2 + 4) * 90), 3)]),
-                     ]
+                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(150, 290).rotaciona_no_ponto(radians((2 + 4) * 90), 3)])]
 
         resposta = 1
 
-        # tela = Tela(perguntas, respostas, resposta, area_padrao)
         tela = Tela(perguntas, respostas, resposta, area_padrao)
         self.telas.append(tela)
 
         # Tela 2
-        #Estrelas -> x [300 a 400] y [ 325 a 400]
-        #Estrelas de Davi -> x [400 a 500] y [ 425 a 525 ]
-        perguntas = [Desenho([estrelaDaviVsGolias.translada(-350, -400).escala_no_ponto(1.5, 1.5, 0),
+        perguntas = [Desenho([estrela_de_davi.translada(-350, -400).escala_no_ponto(1.5, 1.5, 0),
                               estrela.escala_no_ponto(0.7, 0.7, 0).translada(-250, -260)]),
-                     Desenho([estrelaDaviVsGolias.translada(-150, -400).escala_no_ponto(1.5, 1.5, 0),
+                     Desenho([estrela_de_davi.translada(-150, -400).escala_no_ponto(1.5, 1.5, 0),
                               raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 75)]),
-                     Desenho([estrelaDaviVsGolias.translada(50, -400).escala_no_ponto(1.5, 1.5, 0),
+                     Desenho([estrela_de_davi.translada(50, -400).escala_no_ponto(1.5, 1.5, 0),
                               diamante.escala_no_ponto(0.5, 0.5, 0).translada(112, 75)]),
                      Desenho([dodecagono.translada(35, -195).escala_no_ponto(0.5, 0.5, 0),
                               diamante.escala_no_ponto(0.5, 0.5, 0).translada(-287, 245)]),
                      Desenho([dodecagono.translada(235, -195).escala_no_ponto(0.5, 0.5, 0),
-                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 245)])
-                     ]
+                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 245)])]
 
         respostas = [Desenho([dodecagono.translada(35, 60).escala_no_ponto(0.5, 0.5, 0),
                               diamante.escala_no_ponto(0.5, 0.5, 0).translada(-287, 500)]),
-                     Desenho([estrelaDaviVsGolias.translada(-150, 25).escala_no_ponto(1.5, 1.5, 0),
+                     Desenho([estrela_de_davi.translada(-150, 25).escala_no_ponto(1.5, 1.5, 0),
                               raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 500)]),
                      Desenho([dodecagono.translada(435, 60).escala_no_ponto(0.5, 0.5, 0),
-                              estrela.escala_no_ponto(0.7, 0.7, 0).translada(150, 170)]),
-                     ]
+                              estrela.escala_no_ponto(0.7, 0.7, 0).translada(150, 170)])]
 
         resposta = 3
 
@@ -129,35 +120,26 @@ class Jogo:
         self.telas.append(tela)
 
         # Tela 3
+        perguntas = [Desenho([cata_vento.rotaciona_no_ponto(radians(45)).escala_no_ponto(1.5, 1.5, 0).translada(-382, 35)]),
+                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(232, -120)]),
+                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, -120)]),
+                     Desenho([cata_vento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-100, 150)]),
+                     Desenho([cata_vento.escala_no_ponto(1.5, 1.5, 0).translada(-445, 185)]),
+                     Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 55)])]
 
-        perguntas = [
-            Desenho([cataVento.rotaciona_no_ponto(radians(45)).escala_no_ponto(1.5, 1.5, 0).translada(-382, 35)]),
-            Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(232, -120)]),
-            Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, -120)]),
-            Desenho([cataVento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-100, 150)]),
-            Desenho([cataVento.escala_no_ponto(1.5, 1.5, 0).translada(-445, 185)]),
-            Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 55)])
-            ]
-
-        respostas = [
-            Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(25, 310)]),
-            Desenho([cataVento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-507, 580)]),
-            Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, 325)]),
-            Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(385, 310)]),
-            Desenho([cataVento.escala_no_ponto(1.5, 1.5, 0).translada(-245, 450)]),
-            Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 310)]),
-            ]
+        respostas = [Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(25, 310)]),
+                     Desenho([cata_vento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-507, 580)]),
+                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, 325)]),
+                     Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(385, 310)]),
+                     Desenho([cata_vento.escala_no_ponto(1.5, 1.5, 0).translada(-245, 450)]),
+                     Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 310)])]
 
         resposta = 2
 
         tela = Tela(perguntas, respostas, resposta, area_padrao)
         self.telas.append(tela)
 
-        # TODO: criar telas seguintes
-
     def jogar(self):
-        print("")
-
         while self.rodando:
             self.entrada()
 
@@ -185,13 +167,12 @@ class Jogo:
                         self.resposta_do_jogador = 2
                     if key[pygame.K_3]:  # Tecla 3
                         self.resposta_do_jogador = 3
-                    if key[pygame.K_4]:  # Tecla 4
-                        self.resposta_do_jogador = 4
-                    if key[pygame.K_5]:  # Tecla 5
-                        self.resposta_do_jogador = 5
 
-                if self.estado_do_jogo == TELA_INICIAL:
-                    self.estado_do_jogo = JOGANDO
+                if self.estado_do_jogo == TELA_INICIAL:  # Qualquer tecla foi pressionada
+                    self.inicializa_jogo()
+
+                if self.estado_do_jogo == FIM_DE_JOGO:
+                    self.estado_do_jogo = TELA_INICIAL
 
             if evento.type == pygame.MOUSEBUTTONUP:
                 if self.estado_do_jogo == JOGANDO:
@@ -221,22 +202,24 @@ class Jogo:
             mensagem = "Pressione qualquer tecla para iniciar o teste!"
             surface_msg = self.fonte.render(mensagem, False, BRANCO)
 
-            self.superficie.blit(surface_msg, (70, 250))
+            self.superficie.blit(surface_msg, (100, 250))
         elif self.estado_do_jogo == JOGANDO:
             self.telas[self.tela_atual].desenha()
         elif self.estado_do_jogo == FIM_DE_JOGO:
-            mensagem = "Você acertou %d pergunta%s em %.1f segundos!" % (self.corretas,
-                                                                         "" if self.corretas == 1 else "s",
-                                                                         self.tempo_de_resposta)
-            mensagem2 = "Seu QI é:"
+            mensagem1 = "Você acertou %d pergunta%s em %.1f segundos!" % (self.corretas,
+                                                                          "" if self.corretas == 1 else "s",
+                                                                          self.tempo_de_resposta)
+            mensagem2 = "Seu QI é: "
             qi = "%.0f" % ((self.corretas * 10) * (10 / self.tempo_de_resposta))
-            surface_msg = self.fonte.render(mensagem, False, BRANCO)
-            surface_msg2 = self.fonte.render(mensagem2, False, BRANCO)
-            surface_qi = self.fonte.render(qi, False, BRANCO)
+            mensagem3 = "Pressione qualquer tecla para voltar à tela inicial"
 
-            self.superficie.blit(surface_msg, (65, 150))
-            self.superficie.blit(surface_msg2, (175, 200))
-            self.superficie.blit(surface_qi, (290, 200))
+            surface_msg1 = self.fonte.render(mensagem1, False, BRANCO)
+            surface_msg2 = self.fonte.render(mensagem2 + qi, False, BRANCO)
+            surface_msg3 = self.fonte.render(mensagem3, False, BRANCO)
+
+            self.superficie.blit(surface_msg1, (110, 150))
+            self.superficie.blit(surface_msg2, (230, 200))
+            self.superficie.blit(surface_msg3, (90, 350))
 
 
 jogo = Jogo()
