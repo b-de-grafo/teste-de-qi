@@ -107,6 +107,11 @@ class Jogo:
         self.telas.append(tela)
 
         # Tela 2
+        raio = raio.translada(225, 0)
+        diamante = diamante.translada(375 , 0)
+        dodecagono = dodecagono.translada(0, 466)
+        estrela_de_davi = estrela_de_davi.translada(450, 425)
+        estrela = estrela.translada(350, 325)
         perguntas = [Desenho([estrela_de_davi.translada(-350, -400).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
                               estrela.escala_no_ponto(0.7, 0.7, 0).translada(-250, -260).muda_cor(AMARELO)]),
                      Desenho([estrela_de_davi.translada(-150, -400).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
@@ -131,6 +136,8 @@ class Jogo:
         self.telas.append(tela)
 
         # Tela 3
+        cata_vento = cata_vento.translada(550, 0)
+        cruz = cruz.translada(100, 150)
         perguntas = [Desenho([cata_vento.rotaciona_no_ponto(radians(45)).escala_no_ponto(1.5, 1.5, 0).translada(-382, 35).muda_cor(AMARELO)]),
                      Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(232, -120).muda_cor(AMARELO)]),
                      Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, -120).muda_cor(AMARELO),
@@ -151,6 +158,7 @@ class Jogo:
         self.telas.append(tela)
 
         # Tela 4
+        triforce_de_viking = triforce_de_viking.translada(45, 0)
         perguntas = [Desenho([triforce_de_viking.translada(35, 10)]),
                      Desenho([bandeira.translada(-210, -140).escala_no_ponto(0.8, 0.8).muda_cor(AZUL)]),
                      Desenho([triforce_de_viking.translada(395, 10).cisalha_no_ponto(0.6, 0).muda_cor(AZUL_PISCINA)]),
@@ -226,7 +234,7 @@ class Jogo:
                 self.tempo_de_resposta = (pygame.time.get_ticks() - self.tempo_inicial) / 1000
 
     def desenha_telas(self):
-        #self.superficie.fill(PRETO)
+        self.superficie.fill(PRETO)
 
         if self.estado_do_jogo == TELA_INICIAL:
             mensagem = "Pressione qualquer tecla para iniciar o teste!"
