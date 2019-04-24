@@ -58,9 +58,9 @@ class Jogo:
         cruz = Face(self.superficie,
                     [[100, 150], [150, 150], [150, 200], [200, 200], [200, 250], [150, 250], [150, 300], [100, 300], [100, 250], [50, 250], [50, 200], [100, 200]])
         seta = Face(self.superficie,
-                    [[325, 150], [400, 225], [325, 300], [325, 250], [225, 250], [225, 200], [325, 200]])
+                    [[0, 0], [75, 75], [0, 150], [0, 100], [-100, 100], [-100, 50], [0, 50]])  # 325,150
         bandeira = Face(self.superficie,
-                        [[500, 175], [600, 175], [550, 225], [600, 275], [500, 275], [425, 225]])
+                        [[0, 0], [100, 0], [50, 50], [100, 100], [0, 100], [-75, 50]])  # 500,175
         dodecagono = Face(self.superficie,
                           [[0, 466], [18, 399], [67, 350], [134, 332], [201, 350], [250, 399], [268, 466], [250, 533], [201, 582], [134, 600], [67, 582], [18, 533]])
         estrela = Face(self.superficie,
@@ -76,6 +76,8 @@ class Jogo:
         # Tela 1
         # Ideia: poligonos rotacionados de acordo com sua posicao na matriz
         # multiplicado por 90 graus se for seta e 180 graus se for bandeira
+        seta = seta.translada(325, 150)
+        bandeira = bandeira.translada(500, 175)
         perguntas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-225, -100).muda_cor(VERMELHO),
                               seta.escala_no_ponto(0.7, 0.7).translada(-40, -100).rotaciona_no_ponto(radians((0 + 1) * 90), 3).muda_cor(VERMELHO),
                               seta.escala_no_ponto(0.7, 0.7).translada(150, -125).rotaciona_no_ponto(radians((0 + 2) * 90), 3).muda_cor(VERMELHO)]),
@@ -86,7 +88,7 @@ class Jogo:
                               seta.escala_no_ponto(0.7, 0.7).translada(-5, 135).rotaciona_no_ponto(radians((2 + 1) * 90), 3).muda_cor(AZUL)])]
 
         respostas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-220, 320).rotaciona_no_ponto(radians((2 + 2) * 90), 3).muda_cor(AZUL)]),
-                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-40, 320).rotaciona_no_ponto(radians((2 + 3) * 90), 3).muda_cor(VERMELHO)]),
+                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-40, 320).rotaciona_no_ponto(radians((2 + 3) * 90), 3).muda_cor(AZUL)]),
                      Desenho([seta.escala_no_ponto(0.7, 0.7).translada(150, 290).rotaciona_no_ponto(radians((2 + 4) * 90), 3).muda_cor(AZUL)])]
 
         resposta = 1
