@@ -49,6 +49,9 @@ class Jogo:
         self.corretas = 0
 
     def monta_telas(self):
+
+        #Euler: V – A + F = 2
+
         triforce_de_viking = Face(self.superficie,
                                   [[0, 0], [15, 24], [30, 0], [75, 96], [45, 96], [60, 120], [-30, 120], [-15, 96], [-45, 96]])
         raio = Face(self.superficie,
@@ -70,11 +73,31 @@ class Jogo:
         estrela_de_davi = Face(self.superficie,
                                [[0, 0], [15, 25], [50, 25], [25, 50], [50, 75], [15, 75], [0, 100], [-15, 75], [-50, 75], [-25, 50], [-50, 25], [-15, 25]])
 
+
         # Area das Respostas:
         area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),
                                 Face(self.superficie, [[200, 450], [200, 600]]),
                                 Face(self.superficie, [[400, 450], [400, 600]])])]
+        # Desenho 3D
+        crazy_diamond_fr = Face(self.superficie,
+                               [[0, 0, 1, 1], [50, 0, 1, 1], [75, 25, 1, 1], [25, 100, 1, 1], [-25, 25, 1, 1]])
+        crazy_diamond_ve = Face(self.superficie,
+                               [[0, 0, 10, 1], [50, 0, 10, 1], [75, 25, 10, 1], [25, 100, 10, 1], [-25, 25, 10, 1]])
+        #crazy_diamond_fr = Face(self.superficie,
+        #                        [[0, 0], [50, 0], [75, 25], [25, 100], [-25, 25]])
+        #crazy_diamond_ve = Face(self.superficie,
+        #                        [[0, 0], [50, 0], [75, 25], [25, 100], [-25, 25]])
+        # Tela 0
 
+        perguntas = [Desenho([crazy_diamond_fr.translada_tresde(375, 0, 0),
+                              crazy_diamond_ve.translada_tresde(385, 0, 0)])]
+
+        respostas = []
+
+        resposta = 1
+
+        tela = Tela(perguntas, respostas, resposta, area_padrao)
+        self.telas.append(tela)
         # Tela 1
         # Ideia: poligonos rotacionados de acordo com sua posicao na matriz
         # multiplicado por 90 graus se for seta e 180 graus se for bandeira
@@ -100,7 +123,7 @@ class Jogo:
 
         # Tela 2
         raio = raio.translada(225, 0)
-        diamante = diamante.translada(375 , 0)
+        diamante = diamante.translada(375, 0)
         dodecagono = dodecagono.translada(0, 466)
         estrela_de_davi = estrela_de_davi.translada(450, 425)
         estrela = estrela.translada(350, 325)

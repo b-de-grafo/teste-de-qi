@@ -34,7 +34,7 @@ def multiplica_matrizes(matA, matB):
     n_colunasB = len(matB[0])
 
     if n_colunasA != n_linhasB:
-        return
+        return 'deu erro n_colunasA != n_linhasB'
 
     resultado = [[0 for row in range(n_colunasB)] for col in range(n_linhasA)]
 
@@ -48,7 +48,8 @@ def multiplica_matrizes(matA, matB):
 
 def transpoe_vetor(vetor):
     resultado = []
-
+    if vetor is None:
+        print("oi")
     if type(vetor[0]) == list:  # Vetor na vertical
         for item in vetor:
             resultado.append(item[0])

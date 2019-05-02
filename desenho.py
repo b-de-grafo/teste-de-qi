@@ -5,3 +5,4 @@ class Desenho:
     def desenha(self):
         for poligono in self.poligonos:
             poligono.desenha()
+

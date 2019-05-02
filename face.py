@@ -20,7 +20,7 @@ class Face:
     def __repr__(self):
         r = "[ "
         for v in self.vertices:
-            r += f"({v[0]}, {v[1]}, {v[2]}) "
+            r += "({}, {}, {}) ".format(v[0], v[1], v[2])
         r += "]"
         return r
 
@@ -39,7 +39,7 @@ class Face:
         self.cor = cor
         return self
 
-    def translada(self, tx=0, ty=0):
+    def translada(self, tx=0, ty=0, tz=0):
         matriz_translacao = [[1, 0, tx],
                              [0, 1, ty],
                              [0, 0, 1]]
@@ -53,7 +53,29 @@ class Face:
                 novo_vertice[i] = int(novo_vertice[i])
 
             novos_vertices.append(novo_vertice)
+        print(novos_vertices)
+        return Face(self.superficie, novos_vertices, self.cor)
 
+    def translada_tresde(self, tx=0, ty=0, tz=0):
+        matriz_translacao = [[1, 0, 0, tx],
+                             [0, 1, 0, ty],
+                             [0, 0, 1, tz],
+                             [0, 0, 0, 1]]
+
+        novos_vertices = []
+        for vertice in self.vertices:
+            vetor_trans = transpoe_vetor(vertice)
+            print(vetor_trans)
+            resultado = multiplica_matrizes(matriz_translacao, vetor_trans) #na trasposicao do resultado de volta para vetor
+            print(resultado)
+            novo_vertice = transpoe_vetor(resultado)
+            print(novo_vertice)
+            # Arredonda possíveis floats do vetor
+            for i in range(len(novo_vertice)):
+                novo_vertice[i] = int(novo_vertice[i])
+
+            novos_vertices.append(novo_vertice)
+        print(novos_vertices)
         return Face(self.superficie, novos_vertices, self.cor)
 
     def escala(self, lx=1, ly=1):
