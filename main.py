@@ -50,7 +50,7 @@ class Jogo:
 
     def monta_telas(self):
 
-        #Euler: V – A + F = 2
+        #TODOS OS DESENHOs DEVEM RESPEITAR Euler: Vertices – Arestas + Faces = 2
 
         triforce_de_viking = Face(self.superficie,
                                   [[0, 0], [15, 24], [30, 0], [75, 96], [45, 96], [60, 120], [-30, 120], [-15, 96], [-45, 96]])
