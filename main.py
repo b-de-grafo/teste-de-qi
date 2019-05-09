@@ -3,6 +3,7 @@ from math import radians
 from face import *
 from tela import *
 from desenho import *
+from objeto import *
 
 BRANCO = [255, 255, 255]
 VERMELHO = [255, 0, 0]
@@ -89,8 +90,10 @@ class Jogo:
         #                        [[0, 0], [50, 0], [75, 25], [25, 100], [-25, 25]])
         # Tela 0
 
-        perguntas = [Desenho([crazy_diamond_fr.translada_tresde(375, 0, 0),
-                              crazy_diamond_ve.translada_tresde(385, 0, 0)])]
+        # perguntas = [Desenho([crazy_diamond_fr.translada_3d(375, 0, 0),
+                            #   crazy_diamond_ve.translada_3d(385, 0, 0)])]
+        perguntas = [Objeto([crazy_diamond_fr.translada_3d(375, 100, 0),
+                               crazy_diamond_ve.translada_3d(385, 120, 0)])]
 
         respostas = []
 

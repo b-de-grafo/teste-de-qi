@@ -56,7 +56,7 @@ class Face:
         print(novos_vertices)
         return Face(self.superficie, novos_vertices, self.cor)
 
-    def translada_tresde(self, tx=0, ty=0, tz=0):
+    def translada_3d(self, tx=0, ty=0, tz=0):
         matriz_translacao = [[1, 0, 0, tx],
                              [0, 1, 0, ty],
                              [0, 0, 1, tz],
