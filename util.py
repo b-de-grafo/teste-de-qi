@@ -1,5 +1,3 @@
-from face import *
-
 def reta(superficie, inicio, fim, cor):
     xi, yi = inicio[0], inicio[1]
     xf, yf = fim[0], fim[1]
@@ -47,8 +45,6 @@ def multiplica_matrizes(matA, matB):
 
 def transpoe_vetor(vetor):
     resultado = []
-    if vetor is None:
-        print("oi")
     if type(vetor[0]) == list:  # Vetor na vertical
         for item in vetor:
             resultado.append(item[0])

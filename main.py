@@ -1,5 +1,5 @@
 import pygame
-from math import radians
+import time
 from face import *
 from tela import *
 from desenho import *
@@ -51,8 +51,7 @@ class Jogo:
 
     def monta_telas(self):
 
-        #TODOS OS DESENHOs DEVEM RESPEITAR Euler: Vertices – Arestas + Faces = 2
-
+        # Desenhos 2D
         triforce_de_viking = Face(self.superficie,
                                   [[0, 0], [15, 24], [30, 0], [75, 96], [45, 96], [60, 120], [-30, 120], [-15, 96], [-45, 96]])
         raio = Face(self.superficie,
@@ -74,33 +73,15 @@ class Jogo:
         estrela_de_davi = Face(self.superficie,
                                [[0, 0], [15, 25], [50, 25], [25, 50], [50, 75], [15, 75], [0, 100], [-15, 75], [-50, 75], [-25, 50], [-50, 25], [-15, 25]])
 
+        # Desenhos 3D
+        crazy_diamond = Objeto([Face(self.superficie, [[0, 0, 1, 1], [50, 0, 1, 1], [75, 25, 1, 1], [25, 100, 1, 1], [-25, 25, 1, 1]]),
+                                Face(self.superficie, [[0, 0, 10, 1], [50, 0, 10, 1], [75, 25, 10, 1], [25, 100, 10, 1], [-25, 25, 10, 1]])])
 
         # Area das Respostas:
         area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),
                                 Face(self.superficie, [[200, 450], [200, 600]]),
                                 Face(self.superficie, [[400, 450], [400, 600]])])]
-        # Desenho 3D
-        crazy_diamond_fr = Face(self.superficie,
-                               [[0, 0, 1, 1], [50, 0, 1, 1], [75, 25, 1, 1], [25, 100, 1, 1], [-25, 25, 1, 1]])
-        crazy_diamond_ve = Face(self.superficie,
-                               [[0, 0, 10, 1], [50, 0, 10, 1], [75, 25, 10, 1], [25, 100, 10, 1], [-25, 25, 10, 1]])
-        #crazy_diamond_fr = Face(self.superficie,
-        #                        [[0, 0], [50, 0], [75, 25], [25, 100], [-25, 25]])
-        #crazy_diamond_ve = Face(self.superficie,
-        #                        [[0, 0], [50, 0], [75, 25], [25, 100], [-25, 25]])
-        # Tela 0
 
-        # perguntas = [Desenho([crazy_diamond_fr.translada_3d(375, 0, 0),
-                            #   crazy_diamond_ve.translada_3d(385, 0, 0)])]
-        perguntas = [Objeto([crazy_diamond_fr.translada_3d(375, 100, 0),
-                               crazy_diamond_ve.translada_3d(385, 120, 0)])]
-
-        respostas = []
-
-        resposta = 1
-
-        tela = Tela(perguntas, respostas, resposta, area_padrao)
-        self.telas.append(tela)
         # Tela 1
         # Ideia: poligonos rotacionados de acordo com sua posicao na matriz
         # multiplicado por 90 graus se for seta e 180 graus se for bandeira
@@ -195,6 +176,9 @@ class Jogo:
         tela = Tela(perguntas, respostas, resposta, area_padrao)
         self.telas.append(tela)
 
+        # Objetos finais que rotacionam
+        self.objetos_finais = [crazy_diamond.rotaciona_y(radians(10)).translada_3d(400, 450, 0)]
+
     def jogar(self):
         while self.rodando:
             self.entrada()
@@ -273,9 +257,14 @@ class Jogo:
             surface_msg2 = self.fonte.render(mensagem2 + qi, False, BRANCO)
             surface_msg3 = self.fonte.render(mensagem3, False, BRANCO)
 
+            for objeto in self.objetos_finais:
+                objeto.desenha(rotaciona_y=True)
+
             self.superficie.blit(surface_msg1, (110, 150))
             self.superficie.blit(surface_msg2, (230, 200))
             self.superficie.blit(surface_msg3, (90, 350))
+
+            time.sleep(0.3)
 
 
 jogo = Jogo()

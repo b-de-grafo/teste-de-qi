@@ -53,7 +53,6 @@ class Face:
                 novo_vertice[i] = int(novo_vertice[i])
 
             novos_vertices.append(novo_vertice)
-        print(novos_vertices)
         return Face(self.superficie, novos_vertices, self.cor)
 
     def translada_3d(self, tx=0, ty=0, tz=0):
@@ -65,17 +64,13 @@ class Face:
         novos_vertices = []
         for vertice in self.vertices:
             vetor_trans = transpoe_vetor(vertice)
-            print(vetor_trans)
-            resultado = multiplica_matrizes(matriz_translacao, vetor_trans) #na trasposicao do resultado de volta para vetor
-            print(resultado)
+            resultado = multiplica_matrizes(matriz_translacao, vetor_trans)
             novo_vertice = transpoe_vetor(resultado)
-            print(novo_vertice)
             # Arredonda possíveis floats do vetor
             for i in range(len(novo_vertice)):
                 novo_vertice[i] = int(novo_vertice[i])
 
             novos_vertices.append(novo_vertice)
-        print(novos_vertices)
         return Face(self.superficie, novos_vertices, self.cor)
 
     def escala(self, lx=1, ly=1):
@@ -149,3 +144,58 @@ class Face:
 
         # Translada para a origem, faz lá o cisalhamento e transalada de volta
         return self.translada(delta_x, delta_y).cisalha(kx, ky).translada(-delta_x, -delta_y)
+
+    # Funções 3D
+    def rotaciona_x(self, teta):
+        matriz_rotacao = [[1, 0        , 0         , 0],
+                          [0, cos(teta), -sin(teta), 0],
+                          [0, sin(teta), cos(teta) , 0],
+                          [0, 0        , 0         , 1]]
+
+        novos_vertices = []
+        for vertice in self.vertices:
+            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_rotacao, transpoe_vetor(vertice)))
+
+            # Arredonda possíveis floats do vetor
+            for i in range(len(novo_vertice)):
+                novo_vertice[i] = int(novo_vertice[i])
+
+            novos_vertices.append(novo_vertice)
+
+        return Face(self.superficie, novos_vertices, self.cor)
+
+    def rotaciona_y(self, teta):
+        matriz_rotacao = [[cos(teta) , 0         , sin(teta), 0],
+                          [0         , 1         , 0        , 0],
+                          [-sin(teta), 0         , cos(teta), 0],
+                          [0         , 0         , 0        , 1]]
+
+        novos_vertices = []
+        for vertice in self.vertices:
+            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_rotacao, transpoe_vetor(vertice)))
+
+            # Arredonda possíveis floats do vetor
+            for i in range(len(novo_vertice)):
+                novo_vertice[i] = int(novo_vertice[i])
+
+            novos_vertices.append(novo_vertice)
+
+        return Face(self.superficie, novos_vertices, self.cor)
+
+    def rotaciona_z(self, teta):
+        matriz_rotacao = [[cos(teta), -sin(teta), 0, 0],
+                          [sin(teta), cos(teta) , 0, 0],
+                          [0        , 0         , 1, 0],
+                          [0        , 0         , 0, 1]]
+
+        novos_vertices = []
+        for vertice in self.vertices:
+            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_rotacao, transpoe_vetor(vertice)))
+
+            # Arredonda possíveis floats do vetor
+            for i in range(len(novo_vertice)):
+                novo_vertice[i] = int(novo_vertice[i])
+
+            novos_vertices.append(novo_vertice)
+
+        return Face(self.superficie, novos_vertices, self.cor)
