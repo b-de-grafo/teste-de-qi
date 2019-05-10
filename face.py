@@ -90,6 +90,24 @@ class Face:
 
         return Face(self.superficie, novos_vertices, self.cor)
 
+    def escala_tresde(self, lx=1, ly=1, lz=1):
+        matriz_escala = [[lx, 0, 0, 0],
+                         [0, ly, 0, 0],
+                         [0, 0, lz, 0],
+                         [0, 0, 0, 1]]
+
+        novos_vertices = []
+        for vertice in self.vertices:
+            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_escala, transpoe_vetor(vertice)))
+
+            # Arredonda possíveis floats do vetor
+            for i in range(len(novo_vertice)):
+                novo_vertice[i] = int(novo_vertice[i])
+
+            novos_vertices.append(novo_vertice)
+
+        return Face(self.superficie, novos_vertices, self.cor)
+
     def rotaciona(self, teta):
         matriz_rotacao = [[cos(teta), -sin(teta), 0],
                           [sin(teta),  cos(teta), 0],

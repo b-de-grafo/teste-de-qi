@@ -51,6 +51,12 @@ class Jogo:
 
     def monta_telas(self):
 
+        # TODOS OS DESENHOS DEVEM RESPEITAR Euler: Vertices – Arestas + Faces = 2
+        # DESENHOS OK: crazy_diamond
+        # DESENHOS NOT OK: resto
+
+
+        #IMPORTANTE, O SISTEMA DE COORDENADAS UTILIZADO DEVE SER O UNIVERSAL E DEPOIS MAPEAR PARA O DO DISPOSITVO QUANDO FOR DESENHADO
         # Desenhos 2D
         triforce_de_viking = Face(self.superficie,
                                   [[0, 0], [15, 24], [30, 0], [75, 96], [45, 96], [60, 120], [-30, 120], [-15, 96], [-45, 96]])
@@ -75,13 +81,21 @@ class Jogo:
 
         # Desenhos 3D
         crazy_diamond = Objeto([Face(self.superficie, [[0, 0, 1, 1], [50, 0, 1, 1], [75, 25, 1, 1], [25, 100, 1, 1], [-25, 25, 1, 1]]),
-                                Face(self.superficie, [[0, 0, 10, 1], [50, 0, 10, 1], [75, 25, 10, 1], [25, 100, 10, 1], [-25, 25, 10, 1]])])
+                                Face(self.superficie, [[0, 0, 100, 1], [50, 0, 100, 1], [75, 25, 100, 1], [25, 100, 100, 1], [-25, 25, 100, 1]])])
 
         # Area das Respostas:
         area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),
                                 Face(self.superficie, [[200, 450], [200, 600]]),
                                 Face(self.superficie, [[400, 450], [400, 600]])])]
 
+        # Tela 0
+        # Desenhar a figura 3D do seu grupo como wire-frame em projecao isometrica na tela inicial de abertura do seu teste de QI
+        # Projecao isometrica: teta_y = 45 graus e teta_x = 35,26
+        perguntas = [crazy_diamond.translada_3d(150, 80, 0).rotaciona_y(radians(45)).rotaciona_x(radians(35.26)).escala_tresde(2,2,2).muda_cor(AZUL_PISCINA)]
+
+
+        tela = Tela(perguntas, [], 1, [])
+        self.telas.append(tela)
         # Tela 1
         # Ideia: poligonos rotacionados de acordo com sua posicao na matriz
         # multiplicado por 90 graus se for seta e 180 graus se for bandeira

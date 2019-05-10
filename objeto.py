@@ -54,3 +54,10 @@ class Objeto:
             novas_faces.append(self.faces[i].translada_3d(x, y, z))
 
         return Objeto(novas_faces)
+
+    def escala_tresde(self, lx, ly, lz):
+        novas_faces = []
+        for i in range(len(self.faces)):
+            novas_faces.append(self.faces[i].escala_tresde(lx, ly, lz))
+
+        return Objeto(novas_faces)
