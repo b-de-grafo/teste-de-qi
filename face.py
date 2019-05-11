@@ -90,7 +90,7 @@ class Face:
 
         return Face(self.superficie, novos_vertices, self.cor)
 
-    def escala_tresde(self, lx=1, ly=1, lz=1):
+    def escala_3d(self, lx=1, ly=1, lz=1):
         matriz_escala = [[lx, 0, 0, 0],
                          [0, ly, 0, 0],
                          [0, 0, lz, 0],

@@ -68,8 +68,10 @@ class Jogo:
                           [[0, 0], [25, 25], [25, 50], [50, 50], [25, 75], [0, 75], [0, 100], [-25, 75], [-25, 50], [-50, 50], [-25, 25], [0, 25]])
         cruz = Face(self.superficie,
                     [[0, 0], [50, 0], [50, 50], [100, 50], [100, 100], [50, 100], [50, 150], [0, 150], [0, 100], [-50, 100], [-50, 50], [0, 50]])
-        seta = Face(self.superficie,
-                    [[0, 0], [75, 75], [0, 150], [0, 100], [-100, 100], [-100, 50], [0, 50]])
+
+        seta = Objeto([Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]]),
+                       Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]])])
+
         bandeira = Face(self.superficie,
                         [[0, 0], [100, 0], [50, 50], [100, 100], [0, 100], [-75, 50]])
         dodecagono = Face(self.superficie,
@@ -91,7 +93,9 @@ class Jogo:
         # Tela 0
         # Desenhar a figura 3D do seu grupo como wire-frame em projecao isometrica na tela inicial de abertura do seu teste de QI
         # Projecao isometrica: teta_y = 45 graus e teta_x = 35,26
-        perguntas = [crazy_diamond.translada_3d(150, 80, 0).rotaciona_y(radians(45)).rotaciona_x(radians(35.26)).escala_tresde(2,2,2).muda_cor(AZUL_PISCINA)]
+        perguntas = [crazy_diamond.translada_3d(150, 80, 0).rotaciona_y(radians(45)).rotaciona_x(radians(35.26)).escala_3d(2, 2, 2).muda_cor(AZUL_PISCINA),
+                     crazy_diamond.translada_3d(100, 100, 0).rotaciona_y_ponto(radians(45)).rotaciona_x_ponto(radians(35.26)).muda_cor(VERDE),
+                     crazy_diamond.translada_3d(400, 450, 0).rotaciona_y_ponto(radians(45)).rotaciona_x_ponto(radians(35.26)).escala_3d_ponto(1.5, 1.5, 1.5).muda_cor(VERMELHO)]
 
 
         tela = Tela(perguntas, [], 1, [])
@@ -99,20 +103,20 @@ class Jogo:
         # Tela 1
         # Ideia: poligonos rotacionados de acordo com sua posicao na matriz
         # multiplicado por 90 graus se for seta e 180 graus se for bandeira
-        seta = seta.translada(325, 150)
+        seta = seta.translada_3d(325, 150, 0)
         bandeira = bandeira.translada(500, 175)
-        perguntas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-225, -100).muda_cor(VERMELHO),
-                              seta.escala_no_ponto(0.7, 0.7).translada(-40, -100).rotaciona_no_ponto(radians((0 + 1) * 90), 3).muda_cor(VERMELHO),
-                              seta.escala_no_ponto(0.7, 0.7).translada(150, -125).rotaciona_no_ponto(radians((0 + 2) * 90), 3).muda_cor(VERMELHO)]),
+        perguntas = [Desenho([seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-225, -100, 0).muda_cor(VERMELHO),
+                              seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-40, -100, 0).rotaciona_z_ponto(radians((0 + 1) * 90), ind_ponto=3).muda_cor(VERMELHO),
+                              seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(150, -125, 0).rotaciona_z_ponto(radians((0 + 2) * 90), ind_ponto=3).muda_cor(VERMELHO)]),
                      Desenho([bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-525, 100).rotaciona_no_ponto(radians((1 + 0) * 180), 5).muda_cor(VERDE),
                               bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-190, 98).rotaciona_no_ponto(radians((1 + 1) * 180), 5).muda_cor(VERDE),
                               bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-130, 100).rotaciona_no_ponto(radians((1 + 2) * 180), 5).muda_cor(VERDE)]),
-                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-250, 125).rotaciona_no_ponto(radians((2 + 0) * 90), 3).muda_cor(AZUL),
-                              seta.escala_no_ponto(0.7, 0.7).translada(-5, 135).rotaciona_no_ponto(radians((2 + 1) * 90), 3).muda_cor(AZUL)])]
+                     Desenho([seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-250, 125, 0).rotaciona_z_ponto(radians((2 + 0) * 90), ind_ponto=3).muda_cor(AZUL),
+                              seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-5, 135, 0).rotaciona_z_ponto(radians((2 + 1) * 90), ind_ponto=3).muda_cor(AZUL)])]
 
-        respostas = [Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-220, 320).rotaciona_no_ponto(radians((2 + 2) * 90), 3).muda_cor(AZUL)]),
-                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(-40, 320).rotaciona_no_ponto(radians((2 + 3) * 90), 3).muda_cor(AZUL)]),
-                     Desenho([seta.escala_no_ponto(0.7, 0.7).translada(150, 290).rotaciona_no_ponto(radians((2 + 4) * 90), 3).muda_cor(AZUL)])]
+        respostas = [Desenho([seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-220, 320, 0).rotaciona_z_ponto(radians((2 + 2) * 90), ind_ponto=3).muda_cor(AZUL)]),
+                     Desenho([seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-40, 320, 0).rotaciona_z_ponto(radians((2 + 3) * 90), ind_ponto=3).muda_cor(AZUL)]),
+                     Desenho([seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(150, 290, 0).rotaciona_z_ponto(radians((2 + 4) * 90), ind_ponto=3).muda_cor(AZUL)])]
 
         resposta = 1
 

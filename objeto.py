@@ -55,9 +55,42 @@ class Objeto:
 
         return Objeto(novas_faces)
 
-    def escala_tresde(self, lx, ly, lz):
+    def escala_3d(self, lx, ly, lz):
         novas_faces = []
         for i in range(len(self.faces)):
-            novas_faces.append(self.faces[i].escala_tresde(lx, ly, lz))
+            novas_faces.append(self.faces[i].escala_3d(lx, ly, lz))
 
         return Objeto(novas_faces)
+
+    def rotaciona_x_ponto(self, teta, ind_face=0, ind_ponto=0):
+        delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
+        delta_y = -self.faces[ind_face].vertices[ind_ponto][1]
+        delta_z = -self.faces[ind_face].vertices[ind_ponto][2]
+
+        # Translada para a origem, faz lá a rotação e translada de volta
+        return self.translada_3d(delta_x, delta_y, delta_z).rotaciona_x(teta).translada_3d(-delta_x, -delta_y, -delta_z)
+
+
+    def rotaciona_y_ponto(self, teta, ind_face=0, ind_ponto=0):
+        delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
+        delta_y = -self.faces[ind_face].vertices[ind_ponto][1]
+        delta_z = -self.faces[ind_face].vertices[ind_ponto][2]
+
+        # Translada para a origem, faz lá a rotação e translada de volta
+        return self.translada_3d(delta_x, delta_y, delta_z).rotaciona_y(teta).translada_3d(-delta_x, -delta_y, -delta_z)
+
+    def rotaciona_z_ponto(self, teta, ind_face=0, ind_ponto=0):
+        delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
+        delta_y = -self.faces[ind_face].vertices[ind_ponto][1]
+        delta_z = -self.faces[ind_face].vertices[ind_ponto][2]
+
+        # Translada para a origem, faz lá a rotação e translada de volta
+        return self.translada_3d(delta_x, delta_y, delta_z).rotaciona_z(teta).translada_3d(-delta_x, -delta_y, -delta_z)
+
+    def escala_3d_ponto(self, lx, ly, lz, ind_face=0, ind_ponto=0):
+        delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
+        delta_y = -self.faces[ind_face].vertices[ind_ponto][1]
+        delta_z = -self.faces[ind_face].vertices[ind_ponto][2]
+
+        # Translada para a origem, faz lá a escala e translada de volta
+        return self.translada_3d(delta_x, delta_y, delta_z).escala_3d(lx, ly, lz).translada_3d(-delta_x, -delta_y, -delta_z)
