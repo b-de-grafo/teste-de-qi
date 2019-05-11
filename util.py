@@ -117,3 +117,15 @@ def get_canto(face):
             menor_y = vertice[1]
 
     return menor_x, menor_y
+
+
+def srd_sru(vertices, xdmax, xumax, ydmax, yumax):
+    novos_vertices = []
+    for v in vertices:
+        print(v[0]*xumax/xdmax)
+        print((v[1]-ydmax)*yumax/(-ydmax))
+        novos_vertices.append([v[0]*xumax/xdmax, (v[1]-ydmax)*yumax/(-ydmax), v[2], v[3]])
+    return novos_vertices
+
+
+#print(srd_sru([[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]], 400, 1000, 600, 1500))

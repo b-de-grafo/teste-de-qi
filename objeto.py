@@ -94,3 +94,11 @@ class Objeto:
 
         # Translada para a origem, faz lá a escala e translada de volta
         return self.translada_3d(delta_x, delta_y, delta_z).escala_3d(lx, ly, lz).translada_3d(-delta_x, -delta_y, -delta_z)
+
+    def mapeamento_sru_srd(self, xdmax, xumax, ydmax, yumax):
+        novas_faces = []
+        for i in range(len(self.faces)):
+            novas_faces.append(self.faces[i].mapeamento_sru_srd(xdmax, xumax, ydmax, yumax))
+
+        return Objeto(novas_faces)
+

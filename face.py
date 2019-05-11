@@ -217,3 +217,12 @@ class Face:
             novos_vertices.append(novo_vertice)
 
         return Face(self.superficie, novos_vertices, self.cor)
+
+    def mapeamento_sru_srd(self, xdmax, xumax, ydmax, yumax):
+        novos_vertices = []
+        for v in self.vertices:
+            vertice = [v[0] * xdmax / xumax, (v[1]*(-ydmax)/yumax)+ydmax, v[2], v[3]]
+            for i in range(len(vertice)):
+                vertice[i] = int(vertice[i])
+            novos_vertices.append(vertice)
+        return Face(self.superficie, novos_vertices, self.cor)

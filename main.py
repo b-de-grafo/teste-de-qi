@@ -52,7 +52,7 @@ class Jogo:
     def monta_telas(self):
 
         # TODOS OS DESENHOS DEVEM RESPEITAR Euler: Vertices – Arestas + Faces = 2
-        # DESENHOS OK: crazy_diamond
+        # DESENHOS OK: crazy_diamond, seta
         # DESENHOS NOT OK: resto
 
 
@@ -69,8 +69,11 @@ class Jogo:
         cruz = Face(self.superficie,
                     [[0, 0], [50, 0], [50, 50], [100, 50], [100, 100], [50, 100], [50, 150], [0, 150], [0, 100], [-50, 100], [-50, 50], [0, 50]])
 
-        seta = Objeto([Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]]),
-                       Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]])])
+        # seta = Objeto([Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]]),
+        #               Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]])])
+
+        seta = Objeto([Face(self.superficie,  [[0.0, 1500.0, 1, 1], [187.5, 1312.5, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-250.0, 1250.0, 1, 1], [-250.0, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]]),
+                       Face(self.superficie,  [[0.0, 1500.0, 1, 1], [187.5, 1312.5, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-250.0, 1250.0, 1, 1], [-250.0, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]])])
 
         bandeira = Face(self.superficie,
                         [[0, 0], [100, 0], [50, 50], [100, 100], [0, 100], [-75, 50]])
@@ -100,10 +103,11 @@ class Jogo:
 
         tela = Tela(perguntas, [], 1, [])
         self.telas.append(tela)
+        # IMPORTANTE: ROTACAO 2D = ROTACAO Z
         # Tela 1
         # Ideia: poligonos rotacionados de acordo com sua posicao na matriz
         # multiplicado por 90 graus se for seta e 180 graus se for bandeira
-        seta = seta.translada_3d(325, 150, 0)
+        seta = seta.mapeamento_sru_srd(400, 1000, 600, 1500).translada_3d(325, 150, 0)
         bandeira = bandeira.translada(500, 175)
         perguntas = [Desenho([seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-225, -100, 0).muda_cor(VERMELHO),
                               seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-40, -100, 0).rotaciona_z_ponto(radians((0 + 1) * 90), ind_ponto=3).muda_cor(VERMELHO),
