@@ -85,8 +85,8 @@ class Jogo:
                                [[0, 0], [15, 25], [50, 25], [25, 50], [50, 75], [15, 75], [0, 100], [-15, 75], [-50, 75], [-25, 50], [-50, 25], [-15, 25]])
 
         # Desenhos 3D
-        crazy_diamond = Objeto([Face(self.superficie, [[0, 0, 1, 1], [50, 0, 1, 1], [75, 25, 1, 1], [25, 100, 1, 1], [-25, 25, 1, 1]]),
-                                Face(self.superficie, [[0, 0, 100, 1], [50, 0, 100, 1], [75, 25, 100, 1], [25, 100, 100, 1], [-25, 25, 100, 1]])])
+        crazy_diamond = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [125.0, 1500.0, 1, 1], [187.5, 1437.5, 1, 1], [62.5, 1250.0, 1, 1], [-62.5, 1437.5, 1, 1]]),
+                                Face(self.superficie, [[0.0, 1500.0, 100, 1], [125.0, 1500.0, 100, 1], [187.5, 1437.5, 100, 1], [62.5, 1250.0, 100, 1], [-62.5, 1437.5, 100, 1]])])
 
         # Area das Respostas:
         area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),
@@ -96,6 +96,7 @@ class Jogo:
         # Tela 0
         # Desenhar a figura 3D do seu grupo como wire-frame em projecao isometrica na tela inicial de abertura do seu teste de QI
         # Projecao isometrica: teta_y = 45 graus e teta_x = 35,26
+        crazy_diamond = crazy_diamond.mapeamento_sru_srd(400, 1000, 600, 1500)
         perguntas = [crazy_diamond.translada_3d(150, 80, 0).rotaciona_y(radians(45)).rotaciona_x(radians(35.26)).escala_3d(2, 2, 2).muda_cor(AZUL_PISCINA),
                      crazy_diamond.translada_3d(100, 100, 0).rotaciona_y_ponto(radians(45)).rotaciona_x_ponto(radians(35.26)).muda_cor(VERDE),
                      crazy_diamond.translada_3d(400, 450, 0).rotaciona_y_ponto(radians(45)).rotaciona_x_ponto(radians(35.26)).escala_3d_ponto(1.5, 1.5, 1.5).muda_cor(VERMELHO)]
