@@ -60,29 +60,28 @@ class Jogo:
         # Desenhos 2D
         triforce_de_viking = Face(self.superficie,
                                   [[0, 0], [15, 24], [30, 0], [75, 96], [45, 96], [60, 120], [-30, 120], [-15, 96], [-45, 96]])
-        raio = Face(self.superficie,
-                    [[0, 0], [20, 0], [15, 30], [50, 35], [0, 125], [10, 50], [-25, 50]])
-        diamante = Face(self.superficie,
-                        [[0, 0], [50, 0], [75, 25], [25, 100], [-25, 25]])
-
-        cata_vento = Face(self.superficie,
-                          [[0, 0], [25, 25], [25, 50], [50, 50], [25, 75], [0, 75], [0, 100], [-25, 75], [-25, 50], [-50, 50], [-25, 25], [0, 25]])
-
+        #raio = Face(self.superficie,
+        #            [[0, 0], [20, 0], [15, 30], [50, 35], [0, 125], [10, 50], [-25, 50]])
+        raio = Objeto([Face(self.superficie,[[0.0, 1500.0, 1, 1], [33.333333333333336, 1500.0, 1, 1], [25.0, 1425.0, 1, 1], [83.33333333333333, 1412.5, 1, 1], [0.0, 1187.5, 1, 1], [16.666666666666668, 1375.0, 1, 1], [-41.666666666666664, 1375.0, 1, 1]]),
+                       Face(self.superficie,[[0.0, 1500.0, 1, 1], [33.333333333333336, 1500.0, 1, 1], [25.0, 1425.0, 1, 1], [83.33333333333333, 1412.5, 1, 1], [0.0, 1187.5, 1, 1], [16.666666666666668, 1375.0, 1, 1], [-41.666666666666664, 1375.0, 1, 1]])])
+        #diamante = Face(self.superficie,
+        #                [[0, 0], [50, 0], [75, 25], [25, 100], [-25, 25]])
+        diamante = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [125.0, 1437.5, 1, 1], [41.666666666666664, 1250.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1]]),
+                           Face(self.superficie, [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [125.0, 1437.5, 1, 1], [41.666666666666664, 1250.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1]])])
+        # cata_vento = Face(self.superficie,
+        #                  [[0, 0], [25, 25], [25, 50], [50, 50], [25, 75], [0, 75], [0, 100], [-25, 75], [-25, 50], [-50, 50], [-25, 25], [0, 25]])
         cata_vento = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [41.666666666666664, 1437.5, 1, 1], [41.666666666666664, 1375.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [41.666666666666664, 1312.5, 1, 1], [0.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-41.666666666666664, 1312.5, 1, 1], [-41.666666666666664, 1375.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1], [0.0, 1437.5, 1, 1]]),
                              Face(self.superficie, [[0.0, 1500.0, 1, 1], [41.666666666666664, 1437.5, 1, 1], [41.666666666666664, 1375.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [41.666666666666664, 1312.5, 1, 1], [0.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-41.666666666666664, 1312.5, 1, 1], [-41.666666666666664, 1375.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1], [0.0, 1437.5, 1, 1]])])
-
-        cruz = Face(self.superficie,
-                    [[0, 0], [50, 0], [50, 50], [100, 50], [100, 100], [50, 100], [50, 150], [0, 150], [0, 100], [-50, 100], [-50, 50], [0, 50]])
-
+        # cruz = Face(self.superficie,
+        #            [[0, 0], [50, 0], [50, 50], [100, 50], [100, 100], [50, 100], [50, 150], [0, 150], [0, 100], [-50, 100], [-50, 50], [0, 50]])
+        cruz = Objeto([Face(self.superficie,[[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [83.33333333333333, 1250.0, 1, 1], [83.33333333333333, 1125.0, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-83.33333333333333, 1250.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]]),
+                       Face(self.superficie,[[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [83.33333333333333, 1250.0, 1, 1], [83.33333333333333, 1125.0, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-83.33333333333333, 1250.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]])])
         # seta = Objeto([Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]]),
         #               Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]])])
-
         seta = Objeto([Face(self.superficie,  [[0.0, 1500.0, 1, 1], [125.0, 1312.5, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-166.66666666666666, 1250.0, 1, 1], [-166.66666666666666, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]]),
                        Face(self.superficie,  [[0.0, 1500.0, 1, 1], [125.0, 1312.5, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-166.66666666666666, 1250.0, 1, 1], [-166.66666666666666, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]])])
-
         # bandeira = bandeira = Face(self.superficie,
         #                         [[0, 0], [100, 0], [50, 50], [100, 100], [0, 100], [-75, 50]])
-
         bandeira = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [166.66666666666666, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [0.0, 1250.0, 1, 1], [-125.0, 1375.0, 1, 1]]),
                            Face(self.superficie, [[0.0, 1500.0, 1, 1], [166.66666666666666, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [0.0, 1250.0, 1, 1], [-125.0, 1375.0, 1, 1]])])
         dodecagono = Face(self.superficie,
@@ -137,26 +136,26 @@ class Jogo:
         self.telas.append(tela)
 
         # Tela 2
-        raio = raio.translada(225, 0)
-        diamante = diamante.translada(375, 0)
+        raio = raio.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(225, 0, 0)
+        diamante = diamante.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(375, 0, 0)
         dodecagono = dodecagono.translada(0, 466)
         estrela_de_davi = estrela_de_davi.translada(450, 425)
         estrela = estrela.translada(350, 325)
         perguntas = [Desenho([estrela_de_davi.translada(-350, -400).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
                               estrela.escala_no_ponto(0.7, 0.7, 0).translada(-250, -260).muda_cor(AMARELO)]),
                      Desenho([estrela_de_davi.translada(-150, -400).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
-                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 75).muda_cor(VERMELHO)]),
+                              raio.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(70, 75, 0).muda_cor(VERMELHO)]),
                      Desenho([estrela_de_davi.translada(50, -400).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
-                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(112, 75).muda_cor(AZUL)]),
+                              diamante.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(112, 75, 0).muda_cor(AZUL)]),
                      Desenho([dodecagono.translada(35, -195).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
-                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(-287, 245).muda_cor(AZUL)]),
+                              diamante.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(-287, 245, 0).muda_cor(AZUL)]),
                      Desenho([dodecagono.translada(235, -195).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
-                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 245).muda_cor(VERMELHO)])]
+                              raio.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(70, 245, 0).muda_cor(VERMELHO)])]
 
         respostas = [Desenho([dodecagono.translada(35, 60).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
-                              diamante.escala_no_ponto(0.5, 0.5, 0).translada(-287, 500).muda_cor(AZUL)]),
+                              diamante.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(-287, 500, 0).muda_cor(AZUL)]),
                      Desenho([estrela_de_davi.translada(-150, 25).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
-                              raio.escala_no_ponto(0.5, 0.5, 0).translada(70, 500).muda_cor(VERMELHO)]),
+                              raio.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(70, 500, 0).muda_cor(VERMELHO)]),
                      Desenho([dodecagono.translada(435, 60).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
                               estrela.escala_no_ponto(0.7, 0.7, 0).translada(150, 170).muda_cor(AMARELO)])]
 
@@ -167,20 +166,20 @@ class Jogo:
 
         # Tela 3
         cata_vento = cata_vento.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(550, 0, 0)
-        cruz = cruz.translada(100, 150)
+        cruz = cruz.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(100, 150, 0)
         perguntas = [Desenho([cata_vento.rotaciona_z_ponto(radians(45)).escala_3d_ponto(1.5, 1.5, 1.5).translada_3d(-382, 35, 0).muda_cor(AMARELO)]),
-                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(232, -120).muda_cor(AMARELO)]),
-                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, -120).muda_cor(AMARELO),
+                     Desenho([cruz.rotaciona_z_ponto(radians(45)).escala_3d_ponto(0.8, 0.8, 0.8).translada_3d(232, -120, 0).muda_cor(AMARELO)]),
+                     Desenho([cruz.rotaciona_z_ponto(radians(45)).escala_3d_ponto(0.8, 0.8, 0.8).translada_3d(432, -120, 0).muda_cor(AMARELO),
                               cata_vento.rotaciona_z_ponto(radians(225)).escala_3d_ponto(1.5, 1.5, 1.5).translada_3d(-100, 150, 0).muda_cor(AMARELO)]),
                      Desenho([cata_vento.escala_3d_ponto(1.5, 1.5, 1.5).translada_3d(-445, 185, 0).muda_cor(VERDE)]),
-                     Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 55).muda_cor(VERDE)])]
+                     Desenho([cruz.escala_3d_ponto(0.8, 0.8, 0.8).translada_3d(185, 55, 0).muda_cor(VERDE)])]
 
-        respostas = [Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(25, 310).muda_cor(VERDE),
+        respostas = [Desenho([cruz.rotaciona_z_ponto(radians(45)).escala_3d_ponto(0.8, 0.8, 0.8).translada_3d(25, 310, 0).muda_cor(VERDE),
                               cata_vento.rotaciona_z_ponto(radians(225)).escala_3d_ponto(1.5, 1.5, 1.5).translada_3d(-507, 580, 0).muda_cor(VERDE)]),
-                     Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, 325).muda_cor(VERDE),
-                              cruz.escala_no_ponto(0.8, 0.8, 0).translada(385, 310).muda_cor(VERDE)]),
+                     Desenho([cruz.rotaciona_z_ponto(radians(45)).escala_3d_ponto(0.8, 0.8, 0.8).translada_3d(432, 325, 0).muda_cor(VERDE),
+                              cruz.escala_3d_ponto(0.8, 0.8, 0.8).translada_3d(385, 310, 0).muda_cor(VERDE)]),
                      Desenho([cata_vento.escala_3d_ponto(1.5, 1.5, 1.5).translada_3d(-245, 450, 0).muda_cor(VERDE),
-                              cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 310).muda_cor(VERDE)])]
+                              cruz.escala_3d_ponto(0.8, 0.8, 0.8).translada_3d(185, 310, 0).muda_cor(VERDE)])]
 
         resposta = 2
 
