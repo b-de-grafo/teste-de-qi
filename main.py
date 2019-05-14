@@ -64,8 +64,13 @@ class Jogo:
                     [[0, 0], [20, 0], [15, 30], [50, 35], [0, 125], [10, 50], [-25, 50]])
         diamante = Face(self.superficie,
                         [[0, 0], [50, 0], [75, 25], [25, 100], [-25, 25]])
+
         cata_vento = Face(self.superficie,
                           [[0, 0], [25, 25], [25, 50], [50, 50], [25, 75], [0, 75], [0, 100], [-25, 75], [-25, 50], [-50, 50], [-25, 25], [0, 25]])
+
+        cata_vento = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [62.5, 1437.5, 1, 1], [62.5, 1375.0, 1, 1], [125.0, 1375.0, 1, 1], [62.5, 1312.5, 1, 1], [0.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-62.5, 1312.5, 1, 1], [-62.5, 1375.0, 1, 1], [-125.0, 1375.0, 1, 1], [-62.5, 1437.5, 1, 1], [0.0, 1437.5, 1, 1]]),
+                             Face(self.superficie, [[0.0, 1500.0, 1, 1], [62.5, 1437.5, 1, 1], [62.5, 1375.0, 1, 1], [125.0, 1375.0, 1, 1], [62.5, 1312.5, 1, 1], [0.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-62.5, 1312.5, 1, 1], [-62.5, 1375.0, 1, 1], [-125.0, 1375.0, 1, 1], [-62.5, 1437.5, 1, 1], [0.0, 1437.5, 1, 1]])])
+
         cruz = Face(self.superficie,
                     [[0, 0], [50, 0], [50, 50], [100, 50], [100, 100], [50, 100], [50, 150], [0, 150], [0, 100], [-50, 100], [-50, 50], [0, 50]])
 
@@ -75,8 +80,11 @@ class Jogo:
         seta = Objeto([Face(self.superficie,  [[0.0, 1500.0, 1, 1], [187.5, 1312.5, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-250.0, 1250.0, 1, 1], [-250.0, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]]),
                        Face(self.superficie,  [[0.0, 1500.0, 1, 1], [187.5, 1312.5, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-250.0, 1250.0, 1, 1], [-250.0, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]])])
 
-        bandeira = Face(self.superficie,
-                        [[0, 0], [100, 0], [50, 50], [100, 100], [0, 100], [-75, 50]])
+        # bandeira = bandeira = Face(self.superficie,
+        #                         [[0, 0], [100, 0], [50, 50], [100, 100], [0, 100], [-75, 50]])
+
+        bandeira = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [250.0, 1500.0, 1, 1], [125.0, 1375.0, 1, 1], [250.0, 1250.0, 1, 1], [0.0, 1250.0, 1, 1], [-187.5, 1375.0, 1, 1]]),
+                           Face(self.superficie, [[0.0, 1500.0, 1, 1], [250.0, 1500.0, 1, 1], [125.0, 1375.0, 1, 1], [250.0, 1250.0, 1, 1], [0.0, 1250.0, 1, 1], [-187.5, 1375.0, 1, 1]])])
         dodecagono = Face(self.superficie,
                           [[0, 0], [18, -67], [67, -116], [134, -134], [201, -116], [250, -67], [268, 0], [250, 67], [201, 116], [134, 134], [67, 116], [18, 67]])
         estrela = Face(self.superficie,
@@ -109,13 +117,13 @@ class Jogo:
         # Ideia: poligonos rotacionados de acordo com sua posicao na matriz
         # multiplicado por 90 graus se for seta e 180 graus se for bandeira
         seta = seta.mapeamento_sru_srd(400, 1000, 600, 1500).translada_3d(325, 150, 0)
-        bandeira = bandeira.translada(500, 175)
+        bandeira = bandeira.mapeamento_sru_srd(400, 1000, 600, 1500).translada_3d(500, 175, 0)
         perguntas = [Desenho([seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-225, -100, 0).muda_cor(VERMELHO),
                               seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-40, -100, 0).rotaciona_z_ponto(radians((0 + 1) * 90), ind_ponto=3).muda_cor(VERMELHO),
                               seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(150, -125, 0).rotaciona_z_ponto(radians((0 + 2) * 90), ind_ponto=3).muda_cor(VERMELHO)]),
-                     Desenho([bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-525, 100).rotaciona_no_ponto(radians((1 + 0) * 180), 5).muda_cor(VERDE),
-                              bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-190, 98).rotaciona_no_ponto(radians((1 + 1) * 180), 5).muda_cor(VERDE),
-                              bandeira.escala_no_ponto(0.7, 0.7).rotaciona_no_ponto(radians(180)).translada(-130, 100).rotaciona_no_ponto(radians((1 + 2) * 180), 5).muda_cor(VERDE)]),
+                     Desenho([bandeira.escala_3d_ponto(0.7, 0.7, 0.7).rotaciona_z_ponto(radians(180), ind_ponto=3).translada_3d(-525, 100, 0).rotaciona_z_ponto(radians((1 + 0) * 180), ind_ponto=5).muda_cor(VERDE),
+                              bandeira.escala_3d_ponto(0.7, 0.7, 0.7).rotaciona_z_ponto(radians(180), ind_ponto=3).translada_3d(-190, 98, 0).rotaciona_z_ponto(radians((1 + 1) * 180), ind_ponto=5).muda_cor(VERDE),
+                              bandeira.escala_3d_ponto(0.7, 0.7, 0.7).rotaciona_z_ponto(radians(180), ind_ponto=3).translada_3d(-130, 100, 0).rotaciona_z_ponto(radians((1 + 2) * 180), ind_ponto=5).muda_cor(VERDE)]),
                      Desenho([seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-250, 125, 0).rotaciona_z_ponto(radians((2 + 0) * 90), ind_ponto=3).muda_cor(AZUL),
                               seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-5, 135, 0).rotaciona_z_ponto(radians((2 + 1) * 90), ind_ponto=3).muda_cor(AZUL)])]
 
@@ -158,20 +166,20 @@ class Jogo:
         self.telas.append(tela)
 
         # Tela 3
-        cata_vento = cata_vento.translada(550, 0)
+        cata_vento = cata_vento.mapeamento_sru_srd(400, 1000, 600, 1500).translada_3d(550, 0, 0)
         cruz = cruz.translada(100, 150)
-        perguntas = [Desenho([cata_vento.rotaciona_no_ponto(radians(45)).escala_no_ponto(1.5, 1.5, 0).translada(-382, 35).muda_cor(AMARELO)]),
+        perguntas = [Desenho([cata_vento.rotaciona_z_ponto(radians(45)).escala_3d_ponto(1.5, 1.5, 1.5).translada_3d(-382, 35, 0).muda_cor(AMARELO)]),
                      Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(232, -120).muda_cor(AMARELO)]),
                      Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, -120).muda_cor(AMARELO),
-                              cata_vento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-100, 150).muda_cor(AMARELO)]),
-                     Desenho([cata_vento.escala_no_ponto(1.5, 1.5, 0).translada(-445, 185).muda_cor(VERDE)]),
+                              cata_vento.rotaciona_z_ponto(radians(225)).escala_3d_ponto(1.5, 1.5, 1.5).translada_3d(-100, 150, 0).muda_cor(AMARELO)]),
+                     Desenho([cata_vento.escala_3d_ponto(1.5, 1.5, 1.5).translada_3d(-445, 185, 0).muda_cor(VERDE)]),
                      Desenho([cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 55).muda_cor(VERDE)])]
 
         respostas = [Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(25, 310).muda_cor(VERDE),
-                              cata_vento.rotaciona_no_ponto(radians(225)).escala_no_ponto(1.5, 1.5, 0).translada(-507, 580).muda_cor(VERDE)]),
+                              cata_vento.rotaciona_z_ponto(radians(225)).escala_3d_ponto(1.5, 1.5, 1.5).translada_3d(-507, 580, 0).muda_cor(VERDE)]),
                      Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(432, 325).muda_cor(VERDE),
                               cruz.escala_no_ponto(0.8, 0.8, 0).translada(385, 310).muda_cor(VERDE)]),
-                     Desenho([cata_vento.escala_no_ponto(1.5, 1.5, 0).translada(-245, 450).muda_cor(VERDE),
+                     Desenho([cata_vento.escala_3d_ponto(1.5, 1.5, 1.5).translada_3d(-245, 450, 0).muda_cor(VERDE),
                               cruz.escala_no_ponto(0.8, 0.8, 0).translada(185, 310).muda_cor(VERDE)])]
 
         resposta = 2
@@ -182,13 +190,13 @@ class Jogo:
         # Tela 4
         triforce_de_viking = triforce_de_viking.translada(45, 0)
         perguntas = [Desenho([triforce_de_viking.translada(35, 10)]),
-                     Desenho([bandeira.translada(-210, -140).escala_no_ponto(0.8, 0.8).muda_cor(AZUL)]),
+                     Desenho([bandeira.translada_3d(-210, -140, 0).escala_3d_ponto(0.8, 0.8, 0.8).muda_cor(AZUL)]),
                      Desenho([triforce_de_viking.translada(395, 10).cisalha_no_ponto(0.6, 0).muda_cor(AZUL_PISCINA)]),
                      Desenho([triforce_de_viking.translada(35, 175)]),
-                     Desenho([bandeira.translada(-210, 20).escala_no_ponto(0.5, 0.8).muda_cor(AZUL)]),
+                     Desenho([bandeira.translada_3d(-210, 20, 0).escala_3d_ponto(0.5, 0.8, 0.5).muda_cor(AZUL)]),
                      Desenho([triforce_de_viking.translada(420, 175).cisalha_no_ponto(0.35, 0).muda_cor(AZUL_PISCINA)]),
                      Desenho([triforce_de_viking.translada(35, 320)]),
-                     Desenho([bandeira.translada(-215, 170).escala_no_ponto(1.1, 0.8).muda_cor(AZUL)])]
+                     Desenho([bandeira.translada_3d(-215, 170, 0).escala_3d_ponto(1.1, 0.8, 1.1).muda_cor(AZUL)])]
 
         respostas = [Desenho([triforce_de_viking.translada(100, 465).cisalha_no_ponto(-0.8, 0).muda_cor(AZUL_PISCINA)]),
                      Desenho([triforce_de_viking.translada(180, 465).cisalha_no_ponto(0.8, 0).muda_cor(AZUL_PISCINA)]),
