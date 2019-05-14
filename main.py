@@ -121,9 +121,9 @@ class Jogo:
         perguntas = [Desenho([seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-225, -100, 0).muda_cor(VERMELHO),
                               seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-40, -100, 0).rotaciona_z_ponto(radians((0 + 1) * 90), ind_ponto=3).muda_cor(VERMELHO),
                               seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(150, -125, 0).rotaciona_z_ponto(radians((0 + 2) * 90), ind_ponto=3).muda_cor(VERMELHO)]),
-                     Desenho([bandeira.escala_3d_ponto(0.7, 0.7, 0.7).rotaciona_z_ponto(radians(180), ind_ponto=3).translada_3d(-525, 100, 0).rotaciona_z_ponto(radians((1 + 0) * 180), ind_ponto=5).muda_cor(VERDE),
-                              bandeira.escala_3d_ponto(0.7, 0.7, 0.7).rotaciona_z_ponto(radians(180), ind_ponto=3).translada_3d(-190, 98, 0).rotaciona_z_ponto(radians((1 + 1) * 180), ind_ponto=5).muda_cor(VERDE),
-                              bandeira.escala_3d_ponto(0.7, 0.7, 0.7).rotaciona_z_ponto(radians(180), ind_ponto=3).translada_3d(-130, 100, 0).rotaciona_z_ponto(radians((1 + 2) * 180), ind_ponto=5).muda_cor(VERDE)]),
+                     Desenho([bandeira.escala_3d_ponto(0.7, 0.7, 0.7).rotaciona_z_ponto(radians(180), ind_ponto=0).translada_3d(-525, 100, 0).rotaciona_z_ponto(radians((1 + 0) * 180), ind_ponto=5).muda_cor(VERDE),
+                              bandeira.escala_3d_ponto(0.7, 0.7, 0.7).rotaciona_z_ponto(radians(180), ind_ponto=0).translada_3d(-190, 98, 0).rotaciona_z_ponto(radians((1 + 1) * 180), ind_ponto=5).muda_cor(VERDE),
+                              bandeira.escala_3d_ponto(0.7, 0.7, 0.7).rotaciona_z_ponto(radians(180), ind_ponto=0).translada_3d(-130, 100, 0).rotaciona_z_ponto(radians((1 + 2) * 180), ind_ponto=5).muda_cor(VERDE)]),
                      Desenho([seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-250, 125, 0).rotaciona_z_ponto(radians((2 + 0) * 90), ind_ponto=3).muda_cor(AZUL),
                               seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-5, 135, 0).rotaciona_z_ponto(radians((2 + 1) * 90), ind_ponto=3).muda_cor(AZUL)])]
 
