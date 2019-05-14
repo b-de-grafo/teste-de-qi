@@ -68,8 +68,8 @@ class Jogo:
         cata_vento = Face(self.superficie,
                           [[0, 0], [25, 25], [25, 50], [50, 50], [25, 75], [0, 75], [0, 100], [-25, 75], [-25, 50], [-50, 50], [-25, 25], [0, 25]])
 
-        cata_vento = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [62.5, 1437.5, 1, 1], [62.5, 1375.0, 1, 1], [125.0, 1375.0, 1, 1], [62.5, 1312.5, 1, 1], [0.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-62.5, 1312.5, 1, 1], [-62.5, 1375.0, 1, 1], [-125.0, 1375.0, 1, 1], [-62.5, 1437.5, 1, 1], [0.0, 1437.5, 1, 1]]),
-                             Face(self.superficie, [[0.0, 1500.0, 1, 1], [62.5, 1437.5, 1, 1], [62.5, 1375.0, 1, 1], [125.0, 1375.0, 1, 1], [62.5, 1312.5, 1, 1], [0.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-62.5, 1312.5, 1, 1], [-62.5, 1375.0, 1, 1], [-125.0, 1375.0, 1, 1], [-62.5, 1437.5, 1, 1], [0.0, 1437.5, 1, 1]])])
+        cata_vento = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [41.666666666666664, 1437.5, 1, 1], [41.666666666666664, 1375.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [41.666666666666664, 1312.5, 1, 1], [0.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-41.666666666666664, 1312.5, 1, 1], [-41.666666666666664, 1375.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1], [0.0, 1437.5, 1, 1]]),
+                             Face(self.superficie, [[0.0, 1500.0, 1, 1], [41.666666666666664, 1437.5, 1, 1], [41.666666666666664, 1375.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [41.666666666666664, 1312.5, 1, 1], [0.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-41.666666666666664, 1312.5, 1, 1], [-41.666666666666664, 1375.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1], [0.0, 1437.5, 1, 1]])])
 
         cruz = Face(self.superficie,
                     [[0, 0], [50, 0], [50, 50], [100, 50], [100, 100], [50, 100], [50, 150], [0, 150], [0, 100], [-50, 100], [-50, 50], [0, 50]])
@@ -77,14 +77,14 @@ class Jogo:
         # seta = Objeto([Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]]),
         #               Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]])])
 
-        seta = Objeto([Face(self.superficie,  [[0.0, 1500.0, 1, 1], [187.5, 1312.5, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-250.0, 1250.0, 1, 1], [-250.0, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]]),
-                       Face(self.superficie,  [[0.0, 1500.0, 1, 1], [187.5, 1312.5, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-250.0, 1250.0, 1, 1], [-250.0, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]])])
+        seta = Objeto([Face(self.superficie,  [[0.0, 1500.0, 1, 1], [125.0, 1312.5, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-166.66666666666666, 1250.0, 1, 1], [-166.66666666666666, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]]),
+                       Face(self.superficie,  [[0.0, 1500.0, 1, 1], [125.0, 1312.5, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-166.66666666666666, 1250.0, 1, 1], [-166.66666666666666, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]])])
 
         # bandeira = bandeira = Face(self.superficie,
         #                         [[0, 0], [100, 0], [50, 50], [100, 100], [0, 100], [-75, 50]])
 
-        bandeira = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [250.0, 1500.0, 1, 1], [125.0, 1375.0, 1, 1], [250.0, 1250.0, 1, 1], [0.0, 1250.0, 1, 1], [-187.5, 1375.0, 1, 1]]),
-                           Face(self.superficie, [[0.0, 1500.0, 1, 1], [250.0, 1500.0, 1, 1], [125.0, 1375.0, 1, 1], [250.0, 1250.0, 1, 1], [0.0, 1250.0, 1, 1], [-187.5, 1375.0, 1, 1]])])
+        bandeira = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [166.66666666666666, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [0.0, 1250.0, 1, 1], [-125.0, 1375.0, 1, 1]]),
+                           Face(self.superficie, [[0.0, 1500.0, 1, 1], [166.66666666666666, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [0.0, 1250.0, 1, 1], [-125.0, 1375.0, 1, 1]])])
         dodecagono = Face(self.superficie,
                           [[0, 0], [18, -67], [67, -116], [134, -134], [201, -116], [250, -67], [268, 0], [250, 67], [201, 116], [134, 134], [67, 116], [18, 67]])
         estrela = Face(self.superficie,
@@ -93,8 +93,8 @@ class Jogo:
                                [[0, 0], [15, 25], [50, 25], [25, 50], [50, 75], [15, 75], [0, 100], [-15, 75], [-50, 75], [-25, 50], [-50, 25], [-15, 25]])
 
         # Desenhos 3D
-        crazy_diamond = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [125.0, 1500.0, 1, 1], [187.5, 1437.5, 1, 1], [62.5, 1250.0, 1, 1], [-62.5, 1437.5, 1, 1]]),
-                                Face(self.superficie, [[0.0, 1500.0, 100, 1], [125.0, 1500.0, 100, 1], [187.5, 1437.5, 100, 1], [62.5, 1250.0, 100, 1], [-62.5, 1437.5, 100, 1]])])
+        crazy_diamond = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [125.0, 1437.5, 1, 1], [41.666666666666664, 1250.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1]]),
+                                Face(self.superficie, [[0.0, 1500.0, 100, 1], [83.33333333333333, 1500.0, 100, 1], [125.0, 1437.5, 100, 1], [41.666666666666664, 1250.0, 100, 1], [-41.666666666666664, 1437.5, 100, 1]])])
 
         # Area das Respostas:
         area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),
@@ -104,7 +104,7 @@ class Jogo:
         # Tela 0
         # Desenhar a figura 3D do seu grupo como wire-frame em projecao isometrica na tela inicial de abertura do seu teste de QI
         # Projecao isometrica: teta_y = 45 graus e teta_x = 35,26
-        crazy_diamond = crazy_diamond.mapeamento_sru_srd(400, 1000, 600, 1500)
+        crazy_diamond = crazy_diamond.mapeamento_sru_srd(600, 1000, 600, 1500)
         perguntas = [crazy_diamond.translada_3d(150, 80, 0).rotaciona_y(radians(45)).rotaciona_x(radians(35.26)).escala_3d(2, 2, 2).muda_cor(AZUL_PISCINA),
                      crazy_diamond.translada_3d(100, 100, 0).rotaciona_y_ponto(radians(45)).rotaciona_x_ponto(radians(35.26)).muda_cor(VERDE),
                      crazy_diamond.translada_3d(400, 450, 0).rotaciona_y_ponto(radians(45)).rotaciona_x_ponto(radians(35.26)).escala_3d_ponto(1.5, 1.5, 1.5).muda_cor(VERMELHO)]
@@ -116,8 +116,8 @@ class Jogo:
         # Tela 1
         # Ideia: poligonos rotacionados de acordo com sua posicao na matriz
         # multiplicado por 90 graus se for seta e 180 graus se for bandeira
-        seta = seta.mapeamento_sru_srd(400, 1000, 600, 1500).translada_3d(325, 150, 0)
-        bandeira = bandeira.mapeamento_sru_srd(400, 1000, 600, 1500).translada_3d(500, 175, 0)
+        seta = seta.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(325, 150, 0)
+        bandeira = bandeira.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(500, 175, 0)
         perguntas = [Desenho([seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-225, -100, 0).muda_cor(VERMELHO),
                               seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(-40, -100, 0).rotaciona_z_ponto(radians((0 + 1) * 90), ind_ponto=3).muda_cor(VERMELHO),
                               seta.escala_3d_ponto(0.7, 0.7, 0.7).translada_3d(150, -125, 0).rotaciona_z_ponto(radians((0 + 2) * 90), ind_ponto=3).muda_cor(VERMELHO)]),
@@ -166,7 +166,7 @@ class Jogo:
         self.telas.append(tela)
 
         # Tela 3
-        cata_vento = cata_vento.mapeamento_sru_srd(400, 1000, 600, 1500).translada_3d(550, 0, 0)
+        cata_vento = cata_vento.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(550, 0, 0)
         cruz = cruz.translada(100, 150)
         perguntas = [Desenho([cata_vento.rotaciona_z_ponto(radians(45)).escala_3d_ponto(1.5, 1.5, 1.5).translada_3d(-382, 35, 0).muda_cor(AMARELO)]),
                      Desenho([cruz.rotaciona_no_ponto(radians(45)).escala_no_ponto(0.8, 0.8, 0).translada(232, -120).muda_cor(AMARELO)]),
