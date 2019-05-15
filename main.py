@@ -55,11 +55,11 @@ class Jogo:
         # DESENHOS OK: crazy_diamond, seta
         # DESENHOS NOT OK: resto
 
-
         #IMPORTANTE, O SISTEMA DE COORDENADAS UTILIZADO DEVE SER O UNIVERSAL E DEPOIS MAPEAR PARA O DO DISPOSITVO QUANDO FOR DESENHADO
         # Desenhos 2D
         triforce_de_viking = Face(self.superficie,
                                   [[0, 0], [15, 24], [30, 0], [75, 96], [45, 96], [60, 120], [-30, 120], [-15, 96], [-45, 96]])
+
         #raio = Face(self.superficie,
         #            [[0, 0], [20, 0], [15, 30], [50, 35], [0, 125], [10, 50], [-25, 50]])
         raio = Objeto([Face(self.superficie,[[0.0, 1500.0, 1, 1], [33.333333333333336, 1500.0, 1, 1], [25.0, 1425.0, 1, 1], [83.33333333333333, 1412.5, 1, 1], [0.0, 1187.5, 1, 1], [16.666666666666668, 1375.0, 1, 1], [-41.666666666666664, 1375.0, 1, 1]]),
@@ -84,12 +84,17 @@ class Jogo:
         #                         [[0, 0], [100, 0], [50, 50], [100, 100], [0, 100], [-75, 50]])
         bandeira = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [166.66666666666666, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [0.0, 1250.0, 1, 1], [-125.0, 1375.0, 1, 1]]),
                            Face(self.superficie, [[0.0, 1500.0, 1, 1], [166.66666666666666, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [0.0, 1250.0, 1, 1], [-125.0, 1375.0, 1, 1]])])
-        dodecagono = Face(self.superficie,
-                          [[0, 0], [18, -67], [67, -116], [134, -134], [201, -116], [250, -67], [268, 0], [250, 67], [201, 116], [134, 134], [67, 116], [18, 67]])
-        estrela = Face(self.superficie,
-                        [[0, 0], [15, 25], [50, 25], [25, 40], [35, 75], [0, 55], [-35, 75], [-25, 40], [-50, 25], [-15, 25]])
-        estrela_de_davi = Face(self.superficie,
-                               [[0, 0], [15, 25], [50, 25], [25, 50], [50, 75], [15, 75], [0, 100], [-15, 75], [-50, 75], [-25, 50], [-50, 25], [-15, 25]])
+        # dodecagono = Face(self.superficie,
+                        #   [[0, 0], [18, -67], [67, -116], [134, -134], [201, -116], [250, -67], [268, 0], [250, 67], [201, 116], [134, 134], [67, 116], [18, 67]])
+        dodecagono = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [30.0, 1667.5, 1, 1], [111.66666666666667, 1790.0, 1, 1], [223.33333333333334, 1835.0, 1, 1], [335.0, 1790.0, 1, 1], [416.6666666666667, 1667.5, 1, 1], [446.6666666666667, 1500.0, 1, 1], [416.6666666666667, 1332.5, 1, 1], [335.0, 1210.0, 1, 1], [223.33333333333334, 1165.0, 1, 1], [111.66666666666667, 1210.0, 1, 1], [30.0, 1332.5, 1, 1]]), Face(self.superficie, [[0.0, 1500.0, 1, 1], [30.0, 1667.5, 1, 1], [111.66666666666667, 1790.0, 1, 1], [223.33333333333334, 1835.0, 1, 1], [335.0, 1790.0, 1, 1], [416.6666666666667, 1667.5, 1, 1], [446.6666666666667, 1500.0, 1, 1], [416.6666666666667, 1332.5, 1, 1], [335.0, 1210.0, 1, 1], [223.33333333333334, 1165.0, 1, 1], [111.66666666666667, 1210.0, 1, 1], [30.0, 1332.5, 1, 1]])])
+
+        # estrela = Face(self.superficie,
+                        # [[0, 0], [15, 25], [50, 25], [25, 40], [35, 75], [0, 55], [-35, 75], [-25, 40], [-50, 25], [-15, 25]])
+        estrela = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [25.0, 1437.5, 1, 1], [83.33333333333333, 1437.5, 1, 1], [41.666666666666664, 1400.0, 1, 1], [58.333333333333336, 1312.5, 1, 1], [0.0, 1362.5, 1, 1], [-58.333333333333336, 1312.5, 1, 1], [-41.666666666666664, 1400.0, 1, 1], [-83.33333333333333, 1437.5, 1, 1], [-25.0, 1437.5, 1, 1]]), Face(self.superficie, [[0.0, 1500.0, 1, 1], [25.0, 1437.5, 1, 1], [83.33333333333333, 1437.5, 1, 1], [41.666666666666664, 1400.0, 1, 1], [58.333333333333336, 1312.5, 1, 1], [0.0, 1362.5, 1, 1], [-58.333333333333336, 1312.5, 1, 1], [-41.666666666666664, 1400.0, 1, 1], [-83.33333333333333, 1437.5, 1, 1], [-25.0, 1437.5, 1, 1]])])
+
+        # estrela_de_davi = Face(self.superficie,
+                            #    [[0, 0], [15, 25], [50, 25], [25, 50], [50, 75], [15, 75], [0, 100], [-15, 75], [-50, 75], [-25, 50], [-50, 25], [-15, 25]])
+        estrela_de_davi = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [25.0, 1437.5, 1, 1], [83.33333333333333, 1437.5, 1, 1], [41.666666666666664, 1375.0, 1, 1], [83.33333333333333, 1312.5, 1, 1], [25.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-25.0, 1312.5, 1, 1], [-83.33333333333333, 1312.5, 1, 1], [-41.666666666666664, 1375.0, 1, 1], [-83.33333333333333, 1437.5, 1, 1], [-25.0, 1437.5, 1, 1]]), Face(self.superficie, [[0.0, 1500.0, 1, 1], [25.0, 1437.5, 1, 1], [83.33333333333333, 1437.5, 1, 1], [41.666666666666664, 1375.0, 1, 1], [83.33333333333333, 1312.5, 1, 1], [25.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-25.0, 1312.5, 1, 1], [-83.33333333333333, 1312.5, 1, 1], [-41.666666666666664, 1375.0, 1, 1], [-83.33333333333333, 1437.5, 1, 1], [-25.0, 1437.5, 1, 1]])])
 
         # Desenhos 3D
         crazy_diamond = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [125.0, 1437.5, 1, 1], [41.666666666666664, 1250.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1]]),
@@ -138,26 +143,27 @@ class Jogo:
         # Tela 2
         raio = raio.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(225, 0, 0)
         diamante = diamante.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(375, 0, 0)
-        dodecagono = dodecagono.translada(0, 466)
-        estrela_de_davi = estrela_de_davi.translada(450, 425)
-        estrela = estrela.translada(350, 325)
-        perguntas = [Desenho([estrela_de_davi.translada(-350, -400).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
-                              estrela.escala_no_ponto(0.7, 0.7, 0).translada(-250, -260).muda_cor(AMARELO)]),
-                     Desenho([estrela_de_davi.translada(-150, -400).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
+        dodecagono = dodecagono.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(0, 466, 0)
+        estrela_de_davi = estrela_de_davi.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(450, 425, 0)
+        estrela = estrela.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(350, 325, 0)
+
+        perguntas = [Desenho([estrela_de_davi.translada_3d(-350, -400, 0).escala_3d_ponto(1.5, 1.5, 0).muda_cor(VERDE),
+                              estrela.escala_3d_ponto(0.7, 0.7, 0).translada_3d(-250, -260, 0).muda_cor(AMARELO)]),
+                     Desenho([estrela_de_davi.translada_3d(-150, -400, 0).escala_3d_ponto(1.5, 1.5, 0).muda_cor(VERDE),
                               raio.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(70, 75, 0).muda_cor(VERMELHO)]),
-                     Desenho([estrela_de_davi.translada(50, -400).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
+                     Desenho([estrela_de_davi.translada_3d(50, -400, 0).escala_3d_ponto(1.5, 1.5, 0).muda_cor(VERDE),
                               diamante.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(112, 75, 0).muda_cor(AZUL)]),
-                     Desenho([dodecagono.translada(35, -195).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
+                     Desenho([dodecagono.translada_3d(35, -195, 0).escala_3d_ponto(0.5, 0.5, 0.5).muda_cor(AZUL_PISCINA),
                               diamante.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(-287, 245, 0).muda_cor(AZUL)]),
-                     Desenho([dodecagono.translada(235, -195).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
+                     Desenho([dodecagono.translada_3d(235, -195, 0).escala_3d_ponto(0.5, 0.5, 0.5).muda_cor(AZUL_PISCINA),
                               raio.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(70, 245, 0).muda_cor(VERMELHO)])]
 
-        respostas = [Desenho([dodecagono.translada(35, 60).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
+        respostas = [Desenho([dodecagono.translada_3d(35, 60, 0).escala_3d_ponto(0.5, 0.5, 0.5).muda_cor(AZUL_PISCINA),
                               diamante.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(-287, 500, 0).muda_cor(AZUL)]),
-                     Desenho([estrela_de_davi.translada(-150, 25).escala_no_ponto(1.5, 1.5, 0).muda_cor(VERDE),
+                     Desenho([estrela_de_davi.translada_3d(-150, 25, 0).escala_3d_ponto(1.5, 1.5, 0).muda_cor(VERDE),
                               raio.escala_3d_ponto(0.5, 0.5, 0.5).translada_3d(70, 500, 0).muda_cor(VERMELHO)]),
-                     Desenho([dodecagono.translada(435, 60).escala_no_ponto(0.5, 0.5, 0).muda_cor(AZUL_PISCINA),
-                              estrela.escala_no_ponto(0.7, 0.7, 0).translada(150, 170).muda_cor(AMARELO)])]
+                     Desenho([dodecagono.translada_3d(435, 60, 0).escala_3d_ponto(0.5, 0.5, 0.5).muda_cor(AZUL_PISCINA),
+                              estrela.escala_3d_ponto(0.7, 0.7, 0).translada_3d(150, 170, 0).muda_cor(AMARELO)])]
 
         resposta = 3
 
