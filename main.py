@@ -50,12 +50,8 @@ class Jogo:
         self.corretas = 0
 
     def monta_telas(self):
-
         # TODOS OS DESENHOS DEVEM RESPEITAR Euler: Vertices – Arestas + Faces = 2
-        # DESENHOS OK: crazy_diamond, seta
-        # DESENHOS NOT OK: resto
 
-        #IMPORTANTE, O SISTEMA DE COORDENADAS UTILIZADO DEVE SER O UNIVERSAL E DEPOIS MAPEAR PARA O DO DISPOSITVO QUANDO FOR DESENHADO
         # Desenhos 2D
         # triforce_de_viking = Face(self.superficie,
                                 #   [[0, 0], [15, 24], [30, 0], [75, 96], [45, 96], [60, 120], [-30, 120], [-15, 96], [-45, 96]])
