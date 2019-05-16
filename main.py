@@ -57,8 +57,9 @@ class Jogo:
 
         #IMPORTANTE, O SISTEMA DE COORDENADAS UTILIZADO DEVE SER O UNIVERSAL E DEPOIS MAPEAR PARA O DO DISPOSITVO QUANDO FOR DESENHADO
         # Desenhos 2D
-        triforce_de_viking = Face(self.superficie,
-                                  [[0, 0], [15, 24], [30, 0], [75, 96], [45, 96], [60, 120], [-30, 120], [-15, 96], [-45, 96]])
+        # triforce_de_viking = Face(self.superficie,
+                                #   [[0, 0], [15, 24], [30, 0], [75, 96], [45, 96], [60, 120], [-30, 120], [-15, 96], [-45, 96]])
+        triforce_de_viking = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [25.0, 1440.0, 1, 1], [50.0, 1500.0, 1, 1], [125.0, 1260.0, 1, 1], [75.0, 1260.0, 1, 1], [100.0, 1200.0, 1, 1], [-50.0, 1200.0, 1, 1], [-25.0, 1260.0, 1, 1], [-75.0, 1260.0, 1, 1]]), Face(self.superficie, [[0.0, 1500.0, 1, 1], [25.0, 1440.0, 1, 1], [50.0, 1500.0, 1, 1], [125.0, 1260.0, 1, 1], [75.0, 1260.0, 1, 1], [100.0, 1200.0, 1, 1], [-50.0, 1200.0, 1, 1], [-25.0, 1260.0, 1, 1], [-75.0, 1260.0, 1, 1]])])
 
         #raio = Face(self.superficie,
         #            [[0, 0], [20, 0], [15, 30], [50, 35], [0, 125], [10, 50], [-25, 50]])
@@ -97,8 +98,9 @@ class Jogo:
         estrela_de_davi = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [25.0, 1437.5, 1, 1], [83.33333333333333, 1437.5, 1, 1], [41.666666666666664, 1375.0, 1, 1], [83.33333333333333, 1312.5, 1, 1], [25.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-25.0, 1312.5, 1, 1], [-83.33333333333333, 1312.5, 1, 1], [-41.666666666666664, 1375.0, 1, 1], [-83.33333333333333, 1437.5, 1, 1], [-25.0, 1437.5, 1, 1]]), Face(self.superficie, [[0.0, 1500.0, 1, 1], [25.0, 1437.5, 1, 1], [83.33333333333333, 1437.5, 1, 1], [41.666666666666664, 1375.0, 1, 1], [83.33333333333333, 1312.5, 1, 1], [25.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-25.0, 1312.5, 1, 1], [-83.33333333333333, 1312.5, 1, 1], [-41.666666666666664, 1375.0, 1, 1], [-83.33333333333333, 1437.5, 1, 1], [-25.0, 1437.5, 1, 1]])])
 
         # Desenhos 3D
+        p = 100
         crazy_diamond = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [125.0, 1437.5, 1, 1], [41.666666666666664, 1250.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1]]),
-                                Face(self.superficie, [[0.0, 1500.0, 100, 1], [83.33333333333333, 1500.0, 100, 1], [125.0, 1437.5, 100, 1], [41.666666666666664, 1250.0, 100, 1], [-41.666666666666664, 1437.5, 100, 1]])])
+                                Face(self.superficie, [[0.0, 1500.0, p, 1], [83.33333333333333, 1500.0, p, 1], [125.0, 1437.5, p, 1], [41.666666666666664, 1250.0, p, 1], [-41.666666666666664, 1437.5, p, 1]])])
 
         # Area das Respostas:
         area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),
@@ -193,19 +195,20 @@ class Jogo:
         self.telas.append(tela)
 
         # Tela 4
-        triforce_de_viking = triforce_de_viking.translada(45, 0)
-        perguntas = [Desenho([triforce_de_viking.translada(35, 10)]),
+        triforce_de_viking = triforce_de_viking.mapeamento_sru_srd(600, 1000, 600, 1500).translada_3d(45, 0, 0)
+
+        perguntas = [Desenho([triforce_de_viking.translada_3d(35, 10, 0)]),
                      Desenho([bandeira.translada_3d(-210, -140, 0).escala_3d_ponto(0.8, 0.8, 0.8).muda_cor(AZUL)]),
-                     Desenho([triforce_de_viking.translada(395, 10).cisalha_no_ponto(0.6, 0).muda_cor(AZUL_PISCINA)]),
-                     Desenho([triforce_de_viking.translada(35, 175)]),
+                     Desenho([triforce_de_viking.translada_3d(395, 10, 0).cisalha_3d_ponto(0.6, 0).muda_cor(AZUL_PISCINA)]),
+                     Desenho([triforce_de_viking.translada_3d(35, 175, 0)]),
                      Desenho([bandeira.translada_3d(-210, 20, 0).escala_3d_ponto(0.5, 0.8, 0.5).muda_cor(AZUL)]),
-                     Desenho([triforce_de_viking.translada(420, 175).cisalha_no_ponto(0.35, 0).muda_cor(AZUL_PISCINA)]),
-                     Desenho([triforce_de_viking.translada(35, 320)]),
+                     Desenho([triforce_de_viking.translada_3d(420, 175, 0).cisalha_3d_ponto(0.35, 0).muda_cor(AZUL_PISCINA)]),
+                     Desenho([triforce_de_viking.translada_3d(35, 320, 0)]),
                      Desenho([bandeira.translada_3d(-215, 170, 0).escala_3d_ponto(1.1, 0.8, 1.1).muda_cor(AZUL)])]
 
-        respostas = [Desenho([triforce_de_viking.translada(100, 465).cisalha_no_ponto(-0.8, 0).muda_cor(AZUL_PISCINA)]),
-                     Desenho([triforce_de_viking.translada(180, 465).cisalha_no_ponto(0.8, 0).muda_cor(AZUL_PISCINA)]),
-                     Desenho([triforce_de_viking.translada(420, 465).cisalha_no_ponto(0.2, 0).muda_cor(AZUL_PISCINA)])]
+        respostas = [Desenho([triforce_de_viking.translada_3d(100, 465, 0).cisalha_3d_ponto(-0.8, 0).muda_cor(AZUL_PISCINA)]),
+                     Desenho([triforce_de_viking.translada_3d(180, 465, 0).cisalha_3d_ponto(0.8, 0).muda_cor(AZUL_PISCINA)]),
+                     Desenho([triforce_de_viking.translada_3d(420, 465, 0).cisalha_3d_ponto(0.2, 0).muda_cor(AZUL_PISCINA)])]
 
         resposta = 2
 

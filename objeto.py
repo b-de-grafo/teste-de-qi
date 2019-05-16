@@ -62,6 +62,14 @@ class Objeto:
 
         return Objeto(novas_faces)
 
+    def cisalha_3d(self, kx, ky):
+
+        novas_faces = []
+        for i in range(len(self.faces)):
+            novas_faces.append(self.faces[i].cisalha_3d(kx, ky))
+
+        return Objeto(novas_faces)
+
     def rotaciona_x_ponto(self, teta, ind_face=0, ind_ponto=0):
         delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
         delta_y = -self.faces[ind_face].vertices[ind_ponto][1]
@@ -94,6 +102,15 @@ class Objeto:
 
         # Translada para a origem, faz lá a escala e translada de volta
         return self.translada_3d(delta_x, delta_y, delta_z).escala_3d(lx, ly, lz).translada_3d(-delta_x, -delta_y, -delta_z)
+
+    def cisalha_3d_ponto(self, kx, ky, kz=0, ind_face=0, ind_ponto=0):
+        delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
+        delta_y = -self.faces[ind_face].vertices[ind_ponto][1]
+        delta_z = -self.faces[ind_face].vertices[ind_ponto][2]
+
+        # Translada para a origem, faz lá a escala e translada de volta
+        return self.translada_3d(delta_x, delta_y, delta_z).cisalha_3d(kx, ky).translada_3d(-delta_x, -delta_y, -delta_z)
+
 
     def mapeamento_sru_srd(self, xdmax, xumax, ydmax, yumax):
         novas_faces = []

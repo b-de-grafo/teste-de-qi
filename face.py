@@ -142,6 +142,28 @@ class Face:
 
         return Face(self.superficie, novos_vertices, self.cor)
 
+    def cisalha_3d(self, kx, ky):
+        z = self.vertices[0][2]
+        face_sem_z = Face(self.superficie, [(x, y, h) for (x, y, _, h) in self.vertices], self.cor)
+
+        novos_vertices = []
+        matriz_rotacao = [[1 , kx, 0],
+                          [ky, 1 , 0],
+                          [0 , 0 , 1]]
+
+        for vertice in face_sem_z.vertices:
+            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_rotacao, transpoe_vetor(vertice)))
+
+            # Arredonda possíveis floats do vetor
+            for i in range(len(novo_vertice)):
+                novo_vertice[i] = int(novo_vertice[i])
+
+            novos_vertices.append(novo_vertice)
+
+        novos_vertices = [(x, y, z, h) for (x, y, h) in novos_vertices]
+
+        return Face(self.superficie, novos_vertices, self.cor)
+
     def escala_no_ponto(self, lx, ly, ind_ponto=0):
         delta_x = -self.vertices[ind_ponto][0]
         delta_y = -self.vertices[ind_ponto][1]
@@ -217,6 +239,13 @@ class Face:
             novos_vertices.append(novo_vertice)
 
         return Face(self.superficie, novos_vertices, self.cor)
+
+    def cisalha_3d_ponto(self, kx, ky, ind_ponto=0):
+        delta_x = -self.vertices[ind_ponto][0]
+        delta_y = -self.vertices[ind_ponto][1]
+
+        # Translada para a origem, faz lá o cisalhamento e transalada de volta
+        return self.translada_3d(delta_x, delta_y).cisalha_3d(kx, ky).translada_3d(-delta_x, -delta_y)
 
     def mapeamento_sru_srd(self, xdmax, xumax, ydmax, yumax):
         novos_vertices = []

@@ -122,8 +122,8 @@ def get_canto(face):
 def srd_sru(vertices, xdmax, xumax, ydmax, yumax):
     novos_vertices = []
     for v in vertices:
-        print(v[0]*xumax/xdmax)
-        print((v[1]-ydmax)*yumax/(-ydmax))
+        # print(v[0]*xumax/xdmax)
+        # print((v[1]-ydmax)*yumax/(-ydmax))
         novos_vertices.append([v[0]*xumax/xdmax, (v[1]-ydmax)*yumax/(-ydmax), v[2], v[3]])
     return novos_vertices
 
@@ -137,3 +137,4 @@ def srd_sru(vertices, xdmax, xumax, ydmax, yumax):
 # print(srd_sru([[0, 0, 1, 1], [18, -67, 1, 1], [67, -116, 1, 1], [134, -134, 1, 1], [201, -116, 1, 1], [250, -67, 1, 1], [268, 0, 1, 1], [250, 67, 1, 1], [201, 116, 1, 1], [134, 134, 1, 1], [67, 116, 1, 1], [18, 67, 1, 1]], 600, 1000, 600, 1500)) # dodecagono
 # print(srd_sru([[0, 0, 1, 1], [15, 25, 1, 1], [50, 25, 1, 1], [25, 40, 1, 1], [35, 75, 1, 1], [0, 55, 1, 1], [-35, 75, 1, 1], [-25, 40, 1, 1], [-50, 25, 1, 1], [-15, 25, 1, 1]], 600, 1000, 600, 1500)) # estrela
 # print(srd_sru([[0, 0, 1, 1], [15, 25, 1, 1], [50, 25, 1, 1], [25, 50, 1, 1], [50, 75, 1, 1], [15, 75, 1, 1], [0, 100, 1, 1], [-15, 75, 1, 1], [-50, 75, 1, 1], [-25, 50, 1, 1], [-50, 25, 1, 1], [-15, 25, 1, 1]], 600, 1000, 600, 1500)) # estrela de davi
+# print(srd_sru([[0, 0, 1, 1], [15, 24, 1, 1], [30, 0, 1, 1], [75, 96, 1, 1], [45, 96, 1, 1], [60, 120, 1, 1], [-30, 120, 1, 1], [-15, 96, 1, 1], [-45, 96, 1, 1]], 600, 1000, 600, 1500)) # triforce
