@@ -111,7 +111,6 @@ class Objeto:
         # Translada para a origem, faz lá a escala e translada de volta
         return self.translada_3d(delta_x, delta_y, delta_z).cisalha_3d(kx, ky).translada_3d(-delta_x, -delta_y, -delta_z)
 
-
     def mapeamento_sru_srd(self, xdmax, xumax, ydmax, yumax):
         novas_faces = []
         for i in range(len(self.faces)):
