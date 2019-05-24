@@ -34,7 +34,7 @@ class Jogo:
         self.rodando = True
 
         self.telas = []
-        self.monta_telas()
+        self.monta_telas_debug_preenche()
 
         self.estado_do_jogo = TELA_INICIAL
 
@@ -48,6 +48,23 @@ class Jogo:
         self.tempo_de_resposta = 0
 
         self.corretas = 0
+
+    def monta_telas_debug_preenche(self):
+        raio = Objeto([Face(self.superficie,
+                            [[0.0, 1500.0, 1, 1], [33.333333333333336, 1500.0, 1, 1], [25.0, 1425.0, 1, 1],
+                             [83.33333333333333, 1412.5, 1, 1], [0.0, 1187.5, 1, 1], [16.666666666666668, 1375.0, 1, 1],
+                             [-41.666666666666664, 1375.0, 1, 1]], preenchido=True, tela=self.tela),
+                       Face(self.superficie,
+                            [[0.0, 1500.0, 1, 1], [33.333333333333336, 1500.0, 1, 1], [25.0, 1425.0, 1, 1],
+                             [83.33333333333333, 1412.5, 1, 1], [0.0, 1187.5, 1, 1], [16.666666666666668, 1375.0, 1, 1],
+                             [-41.666666666666664, 1375.0, 1, 1]])])
+
+        raio = raio.mapeamento_sru_srd(600, 1000, 600, 1500)
+        raio = raio.translada_3d(200, 200, 0)
+        perguntas = [raio]
+
+        tela = Tela(perguntas, [], 1, [])
+        self.telas.append(tela)
 
     def monta_telas(self):
         # TODOS OS DESENHOS DEVEM RESPEITAR Euler: Vertices – Arestas + Faces = 2

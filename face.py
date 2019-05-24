@@ -1,12 +1,14 @@
 from util import *
 from math import cos, sin
+import pygame
 
 BRANCO = [255, 255, 255]
 
 
 class Face:
-    def __init__(self, superficie, vertices, cor=BRANCO, preenchido=False, arestas=True):
+    def __init__(self, superficie, vertices, cor=BRANCO, preenchido=False, arestas=True, tela=None):
         self.superficie = superficie
+        self.tela = tela
 
         self.vertices = []
         for vertice in vertices:
@@ -29,6 +31,15 @@ class Face:
     def desenha(self, cor=None):
         if cor is None:
             cor = self.cor
+
+        if self.arestas:
+            # Desenha retas entre os vértices
+            for i in range(len(self.vertices)):
+                if i < len(self.vertices) - 1:
+                    reta(self.superficie, self.vertices[i], self.vertices[i + 1], cor)
+                else:
+                    reta(self.superficie, self.vertices[0], self.vertices[i], cor)
+
 
         if self.preenchido:
             self.preenche()
@@ -77,7 +88,7 @@ class Face:
                 novo_vertice[i] = int(novo_vertice[i])
 
             novos_vertices.append(novo_vertice)
-        return Face(self.superficie, novos_vertices, self.cor, self.preenchido, self.arestas)
+        return Face(self.superficie, novos_vertices, self.cor, self.preenchido, self.arestas, self.tela)
 
     def escala(self, lx=1, ly=1):
         matriz_escala = [[lx, 0 , 0],
@@ -260,7 +271,7 @@ class Face:
             for i in range(len(vertice)):
                 vertice[i] = int(vertice[i])
             novos_vertices.append(vertice)
-        return Face(self.superficie, novos_vertices, self.cor, self.preenchido, self.arestas)
+        return Face(self.superficie, novos_vertices, self.cor, self.preenchido, self.arestas, self.tela)
 
     def preenche(self):
         menor_y = 9999
@@ -274,9 +285,12 @@ class Face:
         for y_eixo in range(menor_y, maior_y + 1):
             encontro_retas = []
 
-            for j in range(len(self.vertices) - 1):
+            for j in range(len(self.vertices)):
                 x1, y1, _, _ = self.vertices[j]
-                x2, y2, _, _ = self.vertices[j + 1]
+                if j + 1 == len(self.vertices):
+                    x2, y2, _, _ = self.vertices[0]
+                else:
+                    x2, y2, _, _ = self.vertices[j + 1]
 
                 if y1 <= y_eixo <= y2 or y2 <= y_eixo <= y1:
                     if (y2 - y1) != 0:
@@ -284,12 +298,19 @@ class Face:
                         x = m * (y_eixo - y1) + x1
 
                         encontro_retas.append(int(x))
+                    else:
+                        encontro_retas.append(x1)
 
             encontro_retas.sort()
             if len(encontro_retas) % 2 == 0:
                 for par_index in range(0, len(encontro_retas) - 1, 2):
                     reta(self.superficie, [encontro_retas[par_index], y_eixo], [encontro_retas[par_index + 1], y_eixo], cor=[255,0,0])
+                    #if self.tela is not None:
+                        #self.tela.blit(self.superficie, [0, 0])
+                    #pygame.display.flip()
             else:
                 print("Encontros ímpares")
-            a = self.vertices[j]
-        b = self.vertices[j + 1]
+
+            #if self.tela is not None:
+                #self.tela.blit(self.superficie, [0, 0])
+            #pygame.display.flip()
