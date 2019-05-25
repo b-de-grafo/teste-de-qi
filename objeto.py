@@ -14,11 +14,28 @@ class Objeto:
         if rotaciona_z:
             self.faces = self.rotaciona_z(radians(1)).faces
 
-        for face in self.faces:
-            face.desenha()
-        
+        # Preenche as faces
+        self.priorityfill()
+
+        # Desenha as arestas entre as faces
         for i in range(len(self.faces[0].vertices)):
             reta(self.faces[0].superficie, self.faces[0].vertices[i], self.faces[1].vertices[i], self.faces[0].cor)
+
+    def priorityfill(self):
+        faces_ord = []
+        for face in self.faces:
+            soma = 0
+            for vertice in face.vertices:
+                soma += vertice[2]
+            media = soma / len(face.vertices)
+            faces_ord.append([face, media])
+
+        def get_y(lista):
+            return lista[1]
+        faces_ord.sort(key=get_y, reverse=True)
+
+        for face in faces_ord:
+            face[0].desenha()
 
     def muda_cor(self, cor):
         novas_faces = []
@@ -110,7 +127,6 @@ class Objeto:
 
         # Translada para a origem, faz lá a escala e translada de volta
         return self.translada_3d(delta_x, delta_y, delta_z).cisalha_3d(kx, ky).translada_3d(-delta_x, -delta_y, -delta_z)
-
 
     def mapeamento_sru_srd(self, xdmax, xumax, ydmax, yumax):
         novas_faces = []

@@ -55,39 +55,12 @@ def transpoe_vetor(vetor):
     return resultado
 
 
-# Função não utilizada, ta aqui pra talvez uso futuro
-def preenchimento(superficie, origem, inicio, fim, cor):
-    xi, yi = inicio[0], inicio[1]
-    xf, yf = fim[0], fim[1]
-
-    xstep = 1
-    if xf < xi:
-        xstep = -1
-
-    for x in range(xi, xf + 1, xstep):
-        if (xf - xi) != 0:
-            m = (yf - yi) / (xf - xi)
-            y = m * (x - xi) + yi
-
-            reta(superficie, origem, [x, int(y)], cor)
-
-    ystep = 1
-    if yf < yi:
-        ystep = -1
-    for y in range(yi, yf + 1, ystep):
-        if (yf - yi) != 0:
-            m = (xf - xi) / (yf - yi)
-            x = m * (y - yi) + xi
-
-            reta(superficie, origem, [int(x), y], cor)
-
-
-# Função não utilizada, ta aqui pra talvez uso futuro
+# Função não utilizada, ta aqui pra possível uso futuro
 def get_centro(face):
     menor_x = 10000
     menor_y = 10000
-    maior_x = 0
-    maior_y = 0
+    maior_x = -10000
+    maior_y = -10000
 
     for vertice in face.vertices:
         if vertice[0] < menor_x:
@@ -105,7 +78,7 @@ def get_centro(face):
     return menor_x + (largura // 2), menor_y + (altura // 2)
 
 
-# Função não utilizada, ta aqui pra talvez uso futuro
+# Função não utilizada, ta aqui pra possível uso futuro
 def get_canto(face):
     menor_x = 10000
     menor_y = 10000
@@ -122,7 +95,5 @@ def get_canto(face):
 def srd_sru(vertices, xdmax, xumax, ydmax, yumax):
     novos_vertices = []
     for v in vertices:
-        # print(v[0]*xumax/xdmax)
-        # print((v[1]-ydmax)*yumax/(-ydmax))
         novos_vertices.append([v[0]*xumax/xdmax, (v[1]-ydmax)*yumax/(-ydmax), v[2], v[3]])
     return novos_vertices

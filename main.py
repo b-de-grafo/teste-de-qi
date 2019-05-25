@@ -34,6 +34,7 @@ class Jogo:
         self.rodando = True
 
         self.telas = []
+        #self.monta_telas_debug_preenche()
         self.monta_telas()
 
         self.estado_do_jogo = TELA_INICIAL
@@ -48,6 +49,23 @@ class Jogo:
         self.tempo_de_resposta = 0
 
         self.corretas = 0
+
+    def monta_telas_debug_preenche(self):
+        raio = Objeto([Face(self.superficie,
+                            [[0.0, 1500.0, 1, 1], [33.333333333333336, 1500.0, 1, 1], [25.0, 1425.0, 1, 1],
+                             [83.33333333333333, 1412.5, 1, 1], [0.0, 1187.5, 1, 1], [16.666666666666668, 1375.0, 1, 1],
+                             [-41.666666666666664, 1375.0, 1, 1]], preenchido=True, tela=self.tela),
+                       Face(self.superficie,
+                            [[0.0, 1500.0, 1, 1], [33.333333333333336, 1500.0, 1, 1], [25.0, 1425.0, 1, 1],
+                             [83.33333333333333, 1412.5, 1, 1], [0.0, 1187.5, 1, 1], [16.666666666666668, 1375.0, 1, 1],
+                             [-41.666666666666664, 1375.0, 1, 1]], preenchido=True, tela=self.tela)])
+
+        raio = raio.mapeamento_sru_srd(600, 1000, 600, 1500)
+        raio = raio.translada_3d(200, 200, 0)
+        perguntas = [raio]
+
+        tela = Tela(perguntas, [], 1, [])
+        self.telas.append(tela)
 
     def monta_telas(self):
         # TODOS OS DESENHOS DEVEM RESPEITAR Euler: Vertices – Arestas + Faces = 2
@@ -71,7 +89,7 @@ class Jogo:
                              Face(self.superficie, [[0.0, 1500.0, 1, 1], [41.666666666666664, 1437.5, 1, 1], [41.666666666666664, 1375.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [41.666666666666664, 1312.5, 1, 1], [0.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-41.666666666666664, 1312.5, 1, 1], [-41.666666666666664, 1375.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1], [0.0, 1437.5, 1, 1]])])
         # cruz = Face(self.superficie,
         #            [[0, 0], [50, 0], [50, 50], [100, 50], [100, 100], [50, 100], [50, 150], [0, 150], [0, 100], [-50, 100], [-50, 50], [0, 50]])
-        cruz = Objeto([Face(self.superficie,[[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [83.33333333333333, 1250.0, 1, 1], [83.33333333333333, 1125.0, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-83.33333333333333, 1250.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]]),
+        cruz = Objeto([Face(self.superficie,[[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [83.33333333333333, 1250.0, 1, 1], [83.33333333333333, 1125.0, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-83.33333333333333, 1250.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]], preenchido=True),
                        Face(self.superficie,[[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [83.33333333333333, 1250.0, 1, 1], [83.33333333333333, 1125.0, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-83.33333333333333, 1250.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]])])
         # seta = Objeto([Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]]),
         #               Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]])])
@@ -95,25 +113,35 @@ class Jogo:
 
         # Desenhos 3D
         p = 100
-        crazy_diamond = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [125.0, 1437.5, 1, 1], [41.666666666666664, 1250.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1]]),
-                                Face(self.superficie, [[0.0, 1500.0, p, 1], [83.33333333333333, 1500.0, p, 1], [125.0, 1437.5, p, 1], [41.666666666666664, 1250.0, p, 1], [-41.666666666666664, 1437.5, p, 1]])])
+        crazy_diamond = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [125.0, 1437.5, 1, 1], [41.666666666666664, 1250.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1]], cor=VERMELHO, preenchido=True),
+                                Face(self.superficie, [[0.0, 1500.0, p, 1], [83.33333333333333, 1500.0, p, 1], [125.0, 1437.5, p, 1], [41.666666666666664, 1250.0, p, 1], [-41.666666666666664, 1437.5, p, 1]], cor=AZUL, preenchido=True)])
+        crazy_diamond = crazy_diamond.mapeamento_sru_srd(600, 1000, 600, 1500)
 
         # Area das Respostas:
         area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),
                                 Face(self.superficie, [[200, 450], [200, 600]]),
                                 Face(self.superficie, [[400, 450], [400, 600]])])]
 
-        # Tela 0
+        # Tela 00
         # Desenhar a figura 3D do seu grupo como wire-frame em projecao isometrica na tela inicial de abertura do seu teste de QI
         # Projecao isometrica: teta_y = 45 graus e teta_x = 35,26
-        crazy_diamond = crazy_diamond.mapeamento_sru_srd(600, 1000, 600, 1500)
-        perguntas = [crazy_diamond.translada_3d(150, 80, 0).rotaciona_y(radians(45)).rotaciona_x(radians(35.26)).escala_3d(2, 2, 2).muda_cor(AZUL_PISCINA),
-                     crazy_diamond.translada_3d(100, 100, 0).rotaciona_y_ponto(radians(45)).rotaciona_x_ponto(radians(35.26)).muda_cor(VERDE),
-                     crazy_diamond.translada_3d(400, 450, 0).rotaciona_y_ponto(radians(45)).rotaciona_x_ponto(radians(35.26)).escala_3d_ponto(1.5, 1.5, 1.5).muda_cor(VERMELHO)]
+        perguntas = [crazy_diamond.translada_3d(150, 80, 0).rotaciona_y(radians(10)).rotaciona_x(radians(10)).escala_3d(2, 2, 2),
+                     crazy_diamond.translada_3d(100, 100, 0).rotaciona_y_ponto(radians(45)).rotaciona_x_ponto(radians(35.26)),
+                     crazy_diamond.translada_3d(400, 450, 0).rotaciona_y_ponto(radians(45)).rotaciona_x_ponto(radians(35.26)).escala_3d_ponto(1.5, 1.5, 1.5)]
 
 
         tela = Tela(perguntas, [], 1, [])
         self.telas.append(tela)
+
+        # Tela 01
+        perguntas = [crazy_diamond.translada_3d(50, 50, 0),
+                     crazy_diamond.translada_3d(225, 50, 0).rotaciona_y_ponto(radians(30)),
+                     crazy_diamond.translada_3d(320, 50, 0).rotaciona_y_ponto(radians(-30)),
+                     crazy_diamond.translada_3d(500, 50, 0).rotaciona_y_ponto(radians(210))]
+
+        tela = Tela(perguntas, [], 1, [])
+        self.telas.append(tela)
+
         # IMPORTANTE: ROTACAO 2D = ROTACAO Z
         # Tela 1
         # Ideia: poligonos rotacionados de acordo com sua posicao na matriz
