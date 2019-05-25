@@ -33,24 +33,15 @@ class Face:
             cor = self.cor
 
         if self.arestas:
-            # Desenha retas entre os vértices
+            # Desenha arestas entre os vértices
             for i in range(len(self.vertices)):
                 if i < len(self.vertices) - 1:
                     reta(self.superficie, self.vertices[i], self.vertices[i + 1], cor)
                 else:
                     reta(self.superficie, self.vertices[0], self.vertices[i], cor)
-
 
         if self.preenchido:
             self.preenche()
-
-        if self.arestas:
-            # Desenha retas entre os vértices
-            for i in range(len(self.vertices)):
-                if i < len(self.vertices) - 1:
-                    reta(self.superficie, self.vertices[i], self.vertices[i + 1], cor)
-                else:
-                    reta(self.superficie, self.vertices[0], self.vertices[i], cor)
 
     def muda_cor(self, cor):
         self.cor = cor
