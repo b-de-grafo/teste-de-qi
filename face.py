@@ -275,8 +275,8 @@ class Face:
 
     def preenche(self):
         # Pega o y mais acima e mais abaixo da figura pra iterar só neles
-        menor_y = 9999
-        maior_y = -9999
+        menor_y = 10000
+        maior_y = -10000
         for i in range(len(self.vertices)):
             if self.vertices[i][1] < menor_y:
                 menor_y = self.vertices[i][1]
@@ -289,6 +289,7 @@ class Face:
 
             # Pra cada par de vértices (basicamente cada aresta)
             for j in range(len(self.vertices)):
+                # Coordenadas de cada aresta
                 x1, y1, _, _ = self.vertices[j]
                 if j + 1 == len(self.vertices):
                     x2, y2, _, _ = self.vertices[0]
@@ -302,24 +303,25 @@ class Face:
                         x = m * (y_eixo - y1) + x1
 
                         # Adiciona esse ponto num array
-                        encontro_retas.append(int(x))
+                        if int(x) not in encontro_retas:
+                            encontro_retas.append(int(x))
                     else:
-                        encontro_retas.append(x1)
+                        if int(x1) not in encontro_retas:
+                            encontro_retas.append(int(x1))
 
             encontro_retas.sort()
             # Pra cada par de pontos em que a reta cruza a aresta
             if len(encontro_retas) % 2 == 0:
                 for par_index in range(0, len(encontro_retas) - 1, 2):
                     # Pinta entre esses dois pontos
-                    reta(self.superficie, [encontro_retas[par_index], y_eixo], [encontro_retas[par_index + 1], y_eixo], cor=[255,0,0])
+                    reta(self.superficie, [encontro_retas[par_index], y_eixo], [encontro_retas[par_index + 1], y_eixo],
+                         cor=self.cor)
                     # Se descomentar isso da pra ver cada segmento de reta sendo printado, é bom pra debugar
-                    #if self.tela is not None:
-                        #self.tela.blit(self.superficie, [0, 0])
-                    #pygame.display.flip()
-            else:
-                print("Encontros ímpares")
+                    # if self.tela is not None:
+                    #     self.tela.blit(self.superficie, [0, 0])
+                    # pygame.display.flip()
 
             # Se descomentar isso da pra ver cada reta sendo printada, é bom pra debugar
-            #if self.tela is not None:
-                #self.tela.blit(self.superficie, [0, 0])
-            #pygame.display.flip()
+            # if self.tela is not None:
+            #     self.tela.blit(self.superficie, [0, 0])
+            # pygame.display.flip()

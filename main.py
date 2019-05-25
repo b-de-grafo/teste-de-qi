@@ -34,7 +34,8 @@ class Jogo:
         self.rodando = True
 
         self.telas = []
-        self.monta_telas_debug_preenche()
+        #self.monta_telas_debug_preenche()
+        self.monta_telas()
 
         self.estado_do_jogo = TELA_INICIAL
 
@@ -57,7 +58,7 @@ class Jogo:
                        Face(self.superficie,
                             [[0.0, 1500.0, 1, 1], [33.333333333333336, 1500.0, 1, 1], [25.0, 1425.0, 1, 1],
                              [83.33333333333333, 1412.5, 1, 1], [0.0, 1187.5, 1, 1], [16.666666666666668, 1375.0, 1, 1],
-                             [-41.666666666666664, 1375.0, 1, 1]])])
+                             [-41.666666666666664, 1375.0, 1, 1]], preenchido=True, tela=self.tela)])
 
         raio = raio.mapeamento_sru_srd(600, 1000, 600, 1500)
         raio = raio.translada_3d(200, 200, 0)
@@ -113,7 +114,7 @@ class Jogo:
         # Desenhos 3D
         p = 100
         crazy_diamond = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [125.0, 1437.5, 1, 1], [41.666666666666664, 1250.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1]], preenchido=True),
-                                Face(self.superficie, [[0.0, 1500.0, p, 1], [83.33333333333333, 1500.0, p, 1], [125.0, 1437.5, p, 1], [41.666666666666664, 1250.0, p, 1], [-41.666666666666664, 1437.5, p, 1]])])
+                                Face(self.superficie, [[0.0, 1500.0, p, 1], [83.33333333333333, 1500.0, p, 1], [125.0, 1437.5, p, 1], [41.666666666666664, 1250.0, p, 1], [-41.666666666666664, 1437.5, p, 1]], preenchido=True)])
 
         # Area das Respostas:
         area_padrao = [Desenho([Face(self.superficie, [[0, 450], [600, 450]]),

@@ -59,8 +59,8 @@ def transpoe_vetor(vetor):
 def get_centro(face):
     menor_x = 10000
     menor_y = 10000
-    maior_x = 0
-    maior_y = 0
+    maior_x = -10000
+    maior_y = -10000
 
     for vertice in face.vertices:
         if vertice[0] < menor_x:
