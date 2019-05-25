@@ -1,5 +1,10 @@
 from math import radians
 from util import *
+from face import *
+
+X = 0
+Y = 1
+Z = 2
 
 
 class Objeto:
@@ -17,22 +22,48 @@ class Objeto:
         # Preenche as faces
         self.priorityfill()
 
+        """
         # Desenha as arestas entre as faces
         for i in range(len(self.faces[0].vertices)):
             reta(self.faces[0].superficie, self.faces[0].vertices[i], self.faces[1].vertices[i], self.faces[0].cor)
+        """
 
     def priorityfill(self):
         faces_ord = []
         for face in self.faces:
             soma = 0
             for vertice in face.vertices:
-                soma += vertice[2]
+                soma += vertice[Z]
             media = soma / len(face.vertices)
             faces_ord.append([face, media])
 
-        def get_y(lista):
+        # incluir faces laterais
+        frente = self.faces[0]
+        verso = self.faces[1]
+        cor_inicial = [50, 50, 50]
+        incremento_cor = 200 / len(face.vertices) # incrementar de acordo com o número de faces laterais
+
+        for i in range(len(face.vertices)):
+            if i < len(face.vertices)-1:
+                novos_vertices = [frente.vertices[i], frente.vertices[i+1], verso.vertices[i+1], verso.vertices[i]]
+
+            elif i == len(face.vertices)-1:
+                novos_vertices = [frente.vertices[i], frente.vertices[0], verso.vertices[0], verso.vertices[i]]
+
+            cor = [50 + i*incremento_cor] * 3
+            face_lateral = Face(frente.superficie, novos_vertices, cor, frente.preenchido, frente.arestas, frente.tela)
+
+            soma = 0
+            for vertice in novos_vertices:
+                soma += vertice[Z]
+            media = soma / len(novos_vertices)
+
+            faces_ord.append([face_lateral, media])
+
+        def get_media(lista):
             return lista[1]
-        faces_ord.sort(key=get_y, reverse=True)
+
+        faces_ord.sort(key=get_media, reverse=True)
 
         for face in faces_ord:
             face[0].desenha()
