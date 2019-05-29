@@ -20,13 +20,15 @@ class Objeto:
             self.faces = self.rotaciona_z(radians(1)).faces
 
         # Preenche as faces
-        self.priorityfill()
+        if self.faces[0].preenchido or self.faces[0].preenchido:
+            self.priorityfill()
 
-        """
-        # Desenha as arestas entre as faces
-        for i in range(len(self.faces[0].vertices)):
-            reta(self.faces[0].superficie, self.faces[0].vertices[i], self.faces[1].vertices[i], self.faces[0].cor)
-        """
+        else: # Wireframe
+            for face in self.faces:
+                face.desenha()
+                
+            for i in range(len(self.faces[0].vertices)):
+                reta(self.faces[0].superficie, self.faces[0].vertices[i], self.faces[1].vertices[i], self.faces[0].cor)
 
     def priorityfill(self):
         faces_ord = []

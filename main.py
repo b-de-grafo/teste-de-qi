@@ -89,7 +89,7 @@ class Jogo:
                              Face(self.superficie, [[0.0, 1500.0, 1, 1], [41.666666666666664, 1437.5, 1, 1], [41.666666666666664, 1375.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [41.666666666666664, 1312.5, 1, 1], [0.0, 1312.5, 1, 1], [0.0, 1250.0, 1, 1], [-41.666666666666664, 1312.5, 1, 1], [-41.666666666666664, 1375.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1], [0.0, 1437.5, 1, 1]])])
         # cruz = Face(self.superficie,
         #            [[0, 0], [50, 0], [50, 50], [100, 50], [100, 100], [50, 100], [50, 150], [0, 150], [0, 100], [-50, 100], [-50, 50], [0, 50]])
-        cruz = Objeto([Face(self.superficie,[[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [83.33333333333333, 1250.0, 1, 1], [83.33333333333333, 1125.0, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-83.33333333333333, 1250.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]], preenchido=True),
+        cruz = Objeto([Face(self.superficie,[[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [83.33333333333333, 1250.0, 1, 1], [83.33333333333333, 1125.0, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-83.33333333333333, 1250.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]]),
                        Face(self.superficie,[[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [83.33333333333333, 1375.0, 1, 1], [166.66666666666666, 1375.0, 1, 1], [166.66666666666666, 1250.0, 1, 1], [83.33333333333333, 1250.0, 1, 1], [83.33333333333333, 1125.0, 1, 1], [0.0, 1125.0, 1, 1], [0.0, 1250.0, 1, 1], [-83.33333333333333, 1250.0, 1, 1], [-83.33333333333333, 1375.0, 1, 1], [0.0, 1375.0, 1, 1]])])
         # seta = Objeto([Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]]),
         #               Face(self.superficie, [[0, 0, 1, 1], [75, 75, 1, 1], [0, 150, 1, 1], [0, 100, 1, 1], [-100, 100, 1, 1], [-100, 50, 1, 1], [0, 50, 1, 1]])])
@@ -123,6 +123,7 @@ class Jogo:
                                 Face(self.superficie, [[400, 450], [400, 600]])])]
 
         # Tela 00
+        """
         # Desenhar a figura 3D do seu grupo como wire-frame em projecao isometrica na tela inicial de abertura do seu teste de QI
         # Projecao isometrica: teta_y = 45 graus e teta_x = 35,26
         perguntas = [crazy_diamond.translada_3d(150, 80, 0).rotaciona_y(radians(10)).rotaciona_x(radians(10)).escala_3d(2, 2, 2),
@@ -132,15 +133,7 @@ class Jogo:
 
         tela = Tela(perguntas, [], 1, [])
         self.telas.append(tela)
-
-        # Tela 01
-        perguntas = [crazy_diamond.translada_3d(50, 50, 0),
-                     crazy_diamond.translada_3d(225, 50, 0).rotaciona_y_ponto(radians(30)),
-                     crazy_diamond.translada_3d(320, 50, 0).rotaciona_y_ponto(radians(-30)),
-                     crazy_diamond.translada_3d(500, 50, 0).rotaciona_y_ponto(radians(210))]
-
-        tela = Tela(perguntas, [], 1, [])
-        self.telas.append(tela)
+        """
 
         # IMPORTANTE: ROTACAO 2D = ROTACAO Z
         # Tela 1
@@ -239,8 +232,11 @@ class Jogo:
         tela = Tela(perguntas, respostas, resposta, area_padrao)
         self.telas.append(tela)
 
-        # Objetos finais que rotacionam
-        self.objetos_finais = [crazy_diamond.rotaciona_y(radians(10)).translada_3d(400, 450, 0)]
+        # Tela de resposta - objetos 3D que serão desenhados
+        self.objetos_finais = [crazy_diamond.translada_3d(50, 50, 0),
+                     crazy_diamond.translada_3d(225, 50, 0).rotaciona_y_ponto(radians(30)),
+                     crazy_diamond.translada_3d(320, 50, 0).rotaciona_y_ponto(radians(-30)),
+                     crazy_diamond.translada_3d(500, 50, 0).rotaciona_y_ponto(radians(45)).rotaciona_x_ponto(radians(35.26)).translada_3d(35, 50, 0)]
 
     def jogar(self):
         while self.rodando:
@@ -321,7 +317,7 @@ class Jogo:
             surface_msg3 = self.fonte.render(mensagem3, False, BRANCO)
 
             for objeto in self.objetos_finais:
-                objeto.desenha(rotaciona_y=True)
+                objeto.translada_3d(0, 400, 0).desenha(rotaciona_y=False)
 
             self.superficie.blit(surface_msg1, (110, 150))
             self.superficie.blit(surface_msg2, (230, 200))
