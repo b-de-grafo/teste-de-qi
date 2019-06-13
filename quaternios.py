@@ -53,6 +53,7 @@ def adicao(v1, v2):
     return vf
 
 
+# rotacao (ponto, angulo, eixo_arbritario)
 def rotacao(p, teta, n=(0, 0, 0)):
     assert len(p) == 3
     
@@ -66,4 +67,7 @@ def rotacao(p, teta, n=(0, 0, 0)):
                            adicao(produto(2 * produto_escalar(v, r), v),
                                   produto(2 * s, produto_vetorial(v, r)))))
     
-    return 0, qpq[0], qpq[1], qpq[2]
+    return qpq[0], qpq[1], qpq[2]
+
+
+#print(rotacao([0, 1, 0], 90, [1, 0, 0]))

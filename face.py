@@ -1,4 +1,5 @@
 from util import *
+from quaternios import *
 from math import cos, sin
 import pygame
 
@@ -116,22 +117,13 @@ class Face:
 
         return Face(self.superficie, novos_vertices, self.cor, self.preenchido, self.arestas)
 
-    def rotaciona(self, teta):
-        matriz_rotacao = [[cos(teta), -sin(teta), 0],
-                          [sin(teta),  cos(teta), 0],
-                          [0        ,  0        , 1]]
-
+    def rotaciona(self, teta, eixo=(0, 0, 0)):
         novos_vertices = []
+
         for vertice in self.vertices:
-            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_rotacao, transpoe_vetor(vertice)))
-
-            # Arredonda possíveis floats do vetor
-            for i in range(len(novo_vertice)):
-                novo_vertice[i] = int(novo_vertice[i])
-
-            novos_vertices.append(novo_vertice)
-
-        return Face(self.superficie, novos_vertices, self.cor, self.preenchido, self.arestas)
+            novos_vertices.append(rotacao(vertice[:3], teta, eixo))
+        novos_vertices.append(1)
+        return novos_vertices
 
     def cisalha(self, kx, ky):
         novos_vertices = []

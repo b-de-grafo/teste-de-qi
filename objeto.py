@@ -120,6 +120,14 @@ class Objeto:
 
         return Objeto(novas_faces)
 
+    def rotaciona_quaternio(self, teta, eixo=(0, 0, 0)):
+        novas_faces = []
+
+        for i in range(len(self.faces)):
+            novas_faces.append(self.faces[i].rotacao(self.faces[i], teta, eixo))
+
+        return Objeto(novas_faces)
+
     def rotaciona_x_ponto(self, teta, ind_face=0, ind_ponto=0):
         delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
         delta_y = -self.faces[ind_face].vertices[ind_ponto][1]
@@ -127,7 +135,6 @@ class Objeto:
 
         # Translada para a origem, faz lá a rotação e translada de volta
         return self.translada_3d(delta_x, delta_y, delta_z).rotaciona_x(teta).translada_3d(-delta_x, -delta_y, -delta_z)
-
 
     def rotaciona_y_ponto(self, teta, ind_face=0, ind_ponto=0):
         delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
