@@ -26,10 +26,6 @@ def produto_vetorial(a, b):
 
     return i, j, k
 
-# dot = produto_escalar
-# x = produto_vetorial
-# * = conjugado
-
 
 def produto(x, v=(0, 0, 0)):
     return [x * vi for vi in v]
@@ -54,20 +50,16 @@ def adicao(v1, v2):
 
 
 # rotacao (ponto, angulo, eixo_arbritario)
-def rotacao(p, teta, n=(0, 0, 0)):
+def rotacao(p, teta, eixo=(0, 0, 0)):
     assert len(p) == 3
     
     r = p
-    p = (0, p[0], p[1], p[2])
     s = cos(radians(teta/2))
-    v = [sin(radians(teta/2)) * ni for ni in n]
+    v = [sin(radians(teta/2)) * ni for ni in eixo]
     
     qpq = subtracao(produto(s**2, r),
                     adicao((produto(produto_escalar(v, v), r)),
                            adicao(produto(2 * produto_escalar(v, r), v),
                                   produto(2 * s, produto_vetorial(v, r)))))
     
-    return qpq[0], qpq[1], qpq[2]
-
-
-#print(rotacao([0, 1, 0], 90, [1, 0, 0]))
+    return [int(qpq[0]), int(qpq[1]), int(qpq[2])]

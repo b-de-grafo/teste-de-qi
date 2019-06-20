@@ -121,9 +121,8 @@ class Face:
         novos_vertices = []
 
         for vertice in self.vertices:
-            novos_vertices.append(rotacao(vertice[:3], teta, eixo))
-        novos_vertices.append(1)
-        return novos_vertices
+            novos_vertices.append(rotacao(vertice[:3], teta, eixo) + [1])
+        return Face(self.superficie, novos_vertices, self.cor, self.preenchido, self.arestas)
 
     def cisalha(self, kx, ky):
         novos_vertices = []

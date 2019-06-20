@@ -30,6 +30,20 @@ class Objeto:
             for i in range(len(self.faces[0].vertices)):
                 reta(self.faces[0].superficie, self.faces[0].vertices[i], self.faces[1].vertices[i], self.faces[0].cor)
 
+    def muda_cor(self, cor):
+        novas_faces = []
+        for face in self.faces:
+            novas_faces.append((face.muda_cor(cor)))
+
+        return Objeto(novas_faces)
+
+    def mapeamento_sru_srd(self, xdmax, xumax, ydmax, yumax):
+        novas_faces = []
+        for i in range(len(self.faces)):
+            novas_faces.append(self.faces[i].mapeamento_sru_srd(xdmax, xumax, ydmax, yumax))
+
+        return Objeto(novas_faces)
+
     def priorityfill(self):
         faces_ord = []
         for face in self.faces:
@@ -70,34 +84,6 @@ class Objeto:
         for face in faces_ord:
             face[0].desenha()
 
-    def muda_cor(self, cor):
-        novas_faces = []
-        for face in self.faces:
-            novas_faces.append((face.muda_cor(cor)))
-
-        return Objeto(novas_faces)
-            
-    def rotaciona_x(self, teta):
-        novas_faces = []
-        for i in range(len(self.faces)):
-            novas_faces.append(self.faces[i].rotaciona_x(teta))
-
-        return Objeto(novas_faces)
-
-    def rotaciona_y(self, teta):
-        novas_faces = []
-        for i in range(len(self.faces)):
-            novas_faces.append(self.faces[i].rotaciona_y(teta))
-
-        return Objeto(novas_faces)
-
-    def rotaciona_z(self, teta):
-        novas_faces = []
-        for i in range(len(self.faces)):
-            novas_faces.append(self.faces[i].rotaciona_z(teta))
-
-        return Objeto(novas_faces)
-
     def translada_3d(self, x, y, z):
         novas_faces = []
         for i in range(len(self.faces)):
@@ -120,11 +106,48 @@ class Objeto:
 
         return Objeto(novas_faces)
 
-    def rotaciona_quaternio(self, teta, eixo=(0, 0, 0)):
-        novas_faces = []
+    def escala_3d_ponto(self, lx, ly, lz, ind_face=0, ind_ponto=0):
+        delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
+        delta_y = -self.faces[ind_face].vertices[ind_ponto][1]
+        delta_z = -self.faces[ind_face].vertices[ind_ponto][2]
 
+        # Translada para a origem, faz lá a escala e translada de volta
+        return self.translada_3d(delta_x, delta_y, delta_z).escala_3d(lx, ly, lz).translada_3d(-delta_x, -delta_y, -delta_z)
+
+    def cisalha_3d_ponto(self, kx, ky, kz=0, ind_face=0, ind_ponto=0):
+        delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
+        delta_y = -self.faces[ind_face].vertices[ind_ponto][1]
+        delta_z = -self.faces[ind_face].vertices[ind_ponto][2]
+
+        # Translada para a origem, faz lá a escala e translada de volta
+        return self.translada_3d(delta_x, delta_y, delta_z).cisalha_3d(kx, ky).translada_3d(-delta_x, -delta_y, -delta_z)
+
+    #def rotaciona_quaternio(self, teta, eixo=(0, 0, 0)):
+    #    novas_faces = []
+
+    #    for i in range(len(self.faces)):
+    #        novas_faces.append(self.faces[i].rotacao(self.faces[i], teta, eixo))
+
+    #    return Objeto(novas_faces)
+
+    def rotaciona_x(self, teta):
+        novas_faces = []
         for i in range(len(self.faces)):
-            novas_faces.append(self.faces[i].rotacao(self.faces[i], teta, eixo))
+            novas_faces.append(self.faces[i].rotaciona(teta, eixo=(1, 0, 0)))
+
+        return Objeto(novas_faces)
+
+    def rotaciona_y(self, teta):
+        novas_faces = []
+        for i in range(len(self.faces)):
+            novas_faces.append(self.faces[i].rotaciona(teta, eixo=(0, 1, 0)))
+
+        return Objeto(novas_faces)
+
+    def rotaciona_z(self, teta):
+        novas_faces = []
+        for i in range(len(self.faces)):
+            novas_faces.append(self.faces[i].rotaciona(teta, eixo=(0, 0, 1)))
 
         return Objeto(novas_faces)
 
@@ -151,27 +174,3 @@ class Objeto:
 
         # Translada para a origem, faz lá a rotação e translada de volta
         return self.translada_3d(delta_x, delta_y, delta_z).rotaciona_z(teta).translada_3d(-delta_x, -delta_y, -delta_z)
-
-    def escala_3d_ponto(self, lx, ly, lz, ind_face=0, ind_ponto=0):
-        delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
-        delta_y = -self.faces[ind_face].vertices[ind_ponto][1]
-        delta_z = -self.faces[ind_face].vertices[ind_ponto][2]
-
-        # Translada para a origem, faz lá a escala e translada de volta
-        return self.translada_3d(delta_x, delta_y, delta_z).escala_3d(lx, ly, lz).translada_3d(-delta_x, -delta_y, -delta_z)
-
-    def cisalha_3d_ponto(self, kx, ky, kz=0, ind_face=0, ind_ponto=0):
-        delta_x = -self.faces[ind_face].vertices[ind_ponto][0]
-        delta_y = -self.faces[ind_face].vertices[ind_ponto][1]
-        delta_z = -self.faces[ind_face].vertices[ind_ponto][2]
-
-        # Translada para a origem, faz lá a escala e translada de volta
-        return self.translada_3d(delta_x, delta_y, delta_z).cisalha_3d(kx, ky).translada_3d(-delta_x, -delta_y, -delta_z)
-
-    def mapeamento_sru_srd(self, xdmax, xumax, ydmax, yumax):
-        novas_faces = []
-        for i in range(len(self.faces)):
-            novas_faces.append(self.faces[i].mapeamento_sru_srd(xdmax, xumax, ydmax, yumax))
-
-        return Objeto(novas_faces)
-
