@@ -1,5 +1,4 @@
 from math import *
-import sympy as sp
 
 def produto_escalar(v1, v2):
     assert len(v1) == len(v2)
@@ -54,44 +53,18 @@ def rotacao(p, teta, eixo=(0, 0, 0)):
     assert len(p) == 3
     
     r = p
-    s = (cos(radians(teta/2))) ##NAO FUNCIONA PARA COSSENO DE 90
-    v = [sin(radians(teta/2)) * ni for ni in eixo]
+    s = float('%.8f' % (cos(radians(teta/2))))
+    v = [float('%.8f' % (sin(radians(teta/2)))) * ni for ni in eixo]
 
-    print("teta: {}".format(teta))
-    print("eixo: {}".format(eixo))
-    print("r: {}".format(r))
-    print("s: {}".format(s))
-    print("v: {}".format(v))
-    
-    s2r = produto(s**2, r) # vetor
-    print("s2r: {}".format(s2r))
-    vv = produto_escalar(v, v) # escalar
-    print("vv: {}".format(vv))
-    vvr = produto(vv, r) # vetor
-    print("vvr: {}".format(vvr))
-    vr = produto_escalar(v, r) # escalar
-    print("vr: {}".format(vr))
-    dois_vr = 2 * vr # escalar
-    print("2vr: {}".format(dois_vr))
-    dois_vrv = produto(dois_vr, v) # vetor
-    print("2vrv: {}".format(dois_vrv))
+    s2r = produto(s**2, r)
+    vv = produto_escalar(v, v)
+    vvr = produto(vv, r)
+    vr = produto_escalar(v, r)
+    dois_vr = 2 * vr
+    dois_vrv = produto(dois_vr, v)
     vxr = produto_vetorial(v, r)
-    print("vxr: {}".format(vxr))
     dois_svxr = produto(2*s, vxr)
-    print("2svxr: {}".format(dois_svxr))
 
-    segunda_parte = adicao(vvr, dois_vrv) # vvr + dois_vrv
-    segunda_parte = adicao(segunda_parte, dois_svxr) # vvr + dois_vrv + dois_svxr
-    qpq = subtracao(s2r, segunda_parte)
+    qpq = adicao(adicao(subtracao(s2r, vvr), dois_vrv), dois_svxr)
 
-    # qpq = subtracao(produto(s**2, r),
-    #                 adicao((produto(produto_escalar(v, v), r)),
-    #                        adicao(produto(2 * produto_escalar(v, r), v),
-    #                               produto(2 * s, produto_vetorial(v, r)))))
-    print(qpq)
-    exit()
-    
-    return [qpq[0], qpq[1], qpq[2]]
-
-
-rotacao([10, 0, 0], 180, (0, 0, 1))
+    return [round(qpq[0]), round(qpq[1]), round(qpq[2])]
