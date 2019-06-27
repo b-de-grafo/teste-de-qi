@@ -1,6 +1,6 @@
 def reta(superficie, inicio, fim, cor):
-    xi, yi = inicio[0], inicio[1]
-    xf, yf = fim[0], fim[1]
+    xi, yi = round(inicio[0]), round(inicio[1])
+    xf, yf = round(fim[0]), round(fim[1])
 
     xstep = 1
     if xf < xi:

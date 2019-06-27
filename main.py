@@ -67,19 +67,28 @@ class Jogo:
         tela = Tela(perguntas, [], 1, [])
         self.telas.append(tela)
 
+
     def monta_telas(self):
         p = 100
         crazy_diamond = Objeto([Face(self.superficie, [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [125.0, 1437.5, 1, 1], [41.666666666666664, 1250.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1]], cor=VERMELHO, preenchido=False),
                                 Face(self.superficie, [[0.0, 1500.0, p, 1], [83.33333333333333, 1500.0, p, 1], [125.0, 1437.5, p, 1], [41.666666666666664, 1250.0, p, 1], [-41.666666666666664, 1437.5, p, 1]], cor=AZUL, preenchido=False)])
         crazy_diamond = crazy_diamond.mapeamento_sru_srd(600, 1000, 600, 1500)
 
-        # Tela 00
+        # Tela Única
+        eixo_x1 = 0
+        eixo_y1 = 300
+        eixo_z1 = 0
+
+        eixo_x2 = 600
+        eixo_y2 = 300
+        eixo_z2 = 0
+
+        eixo = (eixo_x2-eixo_x1, eixo_y2-eixo_y1, eixo_z2-eixo_z1)
         perguntas = [crazy_diamond.translada_3d(280, 120, 0),
-                     crazy_diamond.translada_3d(180, 220, 0).rotaciona_y(30),
-                     crazy_diamond.translada_3d(380, 320, 0).rotaciona_y(45)]
+                     crazy_diamond.translada_3d(280, 120, 0).rotaciona_quaternio(50, eixo),
+                     Objeto([Face(self.superficie, [[eixo_x1, eixo_y1, eixo_z1, 1], [eixo_x2, eixo_y2, eixo_z2, 1]]), Face(self.superficie, [[eixo_x1, eixo_y1, eixo_z1, 1], [eixo_x2, eixo_y2, eixo_z2, 1]])])]
                      # crazy_diamond.translada_3d(100, 100, 0).rotaciona_y(radians(45)).rotaciona_x(radians(35.26)),
                      # crazy_diamond.translada_3d(400, 450, 0).rotaciona_y(radians(45)).rotaciona_x(radians(35.26)).escala_3d_ponto(1.5, 1.5, 1.5)]
-
         tela = Tela(perguntas, [], 1, [])
         self.telas.append(tela)
 
@@ -91,6 +100,7 @@ class Jogo:
             self.entrada()
 
             self.fluxo_do_jogo()
+
 
             self.desenha_telas()
 

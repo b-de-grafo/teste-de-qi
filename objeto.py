@@ -122,13 +122,14 @@ class Objeto:
         # Translada para a origem, faz lá a escala e translada de volta
         return self.translada_3d(delta_x, delta_y, delta_z).cisalha_3d(kx, ky).translada_3d(-delta_x, -delta_y, -delta_z)
 
-    #def rotaciona_quaternio(self, teta, eixo=(0, 0, 0)):
-    #    novas_faces = []
+    def rotaciona_quaternio(self, teta, eixo=(0, 0, 0)):
+       novas_faces = []
 
-    #    for i in range(len(self.faces)):
-    #        novas_faces.append(self.faces[i].rotacao(self.faces[i], teta, eixo))
+       for i in range(len(self.faces)):
+           novas_faces.append(self.faces[i].rotaciona(teta, eixo))
 
-    #    return Objeto(novas_faces)
+       return Objeto(novas_faces)
+
 
     def rotaciona_x(self, teta):
         novas_faces = []

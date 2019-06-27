@@ -56,10 +56,39 @@ def rotacao(p, teta, eixo=(0, 0, 0)):
     r = p
     s = cos(radians(teta/2))
     v = [sin(radians(teta/2)) * ni for ni in eixo]
+
+    print(teta)
+    print(eixo)
+    print(r)
+    print(s)
+    print(v)
     
-    qpq = subtracao(produto(s**2, r),
-                    adicao((produto(produto_escalar(v, v), r)),
-                           adicao(produto(2 * produto_escalar(v, r), v),
-                                  produto(2 * s, produto_vetorial(v, r)))))
+    s2r = produto(s**2, r) # vetor
+    print(f"s2r: {s2r}")
+    vv = produto_escalar(v, v) # escalar
+    print(f"vv: {vv}")
+    vvr = produto(vv, r) # vetor
+    print(f"vvr: {vvr}")
+    vr = produto_escalar(v, r) # escalar
+    print(f"vr: {vr}")
+    dois_vr = 2 * vr # escalar
+    print(f"2vr: {dois_vr}")
+    dois_vrv = produto(dois_vr, v) # vetor
+    print(f"2vrv: {dois_vrv}")
+    vxr = produto_vetorial(v, r)
+    print(f"vxr: {vxr}")
+    dois_svxr = produto(2*s, vxr)
+    print(f"2svxr: {dois_svxr}")
+
+    segunda_parte = adicao(vvr, dois_vrv) # vvr + dois_vrv
+    segunda_parte = adicao(segunda_parte, dois_svxr) # vvr + dois_vrv + dois_svxr
+    qpq = subtracao(s2r, segunda_parte)
+
+    # qpq = subtracao(produto(s**2, r),
+    #                 adicao((produto(produto_escalar(v, v), r)),
+    #                        adicao(produto(2 * produto_escalar(v, r), v),
+    #                               produto(2 * s, produto_vetorial(v, r)))))
+    print(qpq)
+    exit()
     
-    return [int(qpq[0]), int(qpq[1]), int(qpq[2])]
+    return [qpq[0], qpq[1], qpq[2]]
