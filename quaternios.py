@@ -64,21 +64,21 @@ def rotacao(p, teta, eixo=(0, 0, 0)):
     print(v)
     
     s2r = produto(s**2, r) # vetor
-    print(f"s2r: {s2r}")
+    print("s2r: {}".format(s2r))
     vv = produto_escalar(v, v) # escalar
-    print(f"vv: {vv}")
+    print("vv: {}".format(vv))
     vvr = produto(vv, r) # vetor
-    print(f"vvr: {vvr}")
+    print("vvr: {}".format(vvr))
     vr = produto_escalar(v, r) # escalar
-    print(f"vr: {vr}")
+    print("vr: {}".format(vr))
     dois_vr = 2 * vr # escalar
-    print(f"2vr: {dois_vr}")
+    print("2vr: {}".format(dois_vr))
     dois_vrv = produto(dois_vr, v) # vetor
-    print(f"2vrv: {dois_vrv}")
+    print("2vrv: {}".format(dois_vrv))
     vxr = produto_vetorial(v, r)
-    print(f"vxr: {vxr}")
+    print("vxr: {}".format(vxr))
     dois_svxr = produto(2*s, vxr)
-    print(f"2svxr: {dois_svxr}")
+    print("2svxr: {}".format(dois_svxr))
 
     segunda_parte = adicao(vvr, dois_vrv) # vvr + dois_vrv
     segunda_parte = adicao(segunda_parte, dois_svxr) # vvr + dois_vrv + dois_svxr
