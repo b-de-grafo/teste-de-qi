@@ -1,5 +1,5 @@
 from math import *
-
+import sympy as sp
 
 def produto_escalar(v1, v2):
     assert len(v1) == len(v2)
@@ -54,14 +54,14 @@ def rotacao(p, teta, eixo=(0, 0, 0)):
     assert len(p) == 3
     
     r = p
-    s = cos(radians(teta/2))
+    s = (cos(radians(teta/2))) ##NAO FUNCIONA PARA COSSENO DE 90
     v = [sin(radians(teta/2)) * ni for ni in eixo]
 
-    print(teta)
-    print(eixo)
-    print(r)
-    print(s)
-    print(v)
+    print("teta: {}".format(teta))
+    print("eixo: {}".format(eixo))
+    print("r: {}".format(r))
+    print("s: {}".format(s))
+    print("v: {}".format(v))
     
     s2r = produto(s**2, r) # vetor
     print("s2r: {}".format(s2r))
@@ -92,3 +92,6 @@ def rotacao(p, teta, eixo=(0, 0, 0)):
     exit()
     
     return [qpq[0], qpq[1], qpq[2]]
+
+
+rotacao([10, 0, 0], 180, (0, 0, 1))
