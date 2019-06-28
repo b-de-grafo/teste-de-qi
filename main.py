@@ -75,20 +75,11 @@ class Jogo:
         crazy_diamond = crazy_diamond.mapeamento_sru_srd(600, 1000, 600, 1500)
 
         # Tela Única
-        eixo_x1 = 0
-        eixo_y1 = 300
-        eixo_z1 = 0
+        self.eixo = ((0, 0, 0), (1, 1, 0))
 
-        eixo_x2 = 600
-        eixo_y2 = 300
-        eixo_z2 = 0
-
-        eixo = (eixo_x2-eixo_x1, eixo_y2-eixo_y1, eixo_z2-eixo_z1)
+        eixo = (self.eixo[1][0]-self.eixo[0][0], self.eixo[1][1]-self.eixo[0][1], self.eixo[1][2]-self.eixo[0][2])
         perguntas = [crazy_diamond.translada_3d(280, 120, 0),
-                     crazy_diamond.translada_3d(280, 120, 0).rotaciona_quaternio(50, eixo),
-                     Objeto([Face(self.superficie, [[eixo_x1, eixo_y1, eixo_z1, 1], [eixo_x2, eixo_y2, eixo_z2, 1]]), Face(self.superficie, [[eixo_x1, eixo_y1, eixo_z1, 1], [eixo_x2, eixo_y2, eixo_z2, 1]])])]
-                     # crazy_diamond.translada_3d(100, 100, 0).rotaciona_y(radians(45)).rotaciona_x(radians(35.26)),
-                     # crazy_diamond.translada_3d(400, 450, 0).rotaciona_y(radians(45)).rotaciona_x(radians(35.26)).escala_3d_ponto(1.5, 1.5, 1.5)]
+                     crazy_diamond.translada_3d(280, 120, 0).rotaciona_quaternio(30, eixo=eixo)]
         tela = Tela(perguntas, [], 1, [])
         self.telas.append(tela)
 
@@ -162,6 +153,7 @@ class Jogo:
             self.superficie.blit(surface_msg, (100, 250))
         elif self.estado_do_jogo == JOGANDO:
             self.telas[self.tela_atual].desenha()
+            desenha_eixo(self.superficie, self.eixo[0], self.eixo[1], BRANCO, self.tamanho_tela)
         elif self.estado_do_jogo == FIM_DE_JOGO:
             mensagem1 = "Você acertou %d pergunta%s em %.1f segundos!" % (self.corretas,
                                                                           "" if self.corretas == 1 else "s",

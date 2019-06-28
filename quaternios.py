@@ -68,3 +68,6 @@ def rotacao(p, teta, eixo=(0, 0, 0)):
     qpq = adicao(adicao(subtracao(s2r, vvr), dois_vrv), dois_svxr)
 
     return [round(qpq[0]), round(qpq[1]), round(qpq[2])]
+
+
+print(rotacao((10, 10, 0), 90, (600, 0, 0)))

@@ -24,6 +24,29 @@ def reta(superficie, inicio, fim, cor):
             superficie.set_at([int(x), y], cor)
 
 
+def desenha_eixo(superficie, ponto_a, ponto_b, cor, tamanho_tela):
+    xi, yi = round(ponto_a[0]), round(ponto_a[1])
+    xf, yf = round(ponto_b[0]), round(ponto_b[1])
+
+    if (xf - xi) != 0:
+        m = (yf - yi) / (xf - xi)
+        y_0 = m * (0 - xi) + yi
+        y_f = m * (tamanho_tela[0] - xi) + yi
+    else:
+        y_0 = 0
+        y_f = tamanho_tela[1]
+
+    if (yf - yi) != 0:
+        m = (xf - xi) / (yf - yi)
+        x_0 = m * (0 - yi) + xi
+        x_f = m * (tamanho_tela[1] - yi) + xi
+    else:
+        x_0 = 0
+        x_f = tamanho_tela[0]
+
+    reta(superficie, (x_0, y_0), (x_f, y_f), cor)
+
+
 def multiplica_matrizes(matA, matB):
     n_linhasA = len(matA)
     n_colunasA = len(matA[0])
