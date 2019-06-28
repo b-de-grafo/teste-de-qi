@@ -1,7 +1,5 @@
 from util import *
 from quaternios import *
-from math import cos, sin
-import pygame
 
 BRANCO = [255, 255, 255]
 
@@ -48,22 +46,6 @@ class Face:
         self.cor = cor
         return self
 
-    def translada(self, tx=0, ty=0, tz=0):
-        matriz_translacao = [[1, 0, tx],
-                             [0, 1, ty],
-                             [0, 0, 1]]
-
-        novos_vertices = []
-        for vertice in self.vertices:
-            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_translacao, transpoe_vetor(vertice)))
-
-            # Arredonda possíveis floats do vetor
-            for i in range(len(novo_vertice)):
-                novo_vertice[i] = int(novo_vertice[i])
-
-            novos_vertices.append(novo_vertice)
-        return Face(self.superficie, novos_vertices, self.cor, self.preenchido, self.arestas)
-
     def translada_3d(self, tx=0, ty=0, tz=0):
         matriz_translacao = [[1, 0, 0, tx],
                              [0, 1, 0, ty],
@@ -81,23 +63,6 @@ class Face:
 
             novos_vertices.append(novo_vertice)
         return Face(self.superficie, novos_vertices, self.cor, self.preenchido, self.arestas, self.tela)
-
-    def escala(self, lx=1, ly=1):
-        matriz_escala = [[lx, 0 , 0],
-                         [0 , ly, 0],
-                         [0 , 0 , 1]]
-
-        novos_vertices = []
-        for vertice in self.vertices:
-            novo_vertice = transpoe_vetor(multiplica_matrizes(matriz_escala, transpoe_vetor(vertice)))
-
-            # Arredonda possíveis floats do vetor
-            for i in range(len(novo_vertice)):
-                novo_vertice[i] = int(novo_vertice[i])
-
-            novos_vertices.append(novo_vertice)
-
-        return Face(self.superficie, novos_vertices, self.cor, self.preenchido, self.arestas)
 
     def escala_3d(self, lx=1, ly=1, lz=1):
         matriz_escala = [[lx, 0, 0, 0],
@@ -122,7 +87,6 @@ class Face:
 
         for vertice in self.vertices:
             novos_vertices.append(rotacao(vertice[:3], teta, eixo) + [1])
-        print(novos_vertices)
 
         return Face(self.superficie, novos_vertices, self.cor, self.preenchido, self.arestas)
 
