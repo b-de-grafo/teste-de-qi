@@ -31,6 +31,27 @@ class Objeto:
         self.paco_rotacao = paco
         self.eixo = eixo
 
+    def set_offset(self, eixo):
+        ponto = self.faces[0].vertices[0]
+        print(ponto)
+
+        xi, yi = round(eixo[0][0]), round(eixo[0][1])
+        xf, yf = round(eixo[1][0]), round(eixo[1][1])
+
+        if (xf - xi) != 0:
+            m = (yf - yi) / (xf - xi)
+            y = m * (ponto[0] - xi) + yi
+        else:
+            y = 0
+
+        if (yf - yi) != 0:
+            m = (xf - xi) / (yf - yi)
+            x = m * (ponto[1] - yi) + xi
+        else:
+            x = ponto[0]
+
+        print(x, y)
+
     def mapeamento_sru_srd(self, xdmax, xumax, ydmax, yumax):
         novas_faces = []
         for i in range(len(self.faces)):
@@ -39,9 +60,11 @@ class Objeto:
         return Objeto(novas_faces)
 
     def inc_rotacao(self):
+        # Incrementa o paço
         self.rotacao += self.paco_rotacao
         if self.rotacao >= 360:
             self.rotacao -= 360
+        # Transforma o ângulo em inteiro então as rotações são sempre inteiras, mas o ângulo guardado no objeto não
         return self.rotaciona_quaternio(int(self.rotacao), self.eixo)
 
     def priorityfill(self):
