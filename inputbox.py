@@ -26,26 +26,26 @@ def get_key():
 def display_box(screen, message):
 # "Print a message in a box in the middle of the screen"
 
-  fontobject = pygame.font.Font(None,18)
-  pygame.draw.rect(screen, (0,0,0),
-                   ((screen.get_width() / 2) - 100,
-                    (screen.get_height() / 2) - 10,
-                    200,20), 0)
+  fontobject = pygame.font.Font(None, 25)
+#   pygame.draw.rect(screen, (0,0,0),
+#                    ((screen.get_width() / 2) - 100,
+#                     (screen.get_height() / 2) - 10,
+#                     200,20), 0)
   pygame.draw.rect(screen, (255,255,255),
-                   ((screen.get_width() / 2) - 102,
+                   ((screen.get_width() / 2) - 150,
                     (screen.get_height() / 2) - 12,
-                    204,24), 1)
+                    350, 27), 1)
 
   if len(message) != 0:
     screen.blit(fontobject.render(message, 1, (255,255,255)),
-                ((screen.get_width() / 2) - 100, (screen.get_height() / 2) - 10))
+                ((screen.get_width() / 2) - 146, (screen.get_height() / 2) - 10))
   
   pygame.display.flip()
 
-def ask(screen, question):
+def ask(screen, question, default = []):
 # "ask(screen, question) -> answer"
   pygame.font.init()
-  current_string = []
+  current_string = list(default)
   display_box(screen, question + ": " + "".join(current_string))
   
   while True:
@@ -56,6 +56,9 @@ def ask(screen, question):
 	
     elif inkey == K_RETURN:
       return "".join(current_string)
+    
+    elif inkey == K_ESCAPE:
+      exit()
 
     elif inkey <= 127:
       current_string.append(chr(inkey))
