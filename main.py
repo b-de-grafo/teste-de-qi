@@ -52,7 +52,7 @@ class Jogo:
                                      preenchido=False)])
         crazy_diamond = crazy_diamond.mapeamento_sru_srd(600, 1000, 600, 1500)
         crazy_diamond = crazy_diamond.translada_3d(280, 120, 0)
-        # Seta o paço e o eixo da rotação
+        # Seta o paço (em graus) e o eixo da rotação
         crazy_diamond.set_rotacao(0.5, eixo)
 
         objetos.append(crazy_diamond)
