@@ -19,6 +19,10 @@ TELA_INPUT_ANGULO = 3
 RODANDO = 4
 FIM_DE_JOGO = 5
 
+# valores default pra facilitar os testes
+DEFAULT_P1 = "0 200 0"
+DEFAULT_P2 = "300 300 0"
+DEFAULT_ANGULO = "360"
 
 class Jogo:
     def __init__(self):
@@ -34,11 +38,11 @@ class Jogo:
 
         # Inicializa o eixo de rotação do programa
         self.eixo = [(0, 200, 0), (300, 300, 0)]
-        self.angulo_rotacao = 0
+        self.angulo_rotacao = 360
 
         self.objetos = self.monta_objetos()
 
-        self.estado_do_jogo = RODANDO
+        self.estado_do_jogo = TELA_INPUT_P1
 
     def monta_objetos(self):
         objetos = []
@@ -88,7 +92,7 @@ class Jogo:
                     break
 
                 if self.estado_do_jogo == RODANDO:
-                    if key[pygame.K_SPACE]:  # Tecla ESPACO
+                    if key[pygame.K_SPACE]:  # Tecla ESPAÇO
                         self.proximo_estado()
                         break
 
@@ -97,29 +101,29 @@ class Jogo:
                     break
 
     def proximo_estado(self):
+        antes = self.estado_do_jogo
+
         if self.estado_do_jogo == FIM_DE_JOGO:
             self.estado_do_jogo = TELA_INICIAL
         else:
             self.estado_do_jogo += 1
+        
+        print("estado: {} -> {}".format(antes, self.estado_do_jogo))
 
-    def parse_ponto(self, string): # ex.: "10, 20, 30"
+    def parse_num(self, num): # "0.5"
         try:
-            coords = string.split(",")
-            if len(coords) != 3:
-                print("Não foram inseridas 3 coordenadas para o ponto.")
-
-            coords = [int(coord.strip()) for coord in coords]
-            return tuple(coords)
-
-        except ValueError:
-            print("Coordenadas inseridas são inválidas.")
-
-    def parse_int(self, string):
-        try:
-            return int(string.strip())
+            return float(num.strip())
 
         except ValueError:
             print("Valor inserido é inválido.")
+
+    def parse_ponto(self, string): # ex.: "0.1 0.2 0.3"
+        coords = string.split(" ")
+        if len(coords) != 3:
+            print("Não foram inseridas 3 coordenadas para o ponto.")
+
+        coords = [self.parse_num(coord) for coord in coords]
+        return tuple(coords)
 
 
     def desenha_tela(self):
@@ -128,42 +132,38 @@ class Jogo:
         if self.estado_do_jogo == TELA_INICIAL:
             mensagem = "Insira os dados do eixo e do ângulo de rotação"
             surface_msg = self.fonte.render(mensagem, False, BRANCO)
-
-            self.superficie.blit(surface_msg, (100, 250))
+            # self.superficie.blit(surface_msg, (100, 250))
 
         elif self.estado_do_jogo == TELA_INPUT_P1:
             # input do primeiro ponto do eixo
-            mensagem = "Primeiro ponto do eixo:" # TODO: mensagens tão aparecendo na tela errada
-            surface_msg = self.fonte.render(mensagem, False, BRANCO)
-            self.superficie.blit(surface_msg, (100, 250))
-
-            p1_string = inputbox.ask(self.tela, "x1, y1, z1")
+            # mensagem = "Primeiro ponto do eixo:"
+            # surface_msg = self.fonte.render(mensagem, False, BRANCO)
+            # self.superficie.blit(surface_msg, (100, 250))
+            
+            p1_string = inputbox.ask(self.tela, "Ponto inicial (x1 y1 z1)", DEFAULT_P1)
             self.eixo[0] = self.parse_ponto(p1_string)
 
             self.proximo_estado() # não foi chamada automaticamente porque a ask() capturou o evento do botão return
 
         elif self.estado_do_jogo == TELA_INPUT_P2:
             # input do segundo ponto do eixo
-            mensagem = "Segundo ponto do eixo:"
-            surface_msg = self.fonte.render(mensagem, False, BRANCO)
-            self.superficie.blit(surface_msg, (100, 250))
+            # mensagem = "Segundo ponto do eixo:"
+            # surface_msg = self.fonte.render(mensagem, False, BRANCO)
+            # self.superficie.blit(surface_msg, (100, 250))
 
-            p2_string = inputbox.ask(self.tela, "x2, y2, z2")
+            p2_string = inputbox.ask(self.tela, "Ponto final (x2 y2 z2)", DEFAULT_P2)
             self.eixo[1] = self.parse_ponto(p2_string)
 
             self.proximo_estado()
 
         elif self.estado_do_jogo == TELA_INPUT_ANGULO:
             # input do ângulo de rotação
-            mensagem = "Ângulo de rotação:"
-            surface_msg = self.fonte.render(mensagem, False, BRANCO)
-            self.superficie.blit(surface_msg, (100, 250))
+            # mensagem = "Ângulo de rotação:"
+            # surface_msg = self.fonte.render(mensagem, False, BRANCO)
+            # self.superficie.blit(surface_msg, (100, 250))
 
-            angulo_string = inputbox.ask(self.tela, "ângulo")
-            self.angulo_rotacao = self.parse_int(angulo_string)
-
-            print(self.eixo)
-            print(self.angulo_rotacao)
+            angulo_string = inputbox.ask(self.tela, "Ângulo de rotação", DEFAULT_ANGULO)
+            self.angulo_rotacao = self.parse_num(angulo_string)
 
             self.proximo_estado()
 
