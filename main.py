@@ -138,7 +138,6 @@ class Jogo:
             self.superficie.blit(surface_msg, (100, 250))
 
             p1_string = inputbox.ask(self.tela, "x1, y1, z1")
-            print(f"p1_string: {p1_string}")
             self.eixo[0] = self.parse_ponto(p1_string)
 
             self.proximo_estado() # não foi chamada automaticamente porque a ask() capturou o evento do botão return
@@ -150,7 +149,6 @@ class Jogo:
             self.superficie.blit(surface_msg, (100, 250))
 
             p2_string = inputbox.ask(self.tela, "x2, y2, z2")
-            print(f"p2_string: {p2_string}")
             self.eixo[1] = self.parse_ponto(p2_string)
 
             self.proximo_estado()
@@ -162,7 +160,6 @@ class Jogo:
             self.superficie.blit(surface_msg, (100, 250))
 
             angulo_string = inputbox.ask(self.tela, "ângulo")
-            print(f"angulo_string: {angulo_string}")
             self.angulo_rotacao = self.parse_int(angulo_string)
 
             print(self.eixo)
