@@ -1,5 +1,6 @@
 import pygame
 from objeto import *
+import inputbox
 
 BRANCO = [255, 255, 255]
 VERMELHO = [255, 0, 0]
@@ -12,8 +13,11 @@ PRETO = [0, 0, 0]
 # VERMELHO = VERDE = AZUL = AMARELO = AZUL_PISCINA = BRANCO
 
 TELA_INICIAL = 0
-RODANDO = 1
-FIM_DE_JOGO = 2
+TELA_INPUT_P1 = 1
+TELA_INPUT_P2 = 2
+TELA_INPUT_ANGULO = 3
+RODANDO = 4
+FIM_DE_JOGO = 5
 
 
 class Jogo:
@@ -24,13 +28,14 @@ class Jogo:
         self.tamanho_tela = [600, 600]
         self.tela = pygame.display.set_mode(self.tamanho_tela)
         self.superficie = pygame.Surface(self.tamanho_tela)
-
         self.fonte = pygame.font.SysFont("Arial", 25)
 
         self.rodando = True
 
-        # Seta o eixo de rotação do programa
-        self.eixo = ((0, 200, 0), (500, 500, 0))
+        # Inicializa o eixo de rotação do programa
+        self.eixo = [(0, 0, 0), (0, 0, 0)]
+        self.angulo_rotacao = 0
+
         self.objetos = self.monta_objetos()
 
         self.estado_do_jogo = TELA_INICIAL
@@ -97,16 +102,76 @@ class Jogo:
         else:
             self.estado_do_jogo += 1
 
+    def parse_ponto(self, string): # ex.: "10, 20, 30"
+        try:
+            coords = string.split(",")
+            if len(coords) != 3:
+                print("Não foram inseridas 3 coordenadas para o ponto.")
+
+            coords = [int(coord.strip()) for coord in coords]
+            return tuple(coords)
+
+        except ValueError:
+            print("Coordenadas inseridas são inválidas.")
+
+    def parse_int(self, string):
+        try:
+            return int(string.strip())
+
+        except ValueError:
+            print("Valor inserido é inválido.")
+
+
     def desenha_tela(self):
         self.superficie.fill(PRETO)
 
         if self.estado_do_jogo == TELA_INICIAL:
-            mensagem = "Digite no terminal os pontos do eixo na ordem (x1, y1, z1), (x2, y2, z2)"
+            mensagem = "Insira os dados do eixo e do ângulo de rotação"
             surface_msg = self.fonte.render(mensagem, False, BRANCO)
 
             self.superficie.blit(surface_msg, (100, 250))
-            # input()
+
+        elif self.estado_do_jogo == TELA_INPUT_P1:
+            # input do primeiro ponto do eixo
+            mensagem = "Primeiro ponto do eixo:" # TODO: mensagens tão aparecendo na tela errada
+            surface_msg = self.fonte.render(mensagem, False, BRANCO)
+            self.superficie.blit(surface_msg, (100, 250))
+
+            p1_string = inputbox.ask(self.tela, "x1, y1, z1")
+            print(f"p1_string: {p1_string}")
+            self.eixo[0] = self.parse_ponto(p1_string)
+
+            self.proximo_estado() # não foi chamada automaticamente porque a ask() capturou o evento do botão return
+
+        elif self.estado_do_jogo == TELA_INPUT_P2:
+            # input do segundo ponto do eixo
+            mensagem = "Segundo ponto do eixo:"
+            surface_msg = self.fonte.render(mensagem, False, BRANCO)
+            self.superficie.blit(surface_msg, (100, 250))
+
+            p2_string = inputbox.ask(self.tela, "x2, y2, z2")
+            print(f"p2_string: {p2_string}")
+            self.eixo[1] = self.parse_ponto(p2_string)
+
+            self.proximo_estado()
+
+        elif self.estado_do_jogo == TELA_INPUT_ANGULO:
+            # input do ângulo de rotação
+            mensagem = "Ângulo de rotação:"
+            surface_msg = self.fonte.render(mensagem, False, BRANCO)
+            self.superficie.blit(surface_msg, (100, 250))
+
+            angulo_string = inputbox.ask(self.tela, "ângulo")
+            print(f"angulo_string: {angulo_string}")
+            self.angulo_rotacao = self.parse_int(angulo_string)
+
+            print(self.eixo)
+            print(self.angulo_rotacao)
+
+            self.proximo_estado()
+
         elif self.estado_do_jogo == RODANDO:
+
             # Desenha polígono
             for objeto in self.objetos:
                 # Incrementa o angulo de rotação do objeto e retorna um novo polígono, não altera o mesmo

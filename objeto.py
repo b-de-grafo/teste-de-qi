@@ -5,7 +5,7 @@ class Objeto:
     def __init__(self, faces):
         self.faces = faces
         self.rotacao = 0
-        self.paco_rotacao = 0
+        self.passo_rotacao = 0
         self.eixo = (0, 1, 0)
 
     def desenha(self):
@@ -27,8 +27,8 @@ class Objeto:
 
         return Objeto(novas_faces)
 
-    def set_rotacao(self, paco, eixo):
-        self.paco_rotacao = paco
+    def set_rotacao(self, passo, eixo):
+        self.passo_rotacao = passo
         self.eixo = eixo
 
     def set_offset(self, eixo):
@@ -61,7 +61,7 @@ class Objeto:
 
     def inc_rotacao(self):
         # Incrementa o paço
-        self.rotacao += self.paco_rotacao
+        self.rotacao += self.passo_rotacao
         if self.rotacao >= 360:
             self.rotacao -= 360
         # Transforma o ângulo em inteiro então as rotações são sempre inteiras, mas o ângulo guardado no objeto não
