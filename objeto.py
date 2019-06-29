@@ -33,10 +33,22 @@ class Objeto:
 
     def set_offset(self, eixo):
         ponto = self.faces[0].vertices[0]
-        print(ponto)
 
         xi, yi = round(eixo[0][0]), round(eixo[0][1])
         xf, yf = round(eixo[1][0]), round(eixo[1][1])
+
+        # Deduz equação geral da reta
+        a = yi - yf
+        b = xi - xf
+        c = xi * yf - xf - yi
+
+        y_do_eixo = (-a * ponto[0] - c) / b
+        offset = y_do_eixo - ponto[1]
+
+        dist_obj_eixo = a * xi
+
+        print(ponto)
+        print(eixo)
 
         if (xf - xi) != 0:
             m = (yf - yi) / (xf - xi)
@@ -60,12 +72,8 @@ class Objeto:
         return Objeto(novas_faces)
 
     def inc_rotacao(self):
-        # Incrementa o paço
+        # Incrementa o passo
         self.rotacao += self.passo_rotacao
-        if self.rotacao >= 360:
-            self.rotacao -= 360
-        # Transforma o ângulo em inteiro então as rotações são sempre inteiras, mas o ângulo guardado no objeto não
-        return self.rotaciona_quaternio(int(self.rotacao), self.eixo)
 
     def priorityfill(self):
         faces_ord = []
@@ -79,13 +87,14 @@ class Objeto:
         # incluir faces laterais
         frente = self.faces[0]
         verso = self.faces[1]
-        incremento_cor = 200 / len(face.vertices)  # incrementar de acordo com o número de faces laterais
+        incremento_cor = 200 / len(self.faces[-1].vertices)  # incrementar de acordo com o número de faces laterais
 
-        for i in range(len(face.vertices)):
-            if i < len(face.vertices)-1:
+        novos_vertices = []
+        for i in range(len(self.faces[-1].vertices)):
+            if i < len(self.faces[-1].vertices)-1:
                 novos_vertices = [frente.vertices[i], frente.vertices[i+1], verso.vertices[i+1], verso.vertices[i]]
 
-            elif i == len(face.vertices)-1:
+            elif i == len(self.faces[-1].vertices)-1:
                 novos_vertices = [frente.vertices[i], frente.vertices[0], verso.vertices[0], verso.vertices[i]]
 
             cor = [50 + i * incremento_cor] * 3
@@ -120,7 +129,11 @@ class Objeto:
 
         return Objeto(novas_faces)
 
-    def rotaciona_quaternio(self, teta, eixo=(0, 0, 0)):
+    def rotaciona_quaternio(self):
+        # Transforma o ângulo em inteiro então as rotações são sempre inteiras, mas o ângulo guardado no objeto não
+        return self._rotaciona_quaternio(int(self.rotacao), self.eixo)
+
+    def _rotaciona_quaternio(self, teta, eixo=(0, 0, 0)):
         novas_faces = []
 
         for i in range(len(self.faces)):

@@ -120,3 +120,20 @@ def srd_sru(vertices, xdmax, xumax, ydmax, yumax):
     for v in vertices:
         novos_vertices.append([v[0]*xumax/xdmax, (v[1]-ydmax)*yumax/(-ydmax), v[2], v[3]])
     return novos_vertices
+
+
+def parse_num(num):  # "0.5"
+    try:
+        return float(num.strip())
+
+    except ValueError:
+        print("Valor inserido é inválido.")
+
+
+def parse_ponto(string):  # ex.: "0.1 0.2 0.3"
+    coords = string.split(" ")
+    if len(coords) != 3:
+        print("Não foram inseridas 3 coordenadas para o ponto.")
+
+    coords = [parse_num(coord) for coord in coords]
+    return tuple(coords)

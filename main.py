@@ -24,6 +24,7 @@ DEFAULT_P1 = "0 200 0"
 DEFAULT_P2 = "300 300 0"
 DEFAULT_ANGULO = "360"
 
+
 class Jogo:
     def __init__(self):
         pygame.init()
@@ -43,7 +44,6 @@ class Jogo:
 
         self.eixo = [(0, 200, 0), (300, 300, 0)]
         self.angulo_rotacao = 360
-
 
         self.objetos = self.monta_objetos()
 
@@ -115,22 +115,6 @@ class Jogo:
         
         print("estado: {} -> {}".format(antes, self.estado_do_jogo))
 
-    def parse_num(self, num): # "0.5"
-        try:
-            return float(num.strip())
-
-        except ValueError:
-            print("Valor inserido é inválido.")
-
-    def parse_ponto(self, string): # ex.: "0.1 0.2 0.3"
-        coords = string.split(" ")
-        if len(coords) != 3:
-            print("Não foram inseridas 3 coordenadas para o ponto.")
-
-        coords = [self.parse_num(coord) for coord in coords]
-        return tuple(coords)
-
-
     def desenha_tela(self):
         self.superficie.fill(PRETO)
 
@@ -146,9 +130,9 @@ class Jogo:
             # self.superficie.blit(surface_msg, (100, 250))
             
             p1_string = inputbox.ask(self.tela, "Ponto inicial (x1 y1 z1)", DEFAULT_P1)
-            self.eixo[0] = self.parse_ponto(p1_string)
+            self.eixo[0] = parse_ponto(p1_string)
 
-            self.proximo_estado() # não foi chamada automaticamente porque a ask() capturou o evento do botão return
+            self.proximo_estado()  # não foi chamada automaticamente porque a ask() capturou o evento do botão return
 
         elif self.estado_do_jogo == TELA_INPUT_P2:
             # input do segundo ponto do eixo
@@ -157,7 +141,7 @@ class Jogo:
             # self.superficie.blit(surface_msg, (100, 250))
 
             p2_string = inputbox.ask(self.tela, "Ponto final (x2 y2 z2)", DEFAULT_P2)
-            self.eixo[1] = self.parse_ponto(p2_string)
+            self.eixo[1] = parse_ponto(p2_string)
 
             self.proximo_estado()
 
@@ -168,7 +152,7 @@ class Jogo:
             # self.superficie.blit(surface_msg, (100, 250))
 
             angulo_string = inputbox.ask(self.tela, "Ângulo de rotação", DEFAULT_ANGULO)
-            self.angulo_rotacao = self.parse_num(angulo_string)
+            self.angulo_rotacao = parse_num(angulo_string)
 
             self.proximo_estado()
 
@@ -177,11 +161,10 @@ class Jogo:
             # Desenha polígono
             for objeto in self.objetos:
                 # Incrementa o angulo de rotação do objeto e retorna um novo polígono, não altera o mesmo
-                objeto_rotacionado = objeto.inc_rotacao()
-                # Tentei fazer essa transalação pra corrigir o problema dele rodar meio longe do eixo mas não deu certo
-                # objeto_rotacionado = objeto_rotacionado.translada_3d(self.eixo[0][0], self.eixo[0][1], self.eixo[0][2]
+                if objeto.rotacao < self.angulo_rotacao:
+                    objeto.inc_rotacao()
+                objeto_rotacionado = objeto.rotaciona_quaternio()
                 objeto_rotacionado.desenha()
-                objeto.desenha()
 
             # Desenha eixo
             desenha_eixo(self.superficie, self.eixo[0], self.eixo[1], BRANCO, self.tamanho_tela)
