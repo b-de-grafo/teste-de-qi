@@ -33,12 +33,12 @@ class Jogo:
         self.rodando = True
 
         # Inicializa o eixo de rotação do programa
-        self.eixo = [(0, 0, 0), (0, 0, 0)]
+        self.eixo = [(0, 200, 0), (300, 300, 0)]
         self.angulo_rotacao = 0
 
         self.objetos = self.monta_objetos()
 
-        self.estado_do_jogo = TELA_INICIAL
+        self.estado_do_jogo = RODANDO
 
     def monta_objetos(self):
         objetos = []
