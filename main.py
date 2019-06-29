@@ -33,7 +33,7 @@ class Jogo:
         self.rodando = True
 
         # Inicializa o eixo de rotação do programa
-        self.eixo = [(0, 200, 0), (300, 300, 0)]
+        self.eixo = [(0, 300, 0), (300, 300, 0)]
         self.angulo_rotacao = 0
 
         self.objetos = self.monta_objetos()
@@ -58,7 +58,7 @@ class Jogo:
         crazy_diamond = crazy_diamond.mapeamento_sru_srd(600, 1000, 600, 1500)
         crazy_diamond = crazy_diamond.translada_3d(280, 120, 0)
         # Seta o paço (em graus) e o eixo da rotação
-        crazy_diamond.set_rotacao(0.5, eixo)
+        crazy_diamond.set_rotacao(0.5, self.eixo)
 
         objetos.append(crazy_diamond)
 
@@ -176,6 +176,8 @@ class Jogo:
                 # Tentei fazer essa transalação pra corrigir o problema dele rodar meio longe do eixo mas não deu certo
                 # objeto_rotacionado = objeto_rotacionado.translada_3d(self.eixo[0][0], self.eixo[0][1], self.eixo[0][2]
                 objeto_rotacionado.desenha()
+                objeto.desenha()
+
             # Desenha eixo
             desenha_eixo(self.superficie, self.eixo[0], self.eixo[1], BRANCO, self.tamanho_tela)
 

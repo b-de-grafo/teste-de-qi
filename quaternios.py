@@ -58,11 +58,18 @@ def unitariza(v):
 
 
 # rotacao (ponto, angulo, eixo_arbritario)
-def rotacao(p, teta, eixo=(0, 0, 0)):
+def rotacao(p, teta, eixos=((0, 0, 0), (1,1,1))):
     assert len(p) == 3
 
+    eixo = (eixos[1][0] - eixos[0][0], eixos[1][1] - eixos[0][1], eixos[1][2] - eixos[0][2])
     eixo = unitariza(eixo)
+    eixo[0] = float('%.4f' % eixo[0])
+    eixo[1] = float('%.4f' % eixo[1])
+    eixo[2] = float('%.4f' % eixo[2])
     r = p
+    r[0] -= eixos[0][0]
+    r[1] -= eixos[0][1]
+    r[2] -= eixos[0][2]
     s = float('%.4f' % (cos(radians(teta / 2))))
     v = [float('%.4f' % (sin(radians(teta / 2)))) * ni for ni in eixo]
 
@@ -79,4 +86,13 @@ def rotacao(p, teta, eixo=(0, 0, 0)):
     ad1 = adicao(sub, dois_vrv)
     qpq = adicao(ad1, dois_svxr)
 
-    return [round(qpq[0]), round(qpq[1]), round(qpq[2])]
+    return [round(qpq[0]) + eixos[0][0] , round(qpq[1]) + eixos[0][1], round(qpq[2]) + eixos[0][2]]
+
+print([300,0,0])
+print([0,300,0])
+print([300, 300, 0])
+print(unitariza([300,0,0]))
+print([300,100,0])
+print([0, 200,0])
+print([300, 300, 0])
+print(unitariza([300,100,0]))
