@@ -64,7 +64,7 @@ class Jogo:
         crazy_diamond = crazy_diamond.mapeamento_sru_srd(600, 1000, 600, 1500)
         crazy_diamond = crazy_diamond.translada_3d(280, 120, 0)
 
-        curva_teste = bezier([0, 1], 0.01, [[100, 400, 15], [300, 400, 5], [100, 200, 0], [300, 200, -10]], self.superficie, AZUL_PISCINA)
+        curva_teste = bezier([0, 1], 0.01, [[100, 400, 15], [300, 400, 5], [100, 200, 0], [500, 500, -10]], self.superficie, AZUL_PISCINA)
 
         # curva_teste = curva_teste.mapeamento_sru_srd(600, 1000, 600, 1500)
         # Seta o passo (em graus) e o eixo da rotação
@@ -163,15 +163,26 @@ class Jogo:
             # Desenha polígono
             for objeto in self.objetos:
                 # Incrementa o angulo de rotação do objeto e retorna um novo polígono, não altera o mesmo
-                if objeto.rotacao < self.angulo_rotacao:
-                    objeto.inc_rotacao()
-                objeto_rotacionado = objeto.rotaciona_quaternio()
-                objeto_rotacionado.desenha()
+                indice_ponto = self.objetos_curva[0].get_curva_ind()
+                curva = self.objetos_curva[0].faces[0].vertices
+                print(curva)
+                print(objeto.faces[0].vertices)
+                translacao = []
+                for i in range(4):
+                    translacao.append(curva[indice_ponto][i] - objeto.faces[0].vertices[3][i])
+                    print(translacao)
+                objeto_transladado = objeto.translada_3d(translacao[0], translacao[1], translacao[2])
+                objeto_transladado.desenha()
+                #if objeto.rotacao < self.angulo_rotacao:
+                #    objeto.inc_rotacao()
+                #objeto_rotacionado = objeto.rotaciona_quaternio()
+                #objeto_rotacionado.desenha()
             for objeto_curva in self.objetos_curva:
                 objeto_curva.desenha()
             # Desenha eixo
-            desenha_eixo(self.superficie, self.eixo[0], self.eixo[1], BRANCO, self.tamanho_tela)
+            #desenha_eixo(self.superficie, self.eixo[0], self.eixo[1], BRANCO, self.tamanho_tela)
 
 
 jogo = Jogo()
 jogo.jogar()
+

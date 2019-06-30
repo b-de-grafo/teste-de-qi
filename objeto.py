@@ -7,6 +7,7 @@ class Objeto:
         self.rotacao = 0
         self.passo_rotacao = 0
         self.eixo = (0, 1, 0)
+        self.curva_ind = 0
 
     def desenha(self):
         # Preenche as faces
@@ -108,3 +109,9 @@ class Objeto:
             novas_faces.append(self.faces[i].rotaciona(teta, eixo))
 
         return Objeto(novas_faces)
+
+    def get_curva_ind(self):
+        if self.curva_ind < 100:
+            self.curva_ind = self.curva_ind + 1
+        return self.curva_ind - 1
+
