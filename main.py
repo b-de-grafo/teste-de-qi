@@ -63,6 +63,9 @@ class Jogo:
                                      preenchido=False)])
         crazy_diamond = crazy_diamond.mapeamento_sru_srd(600, 1000, 600, 1500)
         crazy_diamond = crazy_diamond.translada_3d(280, 120, 0)
+        crazy_diamond.rotacao = 30
+        crazy_diamond.eixo = [(0,0,0),(0,1,0)]
+        crazy_diamond = crazy_diamond.rotaciona_quaternio()
 
         curva_teste = bezier([0, 1], 0.01, [[100, 400, 15], [300, 400, 5], [100, 200, 0], [500, 500, -10]], self.superficie, AZUL_PISCINA)
 
