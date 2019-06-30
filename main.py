@@ -37,8 +37,7 @@ class Jogo:
 
         self.rodando = True
 
-        # Inicializa o eixo de rotação do programa
-
+        # Inicializa o eixo de rotação do programa e o ângulo
         self.eixo = [(200, 200, 0), (300, 300, 0)]
         self.angulo_rotacao = 360
 
@@ -102,14 +101,10 @@ class Jogo:
                     break
 
     def proximo_estado(self):
-        antes = self.estado_do_jogo
-
         if self.estado_do_jogo == FIM_DE_JOGO:
             self.estado_do_jogo = TELA_INICIAL
         else:
             self.estado_do_jogo += 1
-        
-        print("estado: {} -> {}".format(antes, self.estado_do_jogo))
 
     def desenha_tela(self):
         self.superficie.fill(PRETO)
