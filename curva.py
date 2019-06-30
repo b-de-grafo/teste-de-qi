@@ -21,11 +21,13 @@ def bezier(intervalo, passo, pontos, superficie,cor):
     curva_obj = Objeto([Face(superficie,
                              curva,
                              cor=cor,
-                             preenchido=False),
+                             preenchido=False,
+                             curva=True),
                         Face(superficie,
                              curva,
                              cor=cor,
-                             preenchido=False)])
+                             preenchido=False,
+                             curva=True)])
     return curva_obj
 
 #print(bezier([0, 1], 0.1, [[100,400,15],[300,400,5],[100,200,0],[300,200,-10]]))

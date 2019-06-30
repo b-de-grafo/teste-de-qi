@@ -10,8 +10,9 @@ class Objeto:
 
     def desenha(self):
         # Preenche as faces
-        if self.faces[0].preenchido or self.faces[0].preenchido:
+        if self.faces[0].preenchido or self.faces[0].preenchido: #q?
             self.priorityfill()
+
 
         else:  # Wireframe
             for face in self.faces:
