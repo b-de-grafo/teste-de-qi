@@ -28,40 +28,36 @@ def desenha_eixo(superficie, ponto_a, ponto_b, cor, tamanho_tela):
     xi, yi = round(ponto_a[0]), round(ponto_a[1])
     xf, yf = round(ponto_b[0]), round(ponto_b[1])
 
-    if (xf - xi) != 0:
-        m = (yf - yi) / (xf - xi)
-        y_0 = m * (0 - xi) + yi
-        y_f = m * (tamanho_tela[0] - xi) + yi
-    else:
-        y_0 = 0
-        y_f = tamanho_tela[1]
+    for x in range(0, tamanho_tela[0]):
+        if (xf - xi) != 0:
+            m = (yf - yi) / (xf - xi)
+            y = m * (x - xi) + yi
 
-    if (yf - yi) != 0:
-        m = (xf - xi) / (yf - yi)
-        x_0 = m * (0 - yi) + xi
-        x_f = m * (tamanho_tela[1] - yi) + xi
-    else:
-        x_0 = 0
-        x_f = tamanho_tela[0]
+            superficie.set_at([x, int(y)], cor)
 
-    reta(superficie, (x_0, y_0), (x_f, y_f), cor)
+    for y in range(0, tamanho_tela[1]):
+        if (yf - yi) != 0:
+            m = (xf - xi) / (yf - yi)
+            x = m * (y - yi) + xi
+
+            superficie.set_at([int(x), y], cor)
 
 
-def multiplica_matrizes(matA, matB):
-    n_linhasA = len(matA)
-    n_colunasA = len(matA[0])
-    n_linhasB = len(matB)
-    n_colunasB = len(matB[0])
+def multiplica_matrizes(mat_a, mat_b):
+    n_linhas_a = len(mat_a)
+    n_colunas_a = len(mat_a[0])
+    n_linhas_b = len(mat_b)
+    n_colunas_b = len(mat_b[0])
 
-    if n_colunasA != n_linhasB:
-        return 'deu erro n_colunasA != n_linhasB'
+    if n_colunas_a != n_linhas_b:
+        return 'deu erro n_colunas_a != n_linhas_b'
 
-    resultado = [[0 for row in range(n_colunasB)] for col in range(n_linhasA)]
+    resultado = [[0 for row in range(n_colunas_b)] for col in range(n_linhas_a)]
 
-    for i in range(n_linhasA):
-        for j in range(n_colunasB):
-            for k in range(n_colunasA):
-                resultado[i][j] += matA[i][k] * matB[k][j]
+    for i in range(n_linhas_a):
+        for j in range(n_colunas_b):
+            for k in range(n_colunas_a):
+                resultado[i][j] += mat_a[i][k] * mat_b[k][j]
 
     return resultado
 

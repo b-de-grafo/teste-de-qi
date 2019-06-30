@@ -22,7 +22,7 @@ FIM_DE_JOGO = 5
 # valores default pra facilitar os testes
 DEFAULT_P1 = "0 200 0"
 DEFAULT_P2 = "300 300 0"
-DEFAULT_ANGULO = "360"
+DEFAULT_ANGULO = "3600"
 
 
 class Jogo:
@@ -39,10 +39,7 @@ class Jogo:
 
         # Inicializa o eixo de rotação do programa
 
-        self.eixo = [(0, 300, 0), (300, 300, 0)]
-        self.angulo_rotacao = 0
-
-        self.eixo = [(0, 200, 0), (300, 300, 0)]
+        self.eixo = [(200, 200, 0), (300, 300, 0)]
         self.angulo_rotacao = 360
 
         self.objetos = self.monta_objetos()
@@ -51,11 +48,10 @@ class Jogo:
 
     def monta_objetos(self):
         objetos = []
-        eixo = (self.eixo[1][0]-self.eixo[0][0], self.eixo[1][1]-self.eixo[0][1], self.eixo[1][2]-self.eixo[0][2])
 
         p = 100
         crazy_diamond = Objeto([Face(self.superficie,
-                                     [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 1, 1], [125.0, 1437.5, 1, 1],
+                                     [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 0, 1], [125.0, 1437.5, 0, 1],
                                       [41.666666666666664, 1250.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1]],
                                      cor=VERMELHO,
                                      preenchido=False),
