@@ -31,39 +31,6 @@ class Objeto:
         self.passo_rotacao = passo
         self.eixo = eixo
 
-    def set_offset(self, eixo):
-        ponto = self.faces[0].vertices[0]
-
-        xi, yi = round(eixo[0][0]), round(eixo[0][1])
-        xf, yf = round(eixo[1][0]), round(eixo[1][1])
-
-        # Deduz equação geral da reta
-        a = yi - yf
-        b = xi - xf
-        c = xi * yf - xf - yi
-
-        y_do_eixo = (-a * ponto[0] - c) / b
-        offset = y_do_eixo - ponto[1]
-
-        dist_obj_eixo = a * xi
-
-        print(ponto)
-        print(eixo)
-
-        if (xf - xi) != 0:
-            m = (yf - yi) / (xf - xi)
-            y = m * (ponto[0] - xi) + yi
-        else:
-            y = 0
-
-        if (yf - yi) != 0:
-            m = (xf - xi) / (yf - yi)
-            x = m * (ponto[1] - yi) + xi
-        else:
-            x = ponto[0]
-
-        print(x, y)
-
     def mapeamento_sru_srd(self, xdmax, xumax, ydmax, yumax):
         novas_faces = []
         for i in range(len(self.faces)):
