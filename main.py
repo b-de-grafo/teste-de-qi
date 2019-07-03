@@ -68,12 +68,12 @@ class Jogo:
                                      [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 0, 1], [125.0, 1437.5, 0, 1],
                                       [41.666666666666664, 1250.0, 1, 1], [-41.666666666666664, 1437.5, 1, 1]],
                                      cor=VERMELHO,
-                                     preenchido=False),
+                                     preenchido=True),
                                 Face(self.superficie,
                                      [[0.0, 1500.0, p, 1], [83.33333333333333, 1500.0, p, 1], [125.0, 1437.5, p, 1],
                                       [41.666666666666664, 1250.0, p, 1], [-41.666666666666664, 1437.5, p, 1]],
                                      cor=AZUL,
-                                     preenchido=False)])
+                                     preenchido=True)])
         crazy_diamond = crazy_diamond.mapeamento_sru_srd(600, 1000, 600, 1500)
         crazy_diamond = crazy_diamond.translada_3d(280, 120, 0)
         crazy_diamond.rotacao = 30

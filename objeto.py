@@ -1,4 +1,5 @@
 from face import *
+from quaternios import distancia
 
 
 class Objeto:
@@ -46,10 +47,11 @@ class Objeto:
 
     def priorityfill(self):
         faces_ord = []
+        fonte_de_luz = (400, 400, 20)
         for face in self.faces:
             soma = 0
             for vertice in face.vertices:
-                soma += vertice[2]
+                soma += distancia(vertice[:3], fonte_de_luz)
             media = soma / len(face.vertices)
             faces_ord.append([face, media])
 

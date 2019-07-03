@@ -106,9 +106,9 @@ class Face:
         maior_y = -10000
         for i in range(len(self.vertices)):
             if self.vertices[i][1] < menor_y:
-                menor_y = self.vertices[i][1]
+                menor_y = int(self.vertices[i][1])
             if self.vertices[i][1] > maior_y:
-                maior_y = self.vertices[i][1]
+                maior_y = int(self.vertices[i][1])
 
         # Pra cada y do topo da figura até a base
         for y_eixo in range(menor_y, maior_y + 1):

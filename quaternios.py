@@ -57,6 +57,11 @@ def unitariza(v):
     return [e / soma for e in v]
 
 
+def distancia(v1,v2):
+    dif = subtracao(v1,v2)
+    return round(sqrt(produto_escalar(dif,dif)))
+
+
 # rotacao (ponto, angulo, eixo_arbritario)
 def rotacao(p, teta, eixos=((0, 0, 0), (1,1,1))):
     assert len(p) == 3
