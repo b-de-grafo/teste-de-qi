@@ -47,11 +47,10 @@ class Objeto:
 
     def priorityfill(self):
         faces_ord = []
-        fonte_de_luz = (400, 400, 20)
         for face in self.faces:
             soma = 0
             for vertice in face.vertices:
-                soma += distancia(vertice[:3], fonte_de_luz)
+                soma += vertice[2]
             media = soma / len(face.vertices)
             faces_ord.append([face, media])
 
@@ -68,7 +67,14 @@ class Objeto:
             elif i == len(self.faces[-1].vertices)-1:
                 novos_vertices = [frente.vertices[i], frente.vertices[0], verso.vertices[0], verso.vertices[i]]
 
-            cor = [50 + i * incremento_cor] * 3
+            luz = (20, 20, 1)
+            v1 = novos_vertices[1][:3]
+            v2 = novos_vertices[2][:3]
+            cor = (50, 250, 150)
+            cor = intensidade(luz, v1, v2, cor)
+            print(cor)
+
+
             face_lateral = Face(frente.superficie, novos_vertices, cor, frente.preenchido, frente.arestas, frente.tela)
 
             soma = 0
@@ -116,4 +122,30 @@ class Objeto:
         if self.curva_ind < 100:
             self.curva_ind = self.curva_ind + 1
         return self.curva_ind - 1
+
+# k = coeficiente de reflexão no ponto, I = Ip(intensidade da luz) * cos Teta * k + Ia(intensidade da luz)
+def intensidade(luz, v1, v2, cor, k = 0.9, intensidade_no_ponto = (1, 1, 1)):
+    vetor_luz = subtracao(v1, luz)
+    print(vetor_luz)
+    vetor_superficie = subtracao(v2, v1)
+    print(vetor_superficie)
+    x1, y1, z1 = vetor_luz
+    y2, x2, z2 = vetor_superficie # Essa parte tem essas trocas propositalmente
+    x2 = -x2                      # para obter o vetor perpendicular ao vetor_superficie
+    z2 = 0
+    norma_luz = sqrt(x1**2 + y1**2 + z1**2)
+    print(norma_luz)
+    norma_superficie = sqrt(x2**2 + y2**2 + z2**2)
+    cosseno_teta = abs(produto_escalar(vetor_luz, vetor_superficie)/(norma_luz * norma_superficie))
+    cosseno_teta = float('%.4f' % cosseno_teta)
+    print(cosseno_teta)
+    # return produto(k,adicao(produto(k, produto(cosseno_teta, intensidade_no_ponto)), intensidade_no_ponto))
+    intensidade_da_cor = produto(k, produto(cosseno_teta, intensidade_no_ponto))
+    nova_cor = []
+    for i in range(3):
+        if cor[i] * intensidade_da_cor[i] > 255:
+            nova_cor.append(255)
+        else:
+            nova_cor.append(cor[i] * intensidade_da_cor[i])
+    return nova_cor
 
