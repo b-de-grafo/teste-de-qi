@@ -5,8 +5,7 @@ def reta(superficie, inicio, fim, cor):
     xstep = 1
     if xf < xi:
         xstep = -1
-
-    for x in range(xi, xf + 1, xstep):
+    for x in range(int(xi), int(xf) + 1, int(xstep)):
         if (xf - xi) != 0:
             m = (yf - yi) / (xf - xi)
             y = m * (x - xi) + yi
@@ -16,7 +15,7 @@ def reta(superficie, inicio, fim, cor):
     ystep = 1
     if yf < yi:
         ystep = -1
-    for y in range(yi, yf + 1, ystep):
+    for y in range(int(yi), int(yf) + 1, int(ystep)):
         if (yf - yi) != 0:
             m = (xf - xi) / (yf - yi)
             x = m * (y - yi) + xi

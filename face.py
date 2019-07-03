@@ -5,7 +5,7 @@ BRANCO = [255, 255, 255]
 
 
 class Face:
-    def __init__(self, superficie, vertices, cor=BRANCO, preenchido=False, arestas=True, tela=None):
+    def __init__(self, superficie, vertices, cor=BRANCO, preenchido=False, arestas=True, tela=None, curva = None):
         self.superficie = superficie
         self.tela = tela
 
@@ -19,6 +19,7 @@ class Face:
         self.cor = cor
         self.preenchido = preenchido
         self.arestas = arestas
+        self.curva = curva
     
     def __repr__(self):
         r = "[ "
@@ -36,7 +37,7 @@ class Face:
             for i in range(len(self.vertices)):
                 if i < len(self.vertices) - 1:
                     reta(self.superficie, self.vertices[i], self.vertices[i + 1], cor)
-                else:
+                elif not self.curva:
                     reta(self.superficie, self.vertices[0], self.vertices[i], cor)
 
         if self.preenchido:

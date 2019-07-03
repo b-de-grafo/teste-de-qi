@@ -1,6 +1,7 @@
 import pygame
 from objeto import *
 import inputbox
+from curva import bezier
 
 BRANCO = [255, 255, 255]
 VERMELHO = [255, 0, 0]
@@ -20,7 +21,7 @@ RODANDO = 4
 FIM_DE_JOGO = 5
 
 # valores default pra facilitar os testes
-DEFAULT_P1 = "0 200 0"
+DEFAULT_P1 = "0 300 0"
 DEFAULT_P2 = "300 300 0"
 DEFAULT_ANGULO = "3600"
 
@@ -41,13 +42,13 @@ class Jogo:
         self.eixo = [(200, 200, 0), (300, 300, 0)]
         self.angulo_rotacao = 360
 
-        self.objetos = self.monta_objetos()
+        self.objetos,self.objetos_curva = self.monta_objetos()
 
         self.estado_do_jogo = TELA_INPUT_P1
 
     def monta_objetos(self):
         objetos = []
-
+        objetos_curva = []
         p = 100
         crazy_diamond = Objeto([Face(self.superficie,
                                      [[0.0, 1500.0, 1, 1], [83.33333333333333, 1500.0, 0, 1], [125.0, 1437.5, 0, 1],
@@ -61,12 +62,20 @@ class Jogo:
                                      preenchido=False)])
         crazy_diamond = crazy_diamond.mapeamento_sru_srd(600, 1000, 600, 1500)
         crazy_diamond = crazy_diamond.translada_3d(280, 120, 0)
-        # Seta o paço (em graus) e o eixo da rotação
+        crazy_diamond.rotacao = 30
+        crazy_diamond.eixo = [(0,0,0),(0,1,0)]
+        crazy_diamond = crazy_diamond.rotaciona_quaternio()
+
+        curva_teste = bezier([0, 1], 0.01, [[100, 400, 15], [300, 400, 5], [100, 200, 0], [500, 500, -10]], self.superficie, AZUL_PISCINA)
+
+        # curva_teste = curva_teste.mapeamento_sru_srd(600, 1000, 600, 1500)
+        # Seta o passo (em graus) e o eixo da rotação
         crazy_diamond.set_rotacao(0.5, self.eixo)
 
         objetos.append(crazy_diamond)
+        objetos_curva.append(curva_teste)
 
-        return objetos
+        return objetos, objetos_curva
 
     def jogar(self):
         while self.rodando:
@@ -152,14 +161,26 @@ class Jogo:
             # Desenha polígono
             for objeto in self.objetos:
                 # Incrementa o angulo de rotação do objeto e retorna um novo polígono, não altera o mesmo
-                if objeto.rotacao < self.angulo_rotacao:
-                    objeto.inc_rotacao()
-                objeto_rotacionado = objeto.rotaciona_quaternio()
-                objeto_rotacionado.desenha()
-
+                indice_ponto = self.objetos_curva[0].get_curva_ind()
+                curva = self.objetos_curva[0].faces[0].vertices
+                print(curva)
+                print(objeto.faces[0].vertices)
+                translacao = []
+                for i in range(4):
+                    translacao.append(curva[indice_ponto][i] - objeto.faces[0].vertices[3][i])
+                    print(translacao)
+                objeto_transladado = objeto.translada_3d(translacao[0], translacao[1], translacao[2])
+                objeto_transladado.desenha()
+                #if objeto.rotacao < self.angulo_rotacao:
+                #    objeto.inc_rotacao()
+                #objeto_rotacionado = objeto.rotaciona_quaternio()
+                #objeto_rotacionado.desenha()
+            for objeto_curva in self.objetos_curva:
+                objeto_curva.desenha()
             # Desenha eixo
-            desenha_eixo(self.superficie, self.eixo[0], self.eixo[1], BRANCO, self.tamanho_tela)
+            #desenha_eixo(self.superficie, self.eixo[0], self.eixo[1], BRANCO, self.tamanho_tela)
 
 
 jogo = Jogo()
 jogo.jogar()
+
