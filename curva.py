@@ -17,7 +17,7 @@ def bezier(intervalo, passo, pontos, superficie,cor):
             ponto_curva.append(item_curva)
         ponto_curva.append(1)
         curva.append(ponto_curva)
-    print(curva)
+    # print(curva)
     curva_obj = Objeto([Face(superficie,
                              curva,
                              cor=cor,

@@ -88,11 +88,11 @@ def rotacao(p, teta, eixos=((0, 0, 0), (1,1,1))):
 
     return [round(qpq[0]) + eixos[0][0] , round(qpq[1]) + eixos[0][1], round(qpq[2]) + eixos[0][2]]
 
-print([300,0,0])
-print([0,300,0])
-print([300, 300, 0])
-print(unitariza([300,0,0]))
-print([300,100,0])
-print([0, 200,0])
-print([300, 300, 0])
-print(unitariza([300,100,0]))
+# print([300,0,0])
+# print([0,300,0])
+# print([300, 300, 0])
+# print(unitariza([300,0,0]))
+# print([300,100,0])
+# print([0, 200,0])
+# print([300, 300, 0])
+# print(unitariza([300,100,0]))
