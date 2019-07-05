@@ -59,6 +59,9 @@ class Jogo:
         self.pontos_curva = [[100, 400, 15], [300, 400, 5], [100, 200, 0], [500, 500, -10]]
         self.objetos, self.objetos_curva = self.monta_objetos()
 
+        # Shading
+        self.fonte_luz = (300, 300, 0)
+
 
     def monta_objetos(self):
         objetos = []
@@ -78,6 +81,7 @@ class Jogo:
         crazy_diamond = crazy_diamond.translada_3d(280, 120, 0)
         crazy_diamond.rotacao = 30
         crazy_diamond.eixo = [(0,0,0),(0,1,0)]
+
         crazy_diamond = crazy_diamond.rotaciona_quaternio()
 
 
@@ -125,14 +129,10 @@ class Jogo:
                     break
 
     def proximo_estado(self):
-        antes = self.estado_do_jogo
-
         if self.estado_do_jogo == FIM_DE_JOGO:
             self.estado_do_jogo = TELA_INICIAL
         else:
             self.estado_do_jogo += 1
-
-        print("{} -> {}".format(antes, self.estado_do_jogo))
 
     def desenha_tela(self):
         self.superficie.fill(PRETO)
@@ -162,16 +162,19 @@ class Jogo:
 
         elif self.estado_do_jogo == RODANDO_ROTACAO:
             for objeto in self.objetos:
+                objeto.set_fonte_luz(self.fonte_luz) # passa fonte de luz do Jogo pro Objeto
+
                 # Incrementa o angulo de rotação do objeto e retorna um novo polígono, não altera o mesmo
                 if objeto.rotacao < self.angulo_rotacao:
                     objeto.inc_rotacao()
-                
+
                 objeto_rotacionado = objeto.rotaciona_quaternio()
                 objeto_rotacionado.desenha()
 
             # Desenha eixo
             desenha_eixo(self.superficie, self.eixo[0], self.eixo[1], BRANCO, self.tamanho_tela)
-        
+            pygame.draw.circle(self.superficie, AMARELO, self.fonte_luz[:2], 15) # Fonte de luz
+
 
         elif self.estado_do_jogo == INPUT_CURVA_P1:
             self.superficie.fill(PRETO)
@@ -200,8 +203,10 @@ class Jogo:
 
 
         elif self.estado_do_jogo == RODANDO_CURVA:
+            pygame.draw.circle(self.superficie, AMARELO, self.fonte_luz[:2], 20) # Fonte de luz
 
             for objeto in self.objetos:
+                objeto.set_fonte_luz(self.fonte_luz)
                 indice_ponto = self.objetos_curva[0].get_curva_ind()
                 curva = self.objetos_curva[0].faces[0].vertices
                 # print(curva)

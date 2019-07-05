@@ -9,6 +9,7 @@ class Objeto:
         self.passo_rotacao = 0
         self.eixo = (0, 1, 0)
         self.curva_ind = 0
+        self.fonte_luz = (0, 0, 1)
 
     def desenha(self):
         # Preenche as faces
@@ -34,6 +35,10 @@ class Objeto:
         self.passo_rotacao = passo
         self.eixo = eixo
 
+    def set_fonte_luz(self, fonte_luz):
+        if len(fonte_luz) == 3:
+            self.fonte_luz = fonte_luz
+
     def mapeamento_sru_srd(self, xdmax, xumax, ydmax, yumax):
         novas_faces = []
         for i in range(len(self.faces)):
@@ -47,25 +52,25 @@ class Objeto:
 
     def priorityfill(self):
         faces_ord = []
-        for face in self.faces:
+
+        for i in range(len(self.faces)):
+            face = self.faces[i]
             soma = 0
             for vertice in face.vertices:
                 soma += vertice[2]
             media = soma / len(face.vertices)
 
             luz = (0, 0, 1)
-            v1 = face.vertices[0][:3]
-            v2 = face.vertices[1][:3]
-            v3 = face.vertices[2][:3]
+            amostra_vertices = [face.vertices[0][:3], face.vertices[1][:3], face.vertices[2][:3]]
             cor = (50, 250, 150)
-            cor = intensidade(luz, v1, v2, v3, cor)
+            cor = intensidade(self.fonte_luz, vertices_face=amostra_vertices, ordem_face=i, cor=cor)
 
             faces_ord.append([face.muda_cor(cor), media])
 
         # incluir faces laterais
         frente = self.faces[0]
         verso = self.faces[1]
-        incremento_cor = 200 / len(self.faces[-1].vertices)  # incrementar de acordo com o número de faces laterais
+        # incremento_cor = 200 / len(self.faces[-1].vertices)
 
         novos_vertices = []
         for i in range(len(self.faces[-1].vertices)):
@@ -76,11 +81,9 @@ class Objeto:
                 novos_vertices = [frente.vertices[i], frente.vertices[0], verso.vertices[0], verso.vertices[i]]
 
             luz = (0, 0, 1)
-            v1 = novos_vertices[0][:3]
-            v2 = novos_vertices[1][:3]
-            v3 = novos_vertices[2][:3]
+            amostra_vertices = [novos_vertices[0][:3], novos_vertices[1][:3], novos_vertices[2][:3]]
             cor = (50, 250, 150)
-            cor = intensidade(luz, v1, v2, v3, cor)
+            cor = intensidade(self.fonte_luz, vertices_face=amostra_vertices, ordem_face=None, cor=cor)
 
             face_lateral = Face(frente.superficie, novos_vertices, cor, frente.preenchido, frente.arestas, frente.tela)
 
@@ -131,11 +134,17 @@ class Objeto:
         return self.curva_ind - 1
 
 # k = coeficiente de reflexão no ponto, I = Ip(intensidade da luz) * cos Teta * k + Ia(intensidade da luz)
-def intensidade(luz, v1, v2, v3, cor, k = 0.9, intensidade_no_ponto = (1, 1, 1)):
-    vetor_luz = subtracao(v1, luz)
-    vetor_aux1 = subtracao(v2, v1)
-    vetor_aux2 = subtracao(v3, v1)
-    vetor_superficie = produto_vetorial(vetor_aux2, vetor_aux1) # vetor normal do plano A ORDEM FAZ DIFERENCA
+def intensidade(luz, vertices_face, ordem_face, cor, k=0.9, intensidade_no_ponto=(1, 1, 1)):
+    vetor_luz = subtracao(vertices_face[0], luz)
+    vetor_aux1 = subtracao(vertices_face[1], vertices_face[0])
+    vetor_aux2 = subtracao(vertices_face[2], vertices_face[0])
+    vetor_superficie = () # vetor normal do plano
+
+    if ordem_face is not None and ordem_face % 2 != 0: # ignora None das faces laterais e vê se a face é de ordem ímpar
+        vetor_superficie = produto_vetorial(vetor_aux1, vetor_aux2)
+    else:
+        vetor_superficie = produto_vetorial(vetor_aux2, vetor_aux1)
+
     x1, y1, z1 = vetor_luz
     x2, y2, z2 = vetor_superficie
     norma_luz = sqrt(x1**2 + y1**2 + z1**2) # modulo do vetor_luz
@@ -153,5 +162,6 @@ def intensidade(luz, v1, v2, v3, cor, k = 0.9, intensidade_no_ponto = (1, 1, 1))
             nova_cor.append(255)
         else:
             nova_cor.append(cor[i] * intensidade_da_cor[i])
+
     return nova_cor
 
